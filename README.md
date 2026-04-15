@@ -1,75 +1,43 @@
 <div align="center">
-  <img src="./assets/logo.svg" width="140" alt="Google Design Fusion logo" />
+  <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
-  <p><strong>An open-source skill that fuses the best design thinking from <code>design.google</code> with a curated <code>DESIGN.md</code> style library to guide better front-end generation.</strong></p>
+  <p><strong>An open-source Codex skill that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
 </div>
 
-<div align="center">
+![Before and after comparison](./assets/screenshots/comparison.png)
 
-![design.google pages](https://img.shields.io/badge/design.google-248_indexed-111111?style=flat-square)
-![external references](https://img.shields.io/badge/external_references-32_ingested-a2712f?style=flat-square)
-![awesome-design-md](https://img.shields.io/badge/DESIGN.md_samples-54-0f766e?style=flat-square)
-![validation](https://img.shields.io/badge/validation-passing-16a34a?style=flat-square)
+## What It Is
 
-</div>
+`google-design-fusion` is not a prompt wrapper and not a loose folder of notes.
 
-<br />
+It is a packaged skill system with:
 
-![A/B comparison](./assets/comparison.svg)
+- a local design corpus built from `design.google`
+- a fused style layer built from `awesome-design-md`
+- a retrieval harness that changes behavior by design phase
+- anti-AI-slop guardrails for common front-end generation mistakes
+- validation scripts that keep the skill, harness, and docs aligned
 
-## What This Skill Comes From
+The goal is simple: make AI-generated front-end work feel more intentional, more reviewable, and much less generic.
 
-This skill is not a generic prompt wrapper.
+## What It Comes From
 
-It is built by combining two source systems:
+This repository combines two source systems on purpose.
 
-1. **The design ideas, essays, systems thinking, and human-interface principles across `design.google`**
-   We crawled and structured the site as a design-principles corpus, including Material, typography, accessibility, motion, AI UI, hardware/XR, and editorial design thinking.
-
-2. **A curated `DESIGN.md` style corpus inspired by the Google Stitch / DESIGN.md workflow**
-   In this workspace that layer comes from `awesome-design-md`, a large collection of public-site-inspired `DESIGN.md` samples used as visual/style seeds.
-
-In short:
-
-**`design.google` provides the judgment layer. `awesome-design-md` provides the style-reference layer. `google-design-fusion` connects them into one reusable skill.**
-
-## What Problem It Solves
-
-Most AI-generated front-end work gets trapped in a few predictable failure modes:
-
-- too many focal points
-- fake KPI cards
-- decorative gradients doing all the work
-- tiny helper text compensating for weak hierarchy
-- motion used as ornament instead of meaning
-- generic component-library layouts passed off as “finished design”
-
-This repository exists to push generation upstream:
-
-- retrieve stronger design evidence first
-- reject common anti-patterns early
-- separate principles from stylistic references
-- then generate direction, prompts, or UI
-
-## Core Architecture
-
-The project is organized as a layered skill runtime instead of a loose folder of notes.
-
-### 1. Principle Layer
+### 1. Judgment Layer
 
 Source:
 
-- `design.google`
-- selected high-value external references linked from legacy `design.google` pages
+- the full crawlable `design.google` surface
+- selected high-value external articles linked from legacy `design.google` pages
 
-Purpose:
+What it contributes:
 
-- attention management
-- motion reasoning
-- typography and readability
-- accessibility and inclusion
-- AI trust and explainability
-- hardware / ambient / XR constraints
+- hierarchy and attention design
+- motion used for meaning, not decoration
+- typography, readability, and accessibility judgment
+- AI trust, explainability, and human-centered interaction thinking
+- ambient, hardware, and XR constraints when relevant
 
 ### 2. Style Layer
 
@@ -77,43 +45,112 @@ Source:
 
 - `awesome-design-md`
 
-Purpose:
+What it contributes:
 
-- brand atmosphere
-- surface language
+- visual atmosphere
 - typography personality
-- density
-- geometry
-- component signatures
+- density and rhythm
+- surface language
+- component signatures and composition references
 
-### 3. Retrieval Layer
+In short:
 
-Implemented in:
+`design.google` provides judgment. `awesome-design-md` provides style seeds. The skill fuses them into one retrieval-guided workflow.
 
-- [skills/google-design-fusion/scripts/design_harness.py](./skills/google-design-fusion/scripts/design_harness.py)
+## Why It Exists
 
-Purpose:
+Most AI front-end output still falls into the same traps:
 
-- query the local corpus by phase
-- retrieve ranked evidence
-- inject guardrails
-- return a reusable evidence packet for design work
+- fake KPI cards with no product meaning
+- tiny helper text patching weak hierarchy
+- too many focal points at once
+- decorative gradients doing the explanatory work
+- motion used as chrome instead of guidance
+- generic component-library layouts passed off as finished design
 
-### 4. Corpus Builder
+This skill pushes the work upstream:
+
+1. retrieve better design evidence first
+2. reject common anti-patterns early
+3. separate principles from style references
+4. return a usable packet for concept, UI, polish, or audit work
+
+## Validated Value
+
+Current included corpus:
+
+- `328` crawl records from the `design.google` site map and direct recovery passes
+- `248` indexed `design.google` source pages
+- `32` indexed high-value external references
+- `54` `awesome-design-md` samples
+- `6457` retrieval chunks in the local vector library
+
+The generated corpus is checked into the repo because it is part of the skill's practical value, not just build output.
+
+## Before / After
+
+Artifacts in this repo:
+
+- Without skill demo: [examples/without-skill/index.html](./examples/without-skill/index.html)
+- With skill demo: [examples/with-skill/index.html](./examples/with-skill/index.html)
+- Comparison page: [examples/comparison/index.html](./examples/comparison/index.html)
+- Rendered comparison: [assets/screenshots/comparison.png](./assets/screenshots/comparison.png)
+
+Observed difference:
+
+| Without skill | With `google-design-fusion` |
+| --- | --- |
+| Stacked noise, fake metrics, decorative helper text | One dominant story, clearer hierarchy, restrained proof blocks |
+| Style guessed from defaults | Style guided by retrieved references |
+| No source trail | Evidence packet tied to corpus retrieval |
+| Easy to drift into AI slop | Guardrails explicitly block common failure modes |
+
+## Architecture
+
+The repo is organized as a layered skill runtime.
+
+### Corpus Builder
 
 Implemented in:
 
 - [skills/google-design-fusion/scripts/build_design_fusion_vector_db.py](./skills/google-design-fusion/scripts/build_design_fusion_vector_db.py)
 
-Purpose:
+Responsibilities:
 
 - crawl `design.google`
-- preserve redirect/canonical facts
-- selectively ingest high-value external design references
+- preserve canonical and redirect facts
+- selectively ingest stable external design references
 - ingest `awesome-design-md`
-- build chunked sparse retrieval indexes
+- build chunked sparse retrieval indexes and manifest metadata
 
-### 5. Validation Layer
+### Retrieval Harness
+
+Implemented in:
+
+- [skills/google-design-fusion/scripts/design_harness.py](./skills/google-design-fusion/scripts/design_harness.py)
+
+Responsibilities:
+
+- classify requests by phase
+- query the fused corpus
+- weight results with phase-aware profiles
+- inject anti-pattern guardrails
+- return a reusable design packet
+
+### Skill Surface
+
+Implemented in:
+
+- [skills/google-design-fusion/SKILL.md](./skills/google-design-fusion/SKILL.md)
+- [skills/google-design-fusion/agents/openai.yaml](./skills/google-design-fusion/agents/openai.yaml)
+
+Responsibilities:
+
+- teach the model when and how to use the corpus
+- separate research, concept, wireframe, UI, polish, and audit behavior
+- keep source-backed reasoning visible
+
+### Validation Layer
 
 Implemented in:
 
@@ -122,128 +159,93 @@ Implemented in:
 - [skills/google-design-fusion/scripts/validate_workspace_docs.py](./skills/google-design-fusion/scripts/validate_workspace_docs.py)
 - [skills/google-design-fusion/scripts/run_full_validation.py](./skills/google-design-fusion/scripts/run_full_validation.py)
 
-Purpose:
+Responsibilities:
 
-- keep the skill package internally coherent
-- ensure harness behavior is phase-aware
-- keep docs aligned with real build output
+- verify skill packaging
+- verify harness behavior
+- verify docs against the real corpus build
 
 ## Harness Mechanism
 
-The harness is the heart of the skill.
+The harness is the operational core of the skill.
 
 It works in four steps:
 
-1. **Build the corpus**
-   Generate a local vector library from `design.google`, selected external references, and `awesome-design-md`.
+1. **Build the local library**
+   The corpus builder creates a fused local index from `design.google`, selected external references, and `awesome-design-md`.
 
-2. **Query by phase**
-   A request is evaluated as `research`, `concept`, `wireframe`, `ui`, `polish`, or `audit`.
+2. **Classify the request by phase**
+   Requests are mapped to `research`, `concept`, `wireframe`, `ui`, `polish`, or `audit`.
 
-3. **Apply phase-specific retrieval**
-   The harness uses phase profiles, metadata weighting, per-page caps, and audit-specific query lenses so `audit` does not behave like `ui`.
+3. **Retrieve with phase-specific rules**
+   The harness applies phase profiles, source weighting, and per-page caps so `audit` does not behave like `ui`, and `polish` does not behave like `research`.
 
 4. **Return a design packet**
-   The output includes:
-   - phase goal
-   - anti-pattern guardrails
-   - ranked evidence
-   - page-level deduped references
+   The output includes the phase goal, ranked evidence, anti-pattern guardrails, and deduped page-level references.
 
-This makes the skill much more than a prompt template. It becomes a reusable design reasoning tool.
+That is the main difference between this skill and a normal prompt template: the model is steered by retrieval, not just by taste claims.
 
-## A/B Demo
+## Anti-Pattern Guardrails
 
-This repo includes a simple before/after demo showing the difference between:
+The skill includes explicit warnings against common AI front-end mistakes, including:
 
-- a generic “AI-made” front-end without retrieval-backed design guidance
-- a front-end shaped with `google-design-fusion`
+- meaningless KPI numerics
+- tiny explanatory captions that hurt visual balance
+- over-dense card grids
+- ornamental motion with no product role
+- style mixing without hierarchy discipline
+- polished-looking output with no source-backed rationale
 
-Artifacts:
+Related research:
 
-- Without skill: [examples/without-skill/index.html](./examples/without-skill/index.html)
-- With skill: [examples/with-skill/index.html](./examples/with-skill/index.html)
-- Comparison image: [assets/comparison.svg](./assets/comparison.svg)
-
-The contrast is intentional:
-
-- **Without skill**: nested cards, fake metrics, decorative helper text, noisy gradients, weak hierarchy
-- **With skill**: attention-first structure, restrained surfaces, stronger typography, clearer meaning
+- [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
 
 ## Repository Layout
 
-### 1. Skill Package
+```text
+skills/google-design-fusion/
+  SKILL.md
+  agents/openai.yaml
+  references/
+  scripts/
+google-design-vector-db/
+research/
+examples/
+assets/
+README.md
+```
 
-Path:
+## Quick Start
 
-- [skills/google-design-fusion/](./skills/google-design-fusion/)
+Clone the repo, place the skill in your Codex skills workspace, and restart Codex.
 
-Includes:
-
-- [SKILL.md](./skills/google-design-fusion/SKILL.md)
-- [openai.yaml](./skills/google-design-fusion/agents/openai.yaml)
-- references in [references/](./skills/google-design-fusion/references/)
-- scripts in [scripts/](./skills/google-design-fusion/scripts/)
-
-### 2. Local Vector Library
-
-Path:
-
-- [google-design-vector-db/](./google-design-vector-db/)
-
-Current build:
-
-- `328` `design.google` crawl records
-- `248` indexed `design.google` source pages
-- `32` indexed high-value external references
-- `54` `awesome-design-md` samples
-- `6457` retrieval chunks
-
-### 3. Research Docs
-
-Path:
-
-- [research/](./research/)
-
-Includes:
-
-- [design-google-site-map.md](./research/design-google-site-map.md)
-- [design-google-principles.md](./research/design-google-principles.md)
-- [google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
-- [ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
-- [validation-report.md](./research/validation-report.md)
-
-## Common Commands
-
-Rebuild the corpus:
+If you want to rebuild or inspect locally:
 
 ```bash
 python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py
-```
-
-Query the retrieval harness:
-
-```bash
-python skills/google-design-fusion/scripts/design_harness.py "brand-forward premium landing page typography" --phase ui --top-k 8
-```
-
-Run the full validation stack:
-
-```bash
+python skills/google-design-fusion/scripts/design_harness.py "premium glassmorphism landing page with calmer hierarchy" --phase ui --top-k 8
 python skills/google-design-fusion/scripts/run_full_validation.py
 ```
 
+## Research Docs
+
+Key supporting documents:
+
+- [research/design-google-site-map.md](./research/design-google-site-map.md)
+- [research/design-google-principles.md](./research/design-google-principles.md)
+- [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
+- [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
+- [research/validation-report.md](./research/validation-report.md)
+
 ## Publishing Notes
 
-This repository intentionally includes the generated local vector library because the corpus is part of the skill’s practical value.
-
-External references are only ingested when they meet a stricter bar:
+External references are only ingested when they pass a higher bar:
 
 - stable access
 - meaningful design-learning value
-- usable text extraction
+- usable text extraction quality
 
-Video shells, generic landing pages, and low-signal redirects stay out of the indexed corpus.
+Video shells, weak redirects, and low-signal landing pages stay out of the indexed corpus.
 
 ## Contributing
 
@@ -251,4 +253,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
-MIT License - see [LICENSE](./LICENSE)
+MIT. See [LICENSE](./LICENSE).

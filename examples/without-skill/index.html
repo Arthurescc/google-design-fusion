@@ -26,6 +26,14 @@
       color: var(--text);
     }
     .page { max-width: 1200px; margin: 0 auto; padding: 36px 28px 72px; }
+    .pill,
+    .eyebrow,
+    h1,
+    h2,
+    h3,
+    p,
+    .note,
+    .subtle { overflow-wrap: anywhere; }
     .hero {
       padding: 36px;
       border-radius: 28px;
@@ -60,6 +68,25 @@
       margin-top: 24px;
     }
     .note { font-size: 12px; color: #9d93ca; margin-top: 8px; }
+    @media (max-width: 900px) {
+      .grid,
+      .mini {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .page {
+        padding: 24px 18px 44px;
+      }
+      .hero,
+      .card,
+      .wide {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 42px;
+      }
+    }
   </style>
 </head>
 <body>

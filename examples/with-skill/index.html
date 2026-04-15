@@ -6,122 +6,672 @@
   <title>With Skill Demo</title>
   <style>
     :root {
-      --bg: #f6f1e8;
-      --panel: #fffdf8;
-      --surface: #efe7dd;
-      --ink: #181818;
-      --muted: #5d554c;
-      --line: #d7c9b8;
-      --accent: #1c1c1c;
-      --warm: #a2712f;
+      color-scheme: light;
+      --bg: #eef3fb;
+      --bg-2: #f7f9fd;
+      --surface: rgba(255, 255, 255, 0.52);
+      --surface-strong: rgba(255, 255, 255, 0.76);
+      --surface-soft: rgba(255, 255, 255, 0.34);
+      --line: rgba(255, 255, 255, 0.7);
+      --shadow: rgba(73, 106, 177, 0.18);
+      --ink: #152033;
+      --muted: #56627a;
+      --accent: #5a74ff;
+      --accent-soft: rgba(90, 116, 255, 0.14);
+      --rose: rgba(255, 188, 216, 0.55);
+      --cyan: rgba(146, 225, 255, 0.68);
     }
+
     * { box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.7), transparent 28%),
-        linear-gradient(180deg, #f6f1e8, #eee6da);
+      font-family: "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.96), transparent 22%),
+        radial-gradient(circle at 76% 10%, rgba(153, 228, 255, 0.92), transparent 28%),
+        radial-gradient(circle at 82% 82%, rgba(255, 197, 220, 0.72), transparent 24%),
+        linear-gradient(180deg, #eef3fb 0%, #e6edf9 42%, #dde7f4 100%);
+      overflow-x: hidden;
     }
-    .page { max-width: 1220px; margin: 0 auto; padding: 44px 32px 80px; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 28px;
-      align-items: stretch;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 34px;
-      padding: 36px;
-    }
-    .eyebrow {
-      display:inline-block;
-      padding: 9px 14px;
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
       border-radius: 999px;
-      background: var(--accent);
-      color: #f7f0e8;
-      letter-spacing: .18em;
+      filter: blur(12px);
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    body::before {
+      width: 22rem;
+      height: 22rem;
+      top: 6rem;
+      left: -5rem;
+      background: radial-gradient(circle, rgba(255,255,255,0.86), rgba(255,255,255,0));
+    }
+
+    body::after {
+      width: 28rem;
+      height: 28rem;
+      right: -6rem;
+      bottom: 4rem;
+      background: radial-gradient(circle, rgba(255, 188, 216, 0.68), rgba(255,255,255,0));
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 32px 68px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+      padding: 14px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(24px) saturate(135%);
+      box-shadow: 0 22px 45px rgba(129, 154, 198, 0.16), inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.92), rgba(255,255,255,0.28)),
+        linear-gradient(135deg, rgba(95, 117, 255, 0.72), rgba(125, 223, 255, 0.56));
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 12px 24px rgba(76, 101, 168, 0.22);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong,
+    .brand-copy span,
+    .eyebrow,
+    .chip,
+    .meta-kicker,
+    .panel-kicker {
+      overflow-wrap: anywhere;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .status-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 22px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #29436c;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(255,255,255,0.72);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.86);
+      white-space: nowrap;
     }
-    h1 {
-      margin: 0 0 18px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 62px;
-      line-height: .98;
-      max-width: 720px;
-    }
-    .lead {
-      max-width: 650px;
-      color: var(--muted);
-      font-size: 23px;
-      line-height: 1.45;
-      margin: 0 0 28px;
-    }
-    .cta {
-      display:inline-flex;
-      align-items:center;
-      gap: 12px;
-      padding: 15px 22px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #f7f0e8;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .panel {
-      background: var(--panel);
+
+    .glass {
+      background: linear-gradient(180deg, var(--surface-strong), var(--surface));
       border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 26px;
+      box-shadow: 0 35px 80px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.92);
+      backdrop-filter: blur(28px) saturate(155%);
     }
-    .label { color: var(--warm); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .stack { display: grid; gap: 18px; }
-    .list { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
-    .list li { padding-top: 14px; border-top: 1px solid #e7ddd0; color: var(--muted); line-height: 1.45; }
-    .grid {
+
+    .hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      gap: 28px;
+      align-items: stretch;
+      padding: 34px;
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -18% auto auto -5%;
+      width: 24rem;
+      height: 24rem;
+      background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0));
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .hero-copy,
+    .hero-scene {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255,255,255,0.78);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #35507e;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.92);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #86e2ff, #7392ff);
+      box-shadow: 0 0 18px rgba(115, 146, 255, 0.5);
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      max-width: 10.6ch;
+      font-size: clamp(52px, 7vw, 88px);
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 42rem;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.52;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
       margin-top: 28px;
     }
-    h2 { margin: 0 0 10px; font-size: 28px; }
-    p { margin: 0; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: linear-gradient(135deg, #4f6fff, #81dfff);
+      box-shadow: 0 18px 34px rgba(90, 116, 255, 0.28);
+    }
+
+    .button.secondary {
+      color: #27406b;
+      background: rgba(255,255,255,0.52);
+      border: 1px solid rgba(255,255,255,0.78);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88);
+    }
+
+    .signal-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .chip {
+      flex: 1 1 180px;
+      min-height: auto;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.42);
+      border: 1px solid rgba(255,255,255,0.68);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+
+    .chip strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .hero-scene {
+      display: grid;
+      align-items: center;
+    }
+
+    .scene-frame {
+      position: relative;
+      min-height: 470px;
+      border-radius: 32px;
+      padding: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,0.9), rgba(255,255,255,0) 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.32));
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.92), 0 28px 60px rgba(100, 123, 176, 0.2);
+      backdrop-filter: blur(28px) saturate(170%);
+    }
+
+    .scene-frame::before,
+    .scene-frame::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .scene-frame::before {
+      inset: auto auto -16% -14%;
+      width: 14rem;
+      height: 14rem;
+      background: radial-gradient(circle, rgba(135, 222, 255, 0.92), rgba(135, 222, 255, 0));
+    }
+
+    .scene-frame::after {
+      inset: 5% -12% auto auto;
+      width: 15rem;
+      height: 15rem;
+      background: radial-gradient(circle, rgba(255, 194, 215, 0.82), rgba(255, 194, 215, 0));
+    }
+
+    .window {
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      border-radius: 28px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.64), rgba(255,255,255,0.4));
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 18px;
+      backdrop-filter: blur(30px) saturate(150%);
+    }
+
+    .window-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .traffic {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .traffic span {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(35, 51, 80, 0.26);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.74);
+    }
+
+    .meta-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #4c6189;
+      white-space: nowrap;
+    }
+
+    .window-hero {
+      display: grid;
+      gap: 14px;
+      padding: 10px 4px 2px;
+    }
+
+    .window-hero h2 {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .window-hero p {
+      margin: 0;
+      max-width: 30rem;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .mini-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mini-pills span {
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #3a5685;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(255,255,255,0.74);
+    }
+
+    .window-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.48);
+      border: 1px solid rgba(255,255,255,0.74);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.86);
+      backdrop-filter: blur(24px);
+    }
+
+    .card.primary-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-pills {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat-pill {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.46);
+      border: 1px solid rgba(255,255,255,0.72);
+    }
+
+    .stat-pill span {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #506584;
+    }
+
+    .stat-pill strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .panel-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #56709b;
+      margin-bottom: 8px;
+    }
+
+    .card h3,
+    .card p,
+    .card li,
+    .detail-card p {
+      overflow-wrap: anywhere;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .detail-card {
+      padding: 22px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.64), rgba(255,255,255,0.4));
+      border: 1px solid rgba(255,255,255,0.74);
+      box-shadow: 0 24px 55px rgba(104, 127, 180, 0.14), inset 0 1px 0 rgba(255,255,255,0.84);
+      backdrop-filter: blur(24px) saturate(150%);
+      min-width: 0;
+    }
+
+    .detail-card h4 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .detail-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .detail-card strong {
+      display: block;
+      margin-top: 18px;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #5070a3;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .window-grid,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-scene {
+        order: -1;
+      }
+
+      .scene-frame {
+        min-height: 480px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        padding: 22px 18px 42px;
+      }
+
+      .masthead {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .status-pill {
+        align-self: flex-start;
+      }
+
+      .hero {
+        padding: 24px;
+        gap: 22px;
+      }
+
+      .scene-frame {
+        min-height: 440px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Google Design Fusion</div>
-        <h1>Research-backed design direction for AI products.</h1>
-        <p class="lead">Blend Google Design principles, anti-pattern guardrails, and curated style references into a front-end workflow that feels deliberate instead of generic.</p>
-        <a class="cta" href="#">Explore the skill</a>
-      </div>
-      <div class="panel stack">
-        <div>
-          <div class="label">Why it feels different</div>
-          <ul class="list">
-            <li>One clear hero instead of three competing focal points.</li>
-            <li>Typography and spacing lead the experience, not decorative chrome.</li>
-            <li>Guardrails remove fake metrics, tiny helper text, and noisy motion.</li>
-          </ul>
+    <header class="masthead">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>Google Design Fusion</strong>
+          <span>retrieval-guided interface direction for premium product surfaces</span>
         </div>
       </div>
-    </section>
+      <div class="status-pill">polish phase / apple glass study</div>
+    </header>
 
-    <section class="grid">
-      <div class="panel">
-        <div class="label">Principle anchors</div>
-        <h2>Attention-first interface design</h2>
-        <p>Use motion to guide focus, keep semantic text readable, and let hierarchy do the explaining.</p>
+    <section class="hero glass">
+      <div class="hero-copy">
+        <div class="eyebrow">With the skill</div>
+        <h1>Calm glass surfaces with real design judgment.</h1>
+        <p class="lead">The same AI workflow becomes quieter, sharper, and more premium when <code>design.google</code> principles, anti-slop guardrails, and curated <code>DESIGN.md</code> references are retrieved before generation.</p>
+        <div class="actions">
+          <a class="button primary" href="#">Open the playbook</a>
+          <a class="button secondary" href="#">Inspect the harness</a>
+        </div>
+        <div class="signal-row">
+          <div class="chip">
+            <strong>Single focal plane</strong>
+            <span>One hero, one action, and enough air for the interface to feel intentional.</span>
+          </div>
+          <div class="chip">
+            <strong>Readable copy rhythm</strong>
+            <span>Concise labels and card copy stay inside the frame instead of leaking into decoration.</span>
+          </div>
+          <div class="chip">
+            <strong>Guardrails first</strong>
+            <span>No fake KPIs, no filler captions, and no ornamental motion pretending to explain the product.</span>
+          </div>
+        </div>
       </div>
-      <div class="panel">
-        <div class="label">Style seeds</div>
-        <h2>Editorial warmth + system precision</h2>
-        <p>Combine calm Material reasoning with sharper product styling references from curated DESIGN.md samples.</p>
+
+      <div class="hero-scene">
+        <div class="scene-frame">
+          <div class="window">
+            <div class="window-top">
+              <div class="traffic" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="meta-kicker">Phase-aware retrieval / UI packet</div>
+            </div>
+
+            <div class="window-hero">
+              <h2>Design direction that reads like a native product surface.</h2>
+              <p>Principles shape the hierarchy first, then visual references refine tone, materiality, and motion restraint.</p>
+              <div class="mini-pills">
+                <span>Hierarchy</span>
+                <span>Motion</span>
+                <span>Restraint</span>
+                <span>Reviewability</span>
+              </div>
+            </div>
+
+            <div class="window-grid">
+              <div class="card primary-card">
+                <div class="panel-kicker">Composition lock</div>
+                <h3>One hero, one action lane, three support signals.</h3>
+                <div class="stat-pills">
+                  <div class="stat-pill">
+                    <span>Focus</span>
+                    <strong>1 focal story</strong>
+                  </div>
+                  <div class="stat-pill">
+                    <span>Support</span>
+                    <strong>3 proof cues</strong>
+                  </div>
+                  <div class="stat-pill">
+                    <span>Noise</span>
+                    <strong>0 decorative metrics</strong>
+                  </div>
+                </div>
+              </div>
+
+                <div class="card">
+                  <div class="panel-kicker">Guardrail audit</div>
+                  <h3>Common AI slips removed</h3>
+                  <p>Fake KPI numerics, decorative helper text, and crowded focal points are removed before the layout settles.</p>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
