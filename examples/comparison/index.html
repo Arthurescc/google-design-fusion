@@ -7,15 +7,13 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0c0f14;
-      --panel: rgba(19, 24, 35, 0.9);
-      --panel-soft: rgba(255, 255, 255, 0.05);
-      --line: rgba(255, 255, 255, 0.1);
+      --bg: #0b0f14;
+      --panel: rgba(20, 25, 36, 0.9);
+      --line: rgba(255, 255, 255, 0.09);
       --text: #f6f8fd;
-      --muted: #98a4ba;
-      --accent: #f4bc66;
-      --danger: #a882ff;
-      --success: #a8cffd;
+      --muted: #9ca8bf;
+      --purple: #a882ff;
+      --blue: #9fd4ff;
     }
 
     * { box-sizing: border-box; }
@@ -24,154 +22,54 @@
       margin: 0;
       font-family: "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 14%, rgba(130, 111, 255, 0.18), transparent 22%),
-        radial-gradient(circle at 88% 8%, rgba(120, 208, 255, 0.16), transparent 22%),
-        linear-gradient(180deg, #0c0f14 0%, #10141d 100%);
+        radial-gradient(circle at 8% 12%, rgba(135, 111, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 92% 8%, rgba(120, 208, 255, 0.12), transparent 22%),
+        linear-gradient(180deg, #0b0f14 0%, #101520 100%);
       color: var(--text);
     }
 
     .page {
-      max-width: 1440px;
+      max-width: 1480px;
       margin: 0 auto;
-      padding: 54px 34px 44px;
-    }
-
-    .intro {
-      display: grid;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .eyebrow {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .intro-side {
-      min-width: 0;
-      padding: 18px 0 12px;
-      display: grid;
-      gap: 10px;
-      align-content: end;
-      min-height: 164px;
-    }
-
-    .intro-kicker {
-      margin: 0 0 10px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      overflow-wrap: anywhere;
-    }
-
-    .intro-side.bad .intro-kicker {
-      color: #c9b8ff;
-    }
-
-    .intro-side.good .intro-kicker {
-      color: #b7d8ff;
-    }
-
-    .intro-title {
-      margin: 0;
-      max-width: none;
-      font-size: clamp(40px, 4.4vw, 58px);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      white-space: nowrap;
-    }
-
-    .lead {
-      margin: 0;
-      max-width: 58rem;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.55;
-      text-wrap: pretty;
+      padding: 44px 30px 40px;
     }
 
     .comparison-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
-      margin-bottom: 22px;
+      gap: 28px;
+      align-items: start;
     }
 
     .panel {
       min-width: 0;
-      border-radius: 30px;
-      padding: 20px;
-      background: linear-gradient(180deg, rgba(21, 26, 37, 0.95), rgba(17, 22, 31, 0.92));
+      min-height: 100%;
+      padding: 24px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(22, 27, 39, 0.96), rgba(16, 21, 31, 0.94));
       border: 1px solid var(--line);
-      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.24);
+      display: grid;
+      gap: 20px;
     }
 
-    .panel.good {
-      background: linear-gradient(180deg, rgba(28, 34, 46, 0.84), rgba(18, 22, 29, 0.92));
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .panel-header strong {
-      font-size: clamp(22px, 2vw, 28px);
-      line-height: 0.98;
-      letter-spacing: -0.03em;
-      min-width: 0;
-    }
-
-    .panel-header span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 0 10px;
-      border-radius: 999px;
-      font-size: 11px;
+    .hero-title {
+      margin: 0;
+      font-size: clamp(42px, 4.7vw, 68px);
+      line-height: 0.92;
+      letter-spacing: -0.055em;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
+      color: #ffffff;
+      text-wrap: balance;
     }
 
-    .panel.bad .panel-header strong {
-      color: #efeaff;
-    }
-
-    .panel.bad .panel-header span {
-      color: #e8dcff;
-      background: rgba(168, 130, 255, 0.16);
-      border: 1px solid rgba(168, 130, 255, 0.24);
-    }
-
-    .panel.good .panel-header strong {
-      color: #f7f7fb;
-    }
-
-    .panel.good .panel-header span {
-      color: #dbe9ff;
-      background: rgba(168, 207, 253, 0.16);
-      border: 1px solid rgba(168, 207, 253, 0.24);
+    .hero-title span {
+      display: block;
     }
 
     .shot {
       overflow: hidden;
-      border-radius: 24px;
+      border-radius: 28px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.02);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
@@ -184,11 +82,11 @@
     }
 
     .notes {
-      display: grid;
-      gap: 10px;
-      margin: 16px 0 0;
+      margin: 0;
       padding: 0;
       list-style: none;
+      display: grid;
+      gap: 12px;
     }
 
     .notes li {
@@ -197,98 +95,47 @@
       gap: 10px;
       align-items: start;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.5;
+      font-size: 17px;
+      line-height: 1.48;
     }
 
     .notes li::before {
       content: "";
-      width: 9px;
-      height: 9px;
-      margin-top: 6px;
+      width: 10px;
+      height: 10px;
+      margin-top: 8px;
       border-radius: 999px;
       background: currentColor;
+      box-shadow: 0 0 14px currentColor;
     }
 
     .panel.bad .notes li::before {
-      color: var(--danger);
-      box-shadow: 0 0 16px rgba(168, 130, 255, 0.35);
+      color: var(--purple);
     }
 
     .panel.good .notes li::before {
-      color: var(--success);
-      box-shadow: 0 0 16px rgba(168, 207, 253, 0.35);
+      color: var(--blue);
     }
 
-    .delta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .delta {
-      padding: 18px;
-      border-radius: 22px;
-      background: var(--panel-soft);
-      border: 1px solid var(--line);
-      min-width: 0;
-    }
-
-    .delta strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      overflow-wrap: anywhere;
-    }
-
-    .delta p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    @media (max-width: 1100px) {
-      .intro-grid,
-      .comparison-grid,
-      .delta-grid {
+    @media (max-width: 1120px) {
+      .comparison-grid {
         grid-template-columns: 1fr;
       }
 
-      .panel-header {
-        flex-direction: column;
-        align-items: flex-start;
+      .page {
+        padding: 28px 18px 28px;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <section class="intro">
-      <div class="eyebrow">Same brief, different judgment</div>
-      <div class="intro-grid">
-        <div class="intro-side bad">
-          <p class="intro-kicker">Without retrieval</p>
-          <h1 class="intro-title">the UI guesses.</h1>
-        </div>
-        <div class="intro-side good">
-          <p class="intro-kicker">With the skill</p>
-          <h1 class="intro-title">it composes.</h1>
-        </div>
-      </div>
-      <p class="lead">Same product brief. Left: a generic AI-first interface full of fake signals and decorative explanation. Right: a premium glass-inspired surface shaped by <code>design.google</code> principles, anti-pattern guardrails, and curated <code>DESIGN.md</code> style references.</p>
-    </section>
-
     <section class="comparison-grid">
       <article class="panel bad">
-        <div class="panel-header">
-          <strong>Without skill</strong>
-          <span>generic AI output</span>
-        </div>
+        <h1 class="hero-title">
+          <span>Without retrieval</span>
+          <span>the UI guesses.</span>
+        </h1>
         <div class="shot">
           <img src="../../assets/screenshots/without-skill.png" alt="Without skill screenshot" />
         </div>
@@ -300,10 +147,10 @@
       </article>
 
       <article class="panel good">
-        <div class="panel-header">
-          <strong>With google-design-fusion</strong>
-          <span>retrieval-guided polish</span>
-        </div>
+        <h1 class="hero-title">
+          <span>With the skill</span>
+          <span>it composes.</span>
+        </h1>
         <div class="shot">
           <img src="../../assets/screenshots/with-skill.png" alt="With skill screenshot" />
         </div>
@@ -313,25 +160,6 @@
           <li>The output is tied to sources and harness validation, so aesthetics stay reviewable instead of arbitrary.</li>
         </ul>
       </article>
-    </section>
-
-    <section class="delta-grid">
-      <div class="delta">
-        <strong>Hierarchy</strong>
-        <p>Moves from stacked distractions to a single calm focal plane.</p>
-      </div>
-      <div class="delta">
-        <strong>Surface language</strong>
-        <p>Moves from loud gradients to restrained translucency and material depth.</p>
-      </div>
-      <div class="delta">
-        <strong>Copy discipline</strong>
-        <p>Moves from filler captions to concise statements that fit the container.</p>
-      </div>
-      <div class="delta">
-        <strong>Reviewability</strong>
-        <p>Moves from guesswork to a source-backed packet with guardrails and validation.</p>
-      </div>
     </section>
   </div>
 </body>
