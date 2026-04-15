@@ -50,13 +50,46 @@
       color: var(--accent);
     }
 
-    h1 {
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .intro-side {
+      min-width: 0;
+      padding: 18px 0 12px;
+      display: grid;
+      gap: 10px;
+      align-content: end;
+      min-height: 164px;
+    }
+
+    .intro-kicker {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .intro-side.bad .intro-kicker {
+      color: #c9b8ff;
+    }
+
+    .intro-side.good .intro-kicker {
+      color: #b7d8ff;
+    }
+
+    .intro-title {
       margin: 0;
-      max-width: 14ch;
-      font-size: clamp(44px, 5.4vw, 68px);
-      line-height: 0.96;
+      max-width: none;
+      font-size: clamp(40px, 4.4vw, 58px);
+      line-height: 0.98;
       letter-spacing: -0.05em;
-      text-wrap: balance;
+      white-space: nowrap;
     }
 
     .lead {
@@ -97,20 +130,21 @@
     }
 
     .panel-header strong {
-      font-size: 28px;
-      line-height: 1;
+      font-size: clamp(22px, 2vw, 28px);
+      line-height: 0.98;
       letter-spacing: -0.03em;
+      min-width: 0;
     }
 
     .panel-header span {
       display: inline-flex;
       align-items: center;
       min-height: 34px;
-      padding: 0 12px;
+      padding: 0 10px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -219,6 +253,7 @@
     }
 
     @media (max-width: 1100px) {
+      .intro-grid,
       .comparison-grid,
       .delta-grid {
         grid-template-columns: 1fr;
@@ -235,8 +270,17 @@
   <div class="page">
     <section class="intro">
       <div class="eyebrow">Same brief, different judgment</div>
-      <h1>Without retrieval, the UI guesses. With the skill, it composes.</h1>
-      <p class="lead">Left: a generic AI-first interface full of fake signals and decorative explanation. Right: a premium glass-inspired surface shaped by <code>design.google</code> principles, anti-pattern guardrails, and curated <code>DESIGN.md</code> style references.</p>
+      <div class="intro-grid">
+        <div class="intro-side bad">
+          <p class="intro-kicker">Without retrieval</p>
+          <h1 class="intro-title">the UI guesses.</h1>
+        </div>
+        <div class="intro-side good">
+          <p class="intro-kicker">With the skill</p>
+          <h1 class="intro-title">it composes.</h1>
+        </div>
+      </div>
+      <p class="lead">Same product brief. Left: a generic AI-first interface full of fake signals and decorative explanation. Right: a premium glass-inspired surface shaped by <code>design.google</code> principles, anti-pattern guardrails, and curated <code>DESIGN.md</code> style references.</p>
     </section>
 
     <section class="comparison-grid">

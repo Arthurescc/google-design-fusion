@@ -2,6 +2,7 @@
   <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
   <p><strong>An open-source Codex skill that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
+  <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
 ![Before and after comparison](./assets/screenshots/comparison.png)
@@ -213,6 +214,7 @@ research/
 examples/
 assets/
 README.md
+README.zh-CN.md
 ```
 
 ## Quick Start
