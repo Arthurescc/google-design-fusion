@@ -1,0 +1,2199 @@
+{
+  "generated_at": "2026-04-14T11:29:48.943560Z",
+  "sitemap_entry_count": 328,
+  "record_count": 328,
+  "indexable_record_count": 280,
+  "outcomes": {
+    "ok": 248,
+    "external_redirect": 35,
+    "external_ingested": 32,
+    "fetch_error": 10,
+    "redirect_to_home": 3
+  },
+  "unresolved_count": 48,
+  "issue_count": 80,
+  "unresolved": [
+    {
+      "requested_url": "https://design.google/library/accessibility-guidance-global-audience",
+      "final_url": "https://www.youtube.com/watch?v=38fbB8wCPzg",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/accessibility-guidance-global-audience",
+          "to": "https://www.youtube.com/watch?v=38fbB8wCPzg"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=38fbB8wCPzg",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/atypi-2017-montr%C3%A9al",
+      "final_url": "https://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/atypi-2017-montr%C3%A9al",
+          "to": "https://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-anchor-podcast-playful-design-system",
+      "final_url": "https://www.youtube.com/watch?v=D7YvXCHLsdo&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-anchor-podcast-playful-design-system",
+          "to": "https://youtu.be/D7YvXCHLsdo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=D7YvXCHLsdo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-1",
+      "final_url": "https://www.youtube.com/watch?v=cPBXjtpGuSA",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-1",
+          "to": "https://www.youtube.com/watch?v=cPBXjtpGuSA"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=cPBXjtpGuSA",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-2",
+      "final_url": "https://www.youtube.com/watch?v=OIvnz7fb0p0&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-2",
+          "to": "https://youtu.be/OIvnz7fb0p0"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=OIvnz7fb0p0",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-3",
+      "final_url": "https://www.youtube.com/watch?v=aDikE5UqDxk&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-3",
+          "to": "https://youtu.be/aDikE5UqDxk"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=aDikE5UqDxk",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-4",
+      "final_url": "https://www.youtube.com/watch?v=5i1Ewds-1BM&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-4",
+          "to": "https://youtu.be/5i1Ewds-1BM"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=5i1Ewds-1BM",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-5",
+      "final_url": "https://www.youtube.com/watch?v=GJ1MDl77VYs&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-5",
+          "to": "https://youtu.be/GJ1MDl77VYs"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=GJ1MDl77VYs",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-starbucks-digital-experience",
+      "final_url": "https://www.youtube.com/watch?v=ZE8T4HV8OGA&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-starbucks-digital-experience",
+          "to": "https://youtu.be/ZE8T4HV8OGA"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=ZE8T4HV8OGA",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/choose-your-words-design-languages",
+      "final_url": "https://www.youtube.com/watch?v=G-LVbuoT1_I",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/choose-your-words-design-languages",
+          "to": "https://www.youtube.com/watch?v=G-LVbuoT1_I"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=G-LVbuoT1_I",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/creative-currency-business",
+      "final_url": "https://www.youtube.com/watch?v=z9I9hMHIouo",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/creative-currency-business",
+          "to": "https://www.youtube.com/watch?v=z9I9hMHIouo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=z9I9hMHIouo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-autonomous",
+      "final_url": "https://www.youtube.com/watch?v=5hLEiBGPrNI&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-autonomous",
+          "to": "https://www.youtube.com/watch?v=5hLEiBGPrNI&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=5hLEiBGPrNI",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-narrative",
+      "final_url": "https://www.youtube.com/watch?v=xPV76mhyr5M&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-narrative",
+          "to": "https://www.youtube.com/watch?v=xPV76mhyr5M&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=xPV76mhyr5M",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-bayonet-records",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-bayonet-records",
+          "to": "http://designnotes.fm/katie-garcia-dustin-payseur-bayonet-records"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-episode-21",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-episode-21",
+          "to": "http://designnotes.fm/website/2018-material-design-awards"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-episode-22",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-episode-22",
+          "to": "http://designnotes.fm/bee-grandinetti-hedvig-ahlberg-punanimation"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-expressions-experience",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-expressions-experience",
+          "to": "http://designnotes.fm/conor-grebel-bedtimes"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-host-liam-spradlin",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-host-liam-spradlin",
+          "to": "http://designnotes.fm/liam-spradlin-host-of-design-notes"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-ksenya-samarskaya-type-designer",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-ksenya-samarskaya-type-designer",
+          "to": "http://designnotes.fm/ksenya-samarskaya-type-designer"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-moma-rob-giampietro",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-moma-rob-giampietro",
+          "to": "http://designnotes.fm/rob-giampietro-design-director-at-moma"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-vanity-fair-clinton-cargill",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-vanity-fair-clinton-cargill",
+          "to": "http://designnotes.fm/clinton-cargill-visual-director-at-vanity-fair"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-screenless",
+      "final_url": "https://www.youtube.com/watch?v=VDO5fPF-Ppo&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-screenless",
+          "to": "https://www.youtube.com/watch?v=VDO5fPF-Ppo&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=VDO5fPF-Ppo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/designing-great-apps-new-internet-users",
+      "final_url": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/designing-great-apps-new-internet-users",
+          "to": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/fair-and-square-equitable-design",
+      "final_url": "https://www.youtube.com/watch?v=wt2btUPPZ_M&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/fair-and-square-equitable-design",
+          "to": "https://youtu.be/wt2btUPPZ_M"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=wt2btUPPZ_M",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/fair-is-not-the-default-myth-of-neutral-ai",
+      "final_url": "https://www.youtube.com/watch?v=NF98WCdvR6U",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/fair-is-not-the-default-myth-of-neutral-ai",
+          "to": "https://www.youtube.com/watch?v=NF98WCdvR6U"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=NF98WCdvR6U",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/global-ux-speaker-series",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/global-ux-speaker-series",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/material-design-playlist",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/material-design-playlist",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/ml-human-bias",
+      "final_url": "https://www.youtube.com/watch?v=59bMh59JQDo",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/ml-human-bias",
+          "to": "https://www.youtube.com/watch?v=59bMh59JQDo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=59bMh59JQDo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/superfamilies",
+      "final_url": "https://fonts.google.com/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/superfamilies",
+          "to": "https://fonts.google.com/featured/Superfamilies"
+        }
+      ],
+      "canonical_url": "https://fonts.google.com/",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: fonts.google.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/tailored-tech-empathetic-design",
+      "final_url": "https://www.youtube.com/watch?v=xPlwoFRSq_0&t=1s&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/tailored-tech-empathetic-design",
+          "to": "https://www.youtube.com/watch?v=xPlwoFRSq_0&t=1s&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=xPlwoFRSq_0&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/the-cream-of-the-crop-fonts",
+      "final_url": "https://fonts.google.com",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/the-cream-of-the-crop-fonts",
+          "to": "https://fonts.google.com"
+        }
+      ],
+      "canonical_url": "https://fonts.google.com/",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: fonts.google.com",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/the-final-frontier-scifi",
+      "final_url": "https://www.youtube.com/watch?v=YPAd2SCnsRQ&",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/the-final-frontier-scifi",
+          "to": "https://www.youtube.com/watch?v=YPAd2SCnsRQ&"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=YPAd2SCnsRQ",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/video-conversation-design-playlist",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-conversation-design-playlist",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/video-design-listening",
+      "final_url": "https://www.youtube.com/watch?v=6_mHCOAAEI8",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-design-listening",
+          "to": "https://www.youtube.com/watch?v=6_mHCOAAEI8"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=6_mHCOAAEI8",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/video-design-systematic",
+      "final_url": "https://www.youtube.com/watch?v=4e4sXwOmXBM",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-design-systematic",
+          "to": "https://www.youtube.com/watch?v=4e4sXwOmXBM"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=4e4sXwOmXBM",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/google-design-hardware-isabelle-olsson",
+      "final_url": "https://design.google/library/google-design-hardware-isabelle-olsson",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/google-design-hardware-isabelle-olsson: HTTP Error 404: Not Found",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/method-collaboration-inclusion",
+      "final_url": "https://design.google/library/method-collaboration-inclusion",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-collaboration-inclusion: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan",
+      "final_url": "https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan: HTTP Error 404: Not Found",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-episode-20",
+      "final_url": "https://design.google/library/method-podcast-episode-20",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-episode-20: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-google-ux-hiring-process",
+      "final_url": "https://design.google/library/method-podcast-google-ux-hiring-process",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-google-ux-hiring-process: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-practicing-playful-creation",
+      "final_url": "https://design.google/library/method-podcast-practicing-playful-creation",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-practicing-playful-creation: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-roxanne-pinto-ux-writing",
+      "final_url": "https://design.google/library/method-podcast-roxanne-pinto-ux-writing",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-roxanne-pinto-ux-writing: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/pairs-medium-publication",
+      "final_url": "https://design.google/library/pairs-medium-publication",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/pairs-medium-publication: HTTP Error 403: Forbidden",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/passion-projects-gallery-matthew-levine",
+      "final_url": "https://design.google/library/passion-projects-gallery-matthew-levine",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/passion-projects-gallery-matthew-levine: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/passion-projects-visbug-adam-argyle",
+      "final_url": "https://design.google/library/passion-projects-visbug-adam-argyle",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/passion-projects-visbug-adam-argyle: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2015-london",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2015-london",
+          "to": "https://design.google/span-lon/"
+        },
+        {
+          "code": 308,
+          "from": "https://design.google/span-lon/",
+          "to": "https://design.google/span-lon"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2015-new-york",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2015-new-york",
+          "to": "https://design.google/span-nyc/"
+        },
+        {
+          "code": 308,
+          "from": "https://design.google/span-nyc/",
+          "to": "https://design.google/span-nyc"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2018-helsinki",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2018-helsinki",
+          "to": "http://design.google/span2018"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2024-11-11"
+    }
+  ],
+  "issues": [
+    {
+      "requested_url": "https://design.google/library/You-will-never-read-the-same-way-font-lexend",
+      "final_url": "https://fonts.googleblog.com/2022/07/lexend.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/You-will-never-read-the-same-way-font-lexend",
+          "to": "https://fonts.googleblog.com/2022/07/lexend.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-16"
+    },
+    {
+      "requested_url": "https://design.google/library/adjusting-grade-mode",
+      "final_url": "https://m3.material.io/blog/readability-research/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/adjusting-grade-mode",
+          "to": "https://material.io/blog/readability-research"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/android-developers-guide-better-typography",
+      "final_url": "https://r.jina.ai/http://medium.com/google-design/the-android-developers-guide-to-better-typography-97e11bb0e261",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/android-developers-guide-better-typography",
+          "to": "https://medium.com/google-design/the-android-developers-guide-to-better-typography-97e11bb0e261"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/announcing-google-fonts-knowledge",
+      "final_url": "https://m3.material.io/blog/google-fonts-knowledge/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/announcing-google-fonts-knowledge",
+          "to": "https://material.io/blog/google-fonts-knowledge/"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/app-alchemy-material-partners",
+      "final_url": "https://m2.material.io/articles/material-partner-studies.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/app-alchemy-material-partners",
+          "to": "https://material.io/articles/material-partner-studies.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/canada-calling-font",
+      "final_url": "https://fonts.googleblog.com/2022/04/radio-canada-en.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/canada-calling-font",
+          "to": "https://fonts.googleblog.com/2022/04/radio-canada-en.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/check-yourselfie-ai-selfies",
+      "final_url": "https://research.google/blog/neural-network-generated-illustrations-in-allo/?m=1",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/check-yourselfie-ai-selfies",
+          "to": "https://research.googleblog.com/2017/05/neural-network-generated-illustrations.html?m=1"
+        }
+      ],
+      "canonical_url": "https://research.google/blog/neural-network-generated-illustrations-in-allo/",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/designing-actions-google",
+      "final_url": "https://developers.google.com/assistant/conversation-design/welcome",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/designing-actions-google",
+          "to": "https://designguidelines.withgoogle.com/conversation/"
+        }
+      ],
+      "canonical_url": "https://developers.google.com/assistant/conversation-design/welcome",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/flow-and-redacted",
+      "final_url": "https://fonts.googleblog.com/2022/01/flow-and-redacted-check-out-these-new.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/flow-and-redacted",
+          "to": "https://fonts.googleblog.com/2022/01/flow-and-redacted-check-out-these-new.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/google-fonts-get-colorful",
+      "final_url": "https://m3.material.io/blog/color-fonts-are-here/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/google-fonts-get-colorful",
+          "to": "https://material.io/blog/color-fonts-are-here"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/how-human-interaction-shaping-future-technology",
+      "final_url": "https://medium.com/google-design/how-human-interaction-is-shaping-the-future-of-technology-c7242d75142f",
+      "status": 200,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "Used explicit override target: https://medium.com/google-design/how-human-interaction-is-shaping-the-future-of-technology-c7242d75142f",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/how-we-designed-it-io-action-google-assistant",
+      "final_url": "https://r.jina.ai/http://medium.com/google-developers/how-we-designed-it-the-google-i-o-18-action-for-the-google-assistant-9370ffbaf9b0",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/how-we-designed-it-io-action-google-assistant",
+          "to": "https://medium.com/google-developers/how-we-designed-it-the-google-i-o-18-action-for-the-google-assistant-9370ffbaf9b0"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-11-11"
+    },
+    {
+      "requested_url": "https://design.google/library/inclusive-insights-open-global-dataset",
+      "final_url": "https://research.google/blog/exploring-and-visualizing-an-open-global-dataset/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/inclusive-insights-open-global-dataset",
+          "to": "https://research.googleblog.com/2017/08/exploring-and-visualizing-open-global.html"
+        }
+      ],
+      "canonical_url": "https://research.google/blog/exploring-and-visualizing-an-open-global-dataset/",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/intro-to-hcml",
+      "final_url": "https://r.jina.ai/http://medium.com/google-design/human-centered-machine-learning-a770d10562cd",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/intro-to-hcml",
+          "to": "https://medium.com/google-design/human-centered-machine-learning-a770d10562cd"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/introducing-material-symbols",
+      "final_url": "https://m3.material.io/blog/introducing-symbols/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/introducing-material-symbols",
+          "to": "https://material.io/blog/introducing-symbols"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/io-2017-design-coverage",
+      "final_url": "https://r.jina.ai/http://medium.com/google-design/i-o-2017-our-definitive-guide-to-design-c6c25cb3e99f",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/io-2017-design-coverage",
+          "to": "https://medium.com/google-design/i-o-2017-our-definitive-guide-to-design-c6c25cb3e99f"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-11-11"
+    },
+    {
+      "requested_url": "https://design.google/library/material-icons-sehee-lee",
+      "final_url": "https://m3.material.io/blog/material-icons-sehee-lee-interview/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/material-icons-sehee-lee",
+          "to": "https://material.io/blog/material-icons-sehee-lee-interview"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/materialize-and-mobilize-material-themes",
+      "final_url": "https://m2.material.io/articles/how-google-created-a-custom-material-theme.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/materialize-and-mobilize-material-themes",
+          "to": "https://material.io/articles/how-google-created-a-custom-material-theme.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/participatory-machine-learning",
+      "final_url": "https://medium.com/people-ai-research/participatory-machine-learning-69b77f1e5e23",
+      "status": 200,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "Used explicit override target: https://medium.com/people-ai-research/participatory-machine-learning-69b77f1e5e23",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/people-ai-guidebook",
+      "final_url": "https://pair.withgoogle.com/guidebook-v2/chapters",
+      "status": 200,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "Used explicit override target: https://pair.withgoogle.com/guidebook-v2/chapters",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/perfect-pairings-fonts",
+      "final_url": "https://m3.material.io/blog/google-fonts-pairing-figma/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/perfect-pairings-fonts",
+          "to": "https://material.io/blog/google-fonts-pairing-figma"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/rebranding-readability-atkinson-font",
+      "final_url": "https://m3.material.io/blog/atkinson-hyperlegible-design/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/rebranding-readability-atkinson-font",
+          "to": "https://material.io/blog/atkinson-hyperlegible-design"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/roboto-but-make-it-flex",
+      "final_url": "https://m3.material.io/blog/roboto-flex/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/roboto-but-make-it-flex",
+          "to": "https://material.io/blog/roboto-flex"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/sample-dialogs",
+      "final_url": "https://developers.googleblog.com/sample-dialogs-the-key-to-creating-great-actions-on-google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/sample-dialogs",
+          "to": "https://developers.googleblog.com/2018/09/sample-dialogs-key-to-creating-great.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/say-hello-roboto-serif",
+      "final_url": "https://m3.material.io/blog/roboto-serif/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/say-hello-roboto-serif",
+          "to": "https://material.io/blog/roboto-serif"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/seoul-printed-matter-politics-and-performance",
+      "final_url": "https://r.jina.ai/http://medium.com/google-design/seoul-printed-matter-politics-and-performance-fa3af37c7547",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/seoul-printed-matter-politics-and-performance",
+          "to": "https://medium.com/google-design/seoul-printed-matter-politics-and-performance-fa3af37c7547"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/space-monos-retrofuturism-font",
+      "final_url": "https://r.jina.ai/http://medium.com/google-design/introducing-space-mono-a-new-monospaced-typeface-by-colophon-foundry-for-google-fonts-84367eac6dfb",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/space-monos-retrofuturism-font",
+          "to": "https://medium.com/google-design/introducing-space-mono-a-new-monospaced-typeface-by-colophon-foundry-for-google-fonts-84367eac6dfb"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/teaming-improve-reading-research",
+      "final_url": "https://m3.material.io/blog/readability-consortium/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/teaming-improve-reading-research",
+          "to": "https://material.io/blog/readability-consortium"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/these-fonts-encourage-literacy-australia",
+      "final_url": "https://fonts.googleblog.com/2022/08/the-handwriting-fonts-that-help.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/these-fonts-encourage-literacy-australia",
+          "to": "https://fonts.googleblog.com/2022/08/the-handwriting-fonts-that-help.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/visit-materialio",
+      "final_url": "https://m3.material.io/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/visit-materialio",
+          "to": "https://material.io"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/web-fonts-win-an-emmy",
+      "final_url": "https://fonts.googleblog.com/2022/06/emmy-award-for-web-fonts-faster-online.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/web-fonts-win-an-emmy",
+          "to": "https://fonts.googleblog.com/2022/06/emmy-award-for-web-fonts-faster-online.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "External reference ingested via jina_markdown.",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/you-can-say-again-role-repetition-conversation-design",
+      "final_url": "https://medium.com/google-design/you-can-say-that-again-the-role-of-repetition-in-conversation-design-55937ef0f0ba",
+      "status": 200,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "external_reference",
+      "include_in_index": true,
+      "outcome": "external_ingested",
+      "note": "Used explicit override target: https://medium.com/google-design/you-can-say-that-again-the-role-of-repetition-in-conversation-design-55937ef0f0ba",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/accessibility-guidance-global-audience",
+      "final_url": "https://www.youtube.com/watch?v=38fbB8wCPzg",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/accessibility-guidance-global-audience",
+          "to": "https://www.youtube.com/watch?v=38fbB8wCPzg"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=38fbB8wCPzg",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/atypi-2017-montr%C3%A9al",
+      "final_url": "https://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/atypi-2017-montr%C3%A9al",
+          "to": "https://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PL0oMAzSh5W9oJSx9BsXeF8UzA44FwB255",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-anchor-podcast-playful-design-system",
+      "final_url": "https://www.youtube.com/watch?v=D7YvXCHLsdo&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-anchor-podcast-playful-design-system",
+          "to": "https://youtu.be/D7YvXCHLsdo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=D7YvXCHLsdo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-1",
+      "final_url": "https://www.youtube.com/watch?v=cPBXjtpGuSA",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-1",
+          "to": "https://www.youtube.com/watch?v=cPBXjtpGuSA"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=cPBXjtpGuSA",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-2",
+      "final_url": "https://www.youtube.com/watch?v=OIvnz7fb0p0&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-2",
+          "to": "https://youtu.be/OIvnz7fb0p0"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=OIvnz7fb0p0",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-3",
+      "final_url": "https://www.youtube.com/watch?v=aDikE5UqDxk&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-3",
+          "to": "https://youtu.be/aDikE5UqDxk"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=aDikE5UqDxk",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-4",
+      "final_url": "https://www.youtube.com/watch?v=5i1Ewds-1BM&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-4",
+          "to": "https://youtu.be/5i1Ewds-1BM"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=5i1Ewds-1BM",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-episode-5",
+      "final_url": "https://www.youtube.com/watch?v=GJ1MDl77VYs&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-episode-5",
+          "to": "https://youtu.be/GJ1MDl77VYs"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=GJ1MDl77VYs",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/centered-starbucks-digital-experience",
+      "final_url": "https://www.youtube.com/watch?v=ZE8T4HV8OGA&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/centered-starbucks-digital-experience",
+          "to": "https://youtu.be/ZE8T4HV8OGA"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=ZE8T4HV8OGA",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/choose-your-words-design-languages",
+      "final_url": "https://www.youtube.com/watch?v=G-LVbuoT1_I",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/choose-your-words-design-languages",
+          "to": "https://www.youtube.com/watch?v=G-LVbuoT1_I"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=G-LVbuoT1_I",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/creative-currency-business",
+      "final_url": "https://www.youtube.com/watch?v=z9I9hMHIouo",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/creative-currency-business",
+          "to": "https://www.youtube.com/watch?v=z9I9hMHIouo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=z9I9hMHIouo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-autonomous",
+      "final_url": "https://www.youtube.com/watch?v=5hLEiBGPrNI&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-autonomous",
+          "to": "https://www.youtube.com/watch?v=5hLEiBGPrNI&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=5hLEiBGPrNI",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-narrative",
+      "final_url": "https://www.youtube.com/watch?v=xPV76mhyr5M&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-narrative",
+          "to": "https://www.youtube.com/watch?v=xPV76mhyr5M&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=xPV76mhyr5M",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-bayonet-records",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-bayonet-records",
+          "to": "http://designnotes.fm/katie-garcia-dustin-payseur-bayonet-records"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-episode-21",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-episode-21",
+          "to": "http://designnotes.fm/website/2018-material-design-awards"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-episode-22",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-episode-22",
+          "to": "http://designnotes.fm/bee-grandinetti-hedvig-ahlberg-punanimation"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-expressions-experience",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-expressions-experience",
+          "to": "http://designnotes.fm/conor-grebel-bedtimes"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-host-liam-spradlin",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-host-liam-spradlin",
+          "to": "http://designnotes.fm/liam-spradlin-host-of-design-notes"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-ksenya-samarskaya-type-designer",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-ksenya-samarskaya-type-designer",
+          "to": "http://designnotes.fm/ksenya-samarskaya-type-designer"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-moma-rob-giampietro",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-moma-rob-giampietro",
+          "to": "http://designnotes.fm/rob-giampietro-design-director-at-moma"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-notes-vanity-fair-clinton-cargill",
+      "final_url": "https://design-notes.show/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-notes-vanity-fair-clinton-cargill",
+          "to": "http://designnotes.fm/clinton-cargill-visual-director-at-vanity-fair"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: design-notes.show",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/design-screenless",
+      "final_url": "https://www.youtube.com/watch?v=VDO5fPF-Ppo&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/design-screenless",
+          "to": "https://www.youtube.com/watch?v=VDO5fPF-Ppo&feature=youtu.be"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=VDO5fPF-Ppo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/designing-great-apps-new-internet-users",
+      "final_url": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/designing-great-apps-new-internet-users",
+          "to": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=Fo-1qrHeQXQ",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/fair-and-square-equitable-design",
+      "final_url": "https://www.youtube.com/watch?v=wt2btUPPZ_M&feature=youtu.be",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/fair-and-square-equitable-design",
+          "to": "https://youtu.be/wt2btUPPZ_M"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=wt2btUPPZ_M",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/fair-is-not-the-default-myth-of-neutral-ai",
+      "final_url": "https://www.youtube.com/watch?v=NF98WCdvR6U",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/fair-is-not-the-default-myth-of-neutral-ai",
+          "to": "https://www.youtube.com/watch?v=NF98WCdvR6U"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=NF98WCdvR6U",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/global-ux-speaker-series",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/global-ux-speaker-series",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh8UjaNYMR4BP98t26NBT2VL",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-23"
+    },
+    {
+      "requested_url": "https://design.google/library/material-design-playlist",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/material-design-playlist",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh-rX-Xr_xi9KIEcbdee_1Ah",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/ml-human-bias",
+      "final_url": "https://www.youtube.com/watch?v=59bMh59JQDo",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/ml-human-bias",
+          "to": "https://www.youtube.com/watch?v=59bMh59JQDo"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=59bMh59JQDo",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/superfamilies",
+      "final_url": "https://fonts.google.com/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/superfamilies",
+          "to": "https://fonts.google.com/featured/Superfamilies"
+        }
+      ],
+      "canonical_url": "https://fonts.google.com/",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: fonts.google.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/tailored-tech-empathetic-design",
+      "final_url": "https://www.youtube.com/watch?v=xPlwoFRSq_0&t=1s&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/tailored-tech-empathetic-design",
+          "to": "https://www.youtube.com/watch?v=xPlwoFRSq_0&t=1s&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=xPlwoFRSq_0&list=PLJ21zHI2TNh8pOUzr4AWaD7AoLGi9Bm4B&index=2",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/the-cream-of-the-crop-fonts",
+      "final_url": "https://fonts.google.com",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/the-cream-of-the-crop-fonts",
+          "to": "https://fonts.google.com"
+        }
+      ],
+      "canonical_url": "https://fonts.google.com/",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: fonts.google.com",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/the-final-frontier-scifi",
+      "final_url": "https://www.youtube.com/watch?v=YPAd2SCnsRQ&",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/the-final-frontier-scifi",
+          "to": "https://www.youtube.com/watch?v=YPAd2SCnsRQ&"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=YPAd2SCnsRQ",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/video-conversation-design-playlist",
+      "final_url": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-conversation-design-playlist",
+          "to": "https://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz"
+        }
+      ],
+      "canonical_url": "http://www.youtube.com/playlist?list=PLJ21zHI2TNh-MpZ-7h1EPK9O7pjx109Bz",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/video-design-listening",
+      "final_url": "https://www.youtube.com/watch?v=6_mHCOAAEI8",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-design-listening",
+          "to": "https://www.youtube.com/watch?v=6_mHCOAAEI8"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=6_mHCOAAEI8",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/video-design-systematic",
+      "final_url": "https://www.youtube.com/watch?v=4e4sXwOmXBM",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/video-design-systematic",
+          "to": "https://www.youtube.com/watch?v=4e4sXwOmXBM"
+        }
+      ],
+      "canonical_url": "https://www.youtube.com/watch?v=4e4sXwOmXBM",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_redirect",
+      "note": "External source blocked from ingestion: www.youtube.com",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/google-design-hardware-isabelle-olsson",
+      "final_url": "https://design.google/library/google-design-hardware-isabelle-olsson",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/google-design-hardware-isabelle-olsson: HTTP Error 404: Not Found",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/method-collaboration-inclusion",
+      "final_url": "https://design.google/library/method-collaboration-inclusion",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-collaboration-inclusion: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan",
+      "final_url": "https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-designing-discourse-philip-battin-curtis-flanagan: HTTP Error 404: Not Found",
+      "lastmod": "2024-07-29"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-episode-20",
+      "final_url": "https://design.google/library/method-podcast-episode-20",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-episode-20: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-google-ux-hiring-process",
+      "final_url": "https://design.google/library/method-podcast-google-ux-hiring-process",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-google-ux-hiring-process: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-practicing-playful-creation",
+      "final_url": "https://design.google/library/method-podcast-practicing-playful-creation",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-practicing-playful-creation: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/method-podcast-roxanne-pinto-ux-writing",
+      "final_url": "https://design.google/library/method-podcast-roxanne-pinto-ux-writing",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/method-podcast-roxanne-pinto-ux-writing: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/pairs-medium-publication",
+      "final_url": "https://design.google/library/pairs-medium-publication",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/pairs-medium-publication: HTTP Error 403: Forbidden",
+      "lastmod": "2025-06-17"
+    },
+    {
+      "requested_url": "https://design.google/library/passion-projects-gallery-matthew-levine",
+      "final_url": "https://design.google/library/passion-projects-gallery-matthew-levine",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/passion-projects-gallery-matthew-levine: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/passion-projects-visbug-adam-argyle",
+      "final_url": "https://design.google/library/passion-projects-visbug-adam-argyle",
+      "status": null,
+      "redirect_chain": [],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "fetch_error",
+      "note": "Failed to fetch https://design.google/library/passion-projects-visbug-adam-argyle: HTTP Error 404: Not Found",
+      "lastmod": "2025-06-19"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2015-london",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2015-london",
+          "to": "https://design.google/span-lon/"
+        },
+        {
+          "code": 308,
+          "from": "https://design.google/span-lon/",
+          "to": "https://design.google/span-lon"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2015-new-york",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2015-new-york",
+          "to": "https://design.google/span-nyc/"
+        },
+        {
+          "code": 308,
+          "from": "https://design.google/span-nyc/",
+          "to": "https://design.google/span-nyc"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2025-06-18"
+    },
+    {
+      "requested_url": "https://design.google/library/span-2018-helsinki",
+      "final_url": "https://design.google/",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/span-2018-helsinki",
+          "to": "http://design.google/span2018"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "redirect_to_home",
+      "note": "",
+      "lastmod": "2024-11-11"
+    }
+  ]
+}

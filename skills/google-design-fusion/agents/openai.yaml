@@ -1,0 +1,4 @@
+interface:
+  display_name: "Google Design Fusion"
+  short_description: "Google Design x awesome-design-md workflow skill."
+  default_prompt: "Use $google-design-fusion to retrieve design principles, fuse style references, and shape a distinctive UI workflow."
