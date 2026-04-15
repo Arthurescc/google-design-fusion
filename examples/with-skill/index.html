@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>With Skill Demo</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --panel: #fffdf8;
+      --surface: #efe7dd;
+      --ink: #181818;
+      --muted: #5d554c;
+      --line: #d7c9b8;
+      --accent: #1c1c1c;
+      --warm: #a2712f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.7), transparent 28%),
+        linear-gradient(180deg, #f6f1e8, #eee6da);
+      color: var(--ink);
+    }
+    .page { max-width: 1220px; margin: 0 auto; padding: 44px 32px 80px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: stretch;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 36px;
+    }
+    .eyebrow {
+      display:inline-block;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #f7f0e8;
+      letter-spacing: .18em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 62px;
+      line-height: .98;
+      max-width: 720px;
+    }
+    .lead {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 23px;
+      line-height: 1.45;
+      margin: 0 0 28px;
+    }
+    .cta {
+      display:inline-flex;
+      align-items:center;
+      gap: 12px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #f7f0e8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 26px;
+    }
+    .label { color: var(--warm); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .stack { display: grid; gap: 18px; }
+    .list { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+    .list li { padding-top: 14px; border-top: 1px solid #e7ddd0; color: var(--muted); line-height: 1.45; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 28px;
+    }
+    h2 { margin: 0 0 10px; font-size: 28px; }
+    p { margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Google Design Fusion</div>
+        <h1>Research-backed design direction for AI products.</h1>
+        <p class="lead">Blend Google Design principles, anti-pattern guardrails, and curated style references into a front-end workflow that feels deliberate instead of generic.</p>
+        <a class="cta" href="#">Explore the skill</a>
+      </div>
+      <div class="panel stack">
+        <div>
+          <div class="label">Why it feels different</div>
+          <ul class="list">
+            <li>One clear hero instead of three competing focal points.</li>
+            <li>Typography and spacing lead the experience, not decorative chrome.</li>
+            <li>Guardrails remove fake metrics, tiny helper text, and noisy motion.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="label">Principle anchors</div>
+        <h2>Attention-first interface design</h2>
+        <p>Use motion to guide focus, keep semantic text readable, and let hierarchy do the explaining.</p>
+      </div>
+      <div class="panel">
+        <div class="label">Style seeds</div>
+        <h2>Editorial warmth + system precision</h2>
+        <p>Combine calm Material reasoning with sharper product styling references from curated DESIGN.md samples.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

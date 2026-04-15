@@ -15,6 +15,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
+sys.dont_write_bytecode = True
+
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9'\-]{1,}")
 

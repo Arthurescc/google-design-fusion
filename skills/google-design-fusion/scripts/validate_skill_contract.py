@@ -9,6 +9,8 @@ from pathlib import Path
 
 import yaml
 
+sys.dont_write_bytecode = True
+
 
 SKILL_NAME = "google-design-fusion"
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")

@@ -1,0 +1,60 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" fill="#0E0E10"/>
+  <text x="120" y="120" fill="#F7F1E8" font-size="56" font-family="Arial, Helvetica, sans-serif" font-weight="700">A/B Demo: Without vs With google-design-fusion</text>
+  <text x="120" y="168" fill="#B6B0A8" font-size="26" font-family="Arial, Helvetica, sans-serif">Same product brief. Left: generic AI UI. Right: retrieval-guided design direction using Google Design principles + awesome-design-md.</text>
+
+  <rect x="90" y="230" width="660" height="640" rx="34" fill="#17171D" stroke="#343444" stroke-width="3"/>
+  <rect x="120" y="270" width="600" height="90" rx="26" fill="url(#leftHero)"/>
+  <text x="145" y="325" fill="#FFFFFF" font-size="34" font-family="Arial, Helvetica, sans-serif" font-weight="700">AI Design Copilot</text>
+  <text x="145" y="352" fill="#E7E2FF" font-size="15" font-family="Arial, Helvetica, sans-serif">tiny helper text · beta · optimized by smart AI magic</text>
+  <rect x="145" y="392" width="170" height="116" rx="22" fill="#211E37" stroke="#5D47E6" stroke-width="2"/>
+  <rect x="337" y="392" width="170" height="116" rx="22" fill="#211E37" stroke="#5D47E6" stroke-width="2"/>
+  <rect x="529" y="392" width="170" height="116" rx="22" fill="#211E37" stroke="#5D47E6" stroke-width="2"/>
+  <text x="165" y="432" fill="#BDB6FF" font-size="14" font-family="Arial, Helvetica, sans-serif">productivity score</text>
+  <text x="165" y="478" fill="#FFFFFF" font-size="40" font-family="Arial, Helvetica, sans-serif" font-weight="700">99%</text>
+  <text x="357" y="432" fill="#BDB6FF" font-size="14" font-family="Arial, Helvetica, sans-serif">creative boost</text>
+  <text x="357" y="478" fill="#FFFFFF" font-size="40" font-family="Arial, Helvetica, sans-serif" font-weight="700">240%</text>
+  <text x="548" y="432" fill="#BDB6FF" font-size="14" font-family="Arial, Helvetica, sans-serif">insight ring</text>
+  <circle cx="628" cy="463" r="31" stroke="#9F8BFF" stroke-width="12"/>
+  <rect x="145" y="544" width="554" height="112" rx="24" fill="#1E1D2A"/>
+  <rect x="145" y="676" width="266" height="152" rx="24" fill="#1C1A28"/>
+  <rect x="433" y="676" width="266" height="152" rx="24" fill="#1C1A28"/>
+  <text x="144" y="210" fill="#FFB648" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">Without skill</text>
+  <text x="145" y="574" fill="#F0E7FF" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Nested cards, fake metrics, decorative glow</text>
+  <text x="145" y="606" fill="#AFA7C7" font-size="18" font-family="Arial, Helvetica, sans-serif">Multiple visual focal points compete at once. Tiny explanatory text patches weak hierarchy.</text>
+  <text x="165" y="726" fill="#FFFFFF" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Magic dashboard</text>
+  <text x="165" y="756" fill="#BDB6FF" font-size="15" font-family="Arial, Helvetica, sans-serif">ring charts, badges, gradients, vague UI</text>
+  <text x="453" y="726" fill="#FFFFFF" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Noise over meaning</text>
+  <text x="453" y="756" fill="#BDB6FF" font-size="15" font-family="Arial, Helvetica, sans-serif">ornament pretends to be information</text>
+
+  <rect x="850" y="230" width="660" height="640" rx="34" fill="#F5F0E8" stroke="#D0C6B8" stroke-width="3"/>
+  <rect x="885" y="266" width="590" height="300" rx="34" fill="#EFE7DD"/>
+  <rect x="920" y="318" width="188" height="32" rx="16" fill="#1B1B1B"/>
+  <text x="939" y="340" fill="#F5F0E8" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="700">GOOGLE DESIGN FUSION</text>
+  <text x="920" y="410" fill="#181818" font-size="52" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Research-backed design direction for AI products.</text>
+  <text x="920" y="472" fill="#49433D" font-size="24" font-family="Arial, Helvetica, sans-serif">Blend Google Design principles, anti-pattern guardrails, and curated style references into a clear front-end workflow.</text>
+  <rect x="920" y="510" width="210" height="54" rx="27" fill="#1B1B1B"/>
+  <text x="954" y="545" fill="#F6F0E8" font-size="18" font-family="Arial, Helvetica, sans-serif" font-weight="700">Explore the skill</text>
+  <rect x="885" y="604" width="280" height="192" rx="24" fill="#FFFDF8" stroke="#D6CABC" stroke-width="2"/>
+  <rect x="1193" y="604" width="282" height="192" rx="24" fill="#FFFDF8" stroke="#D6CABC" stroke-width="2"/>
+  <text x="850" y="210" fill="#9B6C2E" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">With google-design-fusion</text>
+  <text x="915" y="646" fill="#171717" font-size="25" font-family="Arial, Helvetica, sans-serif" font-weight="700">Attention-first structure</text>
+  <text x="915" y="680" fill="#5E564E" font-size="18" font-family="Arial, Helvetica, sans-serif">One clear hero, restrained palette, explicit hierarchy.</text>
+  <text x="915" y="733" fill="#171717" font-size="25" font-family="Arial, Helvetica, sans-serif" font-weight="700">Guardrails built in</text>
+  <text x="915" y="766" fill="#5E564E" font-size="18" font-family="Arial, Helvetica, sans-serif">No fake metrics, no decorative helper text, no noisy motion.</text>
+  <text x="1223" y="646" fill="#171717" font-size="25" font-family="Arial, Helvetica, sans-serif" font-weight="700">Source-guided visual language</text>
+  <text x="1223" y="680" fill="#5E564E" font-size="18" font-family="Arial, Helvetica, sans-serif">Material expressiveness, editorial type, cleaner component rhythm.</text>
+  <text x="1223" y="733" fill="#171717" font-size="25" font-family="Arial, Helvetica, sans-serif" font-weight="700">Reviewable output</text>
+  <text x="1223" y="766" fill="#5E564E" font-size="18" font-family="Arial, Helvetica, sans-serif">Evidence packet, validation scripts, and reusable retrieval harness.</text>
+
+  <rect x="90" y="900" width="1420" height="1" fill="#2A2A30"/>
+  <text x="120" y="940" fill="#9D978E" font-size="22" font-family="Arial, Helvetica, sans-serif">Prompt used: “Build a homepage for an AI design workflow skill that teaches Google Design principles and rejects AI UI slop.”</text>
+
+  <defs>
+    <linearGradient id="leftHero" x1="120" y1="270" x2="720" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6C45F4"/>
+      <stop offset="0.5" stop-color="#9A5CFF"/>
+      <stop offset="1" stop-color="#6D86FF"/>
+    </linearGradient>
+  </defs>
+</svg>

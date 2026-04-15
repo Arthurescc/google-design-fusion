@@ -32,6 +32,8 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 from xml.etree import ElementTree
 
+sys.dont_write_bytecode = True
+
 
 SITE_MAP_URL = "https://design.google/sitemap.xml"
 USER_AGENT = (
