@@ -1,6 +1,6 @@
 ---
 name: google-design-fusion
-description: Fuse design.google research, a local Google Design vector library, and awesome-design-md style references into a full design workflow for landing pages, app shells, brand systems, UI audits, and frontend design prompts. Use when Codex needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) generate or refine a distinctive UI direction, or (5) reject common AI-generated design mistakes before implementation.
+description: Fuse design.google research, a local Google Design vector library, and awesome-design-md style references into a full design workflow for landing pages, app shells, brand systems, UI audits, and frontend design prompts. Portable across Codex, OpenClaw, Claude Code, Hermes Agent, and similar SKILL.md-compatible agents. Use when an agent needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) generate or refine a distinctive UI direction, or (5) reject common AI-generated design mistakes before implementation.
 ---
 
 # Google Design Fusion

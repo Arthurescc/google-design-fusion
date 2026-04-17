@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
-  <p><strong>一个开源 Codex Skill：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
+  <p><strong>一个面向多智能体生态的开源 skill：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -11,6 +11,8 @@
 
 `google-design-fusion` 不是一个简单的提示词包装器，也不是一堆零散笔记。
 
+它被设计成可复用的 skill 系统，可以用于 Codex、OpenClaw、Claude Code、Hermes Agent，以及其他支持 `SKILL.md` 风格指令的工具。
+
 它是一套完整封装的 skill 系统，包含：
 
 - 基于 `design.google` 构建的本地设计语料库
@@ -18,6 +20,14 @@
 - 能按设计阶段切换行为的检索 harness
 - 针对常见 AI 前端错误的 anti-AI-slop guardrails
 - 用于保证 skill、harness 和文档一致性的校验脚本
+
+## 兼容性
+
+这个仓库从一开始就不是为某一个工具单独写的，而是尽量做成可迁移的 skill 形态。
+
+- 直接适配较好的工具：Codex、OpenClaw、Claude Code、Hermes Agent
+- 一般也容易迁移到：支持 Markdown skills / 指令包 / workflow playbook 的其他智能体工具
+- 最适合的任务：前端设计生成、设计审查、设计系统方向定义、UI audit、检索驱动的 prompt shaping
 
 目标很直接：让 AI 生成的前端结果更有设计判断力、更可复核，也更少“套壳感”。
 
@@ -219,7 +229,16 @@ README.zh-CN.md
 
 ## 快速开始
 
-克隆仓库，把 skill 放进你的 Codex skills 目录，然后重启 Codex。
+克隆仓库，把 skill 放进你所使用的智能体 skills 目录，然后重启或刷新对应工具。
+
+常见目录：
+
+```text
+Codex:       ~/.codex/skills/google-design-fusion
+Claude Code: ~/.claude/skills/google-design-fusion
+OpenClaw:    ~/.openclaw/skills/google-design-fusion
+Hermes:      ~/.hermes/skills/google-design-fusion
+```
 
 如果你想在本地重建或检查：
 
@@ -238,6 +257,16 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 - [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
 - [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
 - [research/validation-report.md](./research/validation-report.md)
+
+## FAQ
+
+### 这是只给 Codex 用的吗？
+
+不是。仓库采用的是开放的 `SKILL.md` 结构，目标就是尽量在不同 coding agent 之间复用。
+
+### 它和普通设计提示词合集最大的区别是什么？
+
+它不只是提示词，而是带本地语料库、检索 harness、验证脚本和 anti-pattern guardrails 的完整 skill 系统。
 
 ## 发布说明
 

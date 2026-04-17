@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
-  <p><strong>An open-source Codex skill that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
+  <p><strong>An open-source, cross-agent skill that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -11,6 +11,8 @@
 
 `google-design-fusion` is not a prompt wrapper and not a loose folder of notes.
 
+It is designed to be reusable across Codex, OpenClaw, Claude Code, Hermes Agent, and other tools that can read or adapt `SKILL.md`-style instructions.
+
 It is a packaged skill system with:
 
 - a local design corpus built from `design.google`
@@ -18,6 +20,14 @@ It is a packaged skill system with:
 - a retrieval harness that changes behavior by design phase
 - anti-AI-slop guardrails for common front-end generation mistakes
 - validation scripts that keep the skill, harness, and docs aligned
+
+## Compatibility
+
+This repo is intentionally packaged as a portable skill system, not a one-tool experiment.
+
+- Works well in: Codex, OpenClaw, Claude Code, Hermes Agent
+- Usually portable to: agents that support custom Markdown skills, instruction packs, or workflow playbooks
+- Best fit: front-end design generation, design review, design-system direction, UI audits, and retrieval-backed prompt shaping
 
 The goal is simple: make AI-generated front-end work feel more intentional, more reviewable, and much less generic.
 
@@ -219,7 +229,16 @@ README.zh-CN.md
 
 ## Quick Start
 
-Clone the repo, place the skill in your Codex skills workspace, and restart Codex.
+Clone the repo, place the skill in your preferred agent skills workspace, and restart or refresh that agent.
+
+Common locations:
+
+```text
+Codex:       ~/.codex/skills/google-design-fusion
+Claude Code: ~/.claude/skills/google-design-fusion
+OpenClaw:    ~/.openclaw/skills/google-design-fusion
+Hermes:      ~/.hermes/skills/google-design-fusion
+```
 
 If you want to rebuild or inspect locally:
 
@@ -248,6 +267,16 @@ External references are only ingested when they pass a higher bar:
 - usable text extraction quality
 
 Video shells, weak redirects, and low-signal landing pages stay out of the indexed corpus.
+
+## FAQ
+
+### Is this only for Codex?
+
+No. The repo uses an open `SKILL.md` structure and is meant to be reused across multiple coding-agent ecosystems.
+
+### What makes this different from a design prompt collection?
+
+It includes a local corpus, a retrieval harness, validation scripts, and explicit anti-pattern guardrails. The behavior comes from the system, not from one pasted prompt.
 
 ## Contributing
 
