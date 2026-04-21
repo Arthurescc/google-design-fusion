@@ -1145,6 +1145,13 @@ def load_galaxy_motion_records(galaxy_motion_root: Path) -> List[Dict]:
     return records
 
 
+def load_galaxy_motion_summary(galaxy_motion_root: Path) -> Dict[str, str]:
+    summary_path = galaxy_motion_root / "manifests" / "summary.json"
+    if not summary_path.exists():
+        return {}
+    return json.loads(summary_path.read_text(encoding="utf-8"))
+
+
 def build_chunks(records: Sequence[Dict]) -> List[Dict]:
     chunks: List[Dict] = []
     for record in records:
@@ -1380,6 +1387,7 @@ def main() -> int:
         awesome_records = load_awesome_design_records(awesome_root)
 
     print("[3/5] Loading galaxy-motion references...")
+    galaxy_motion_summary = load_galaxy_motion_summary(galaxy_motion_root)
     galaxy_motion_records = load_galaxy_motion_records(galaxy_motion_root)
 
     # Keep all crawl outcomes in records.jsonl for coverage audits,
@@ -1416,6 +1424,8 @@ def main() -> int:
         ),
         "awesome_design_record_count": len(awesome_records),
         "galaxy_motion_record_count": len(galaxy_motion_records),
+        "galaxy_motion_snapshot_id": galaxy_motion_summary.get("snapshot_id", ""),
+        "galaxy_motion_source_url": galaxy_motion_summary.get("source_url", ""),
         "chunk_count": len(chunks),
         "dimensions": args.dimensions,
         "top_dims": args.top_dims,

@@ -44,12 +44,8 @@ MOTION_SIGNAL_TERMS = {
     "microinteraction",
     "motion",
     "animation",
-    "empty state",
     "notification",
-    "feedback",
-    "cta",
-    "polish",
-    "state change",
+    "toast",
 }
 
 DEFAULT_MOTION_GUARDRAILS = [
@@ -177,7 +173,12 @@ def sparse_dot(query: Dict[int, float], vector: List[List[float]]) -> float:
 
 def query_needs_motion(query: str, phase: str) -> bool:
     lowered = query.lower()
-    return any(term in lowered for term in MOTION_SIGNAL_TERMS)
+    query_tokens = set(tokenize(query))
+    if query_tokens & MOTION_SIGNAL_TERMS:
+        return True
+    if phase == "audit":
+        return "state transition" in lowered or "interaction feedback" in lowered
+    return False
 
 
 def apply_motion_prior(score: float, chunk: Dict, *, phase: str, needs_motion: bool) -> float:
@@ -488,7 +489,11 @@ def search(
 
 def build_prompt_packet(query: str, phase: str, hits: List[Dict]) -> Dict:
     requested_motion = query_needs_motion(query, phase)
-    motion_hits = [hit for hit in hits if (hit.get("source_family") or "") == "galaxy-motion"]
+    motion_hits = [
+        hit
+        for hit in hits
+        if (hit.get("source_family") or "") == "galaxy-motion" and hit.get("tags")
+    ]
     motion_kinds = sorted(
         {
             str(tag).lower()

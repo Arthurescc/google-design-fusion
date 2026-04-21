@@ -49,6 +49,57 @@ class MotionHarnessTests(unittest.TestCase):
         self.assertEqual(packet["motion_strategy"]["evidence_count"], 0)
         self.assertEqual(packet["motion_strategy"]["motion_kinds"], [])
 
+    def test_generic_cta_copy_query_does_not_force_motion(self) -> None:
+        command = [
+            sys.executable,
+            str(SCRIPT),
+            "improve landing page CTA copy hierarchy",
+            "--phase",
+            "polish",
+            "--top-k",
+            "6",
+            "--format",
+            "json",
+        ]
+        completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+        packet = json.loads(completed.stdout)
+        self.assertFalse(packet["motion_strategy"]["enabled"])
+
+    def test_words_containing_motion_do_not_trigger_motion_path(self) -> None:
+        command = [
+            sys.executable,
+            str(SCRIPT),
+            "improve promotion banner copy hierarchy",
+            "--phase",
+            "polish",
+            "--top-k",
+            "6",
+            "--format",
+            "json",
+        ]
+        completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+        packet = json.loads(completed.stdout)
+        self.assertFalse(packet["motion_strategy"]["enabled"])
+
+    def test_emotionally_wording_does_not_trigger_motion_path(self) -> None:
+        command = [
+            sys.executable,
+            str(SCRIPT),
+            "emotionally warm onboarding hierarchy",
+            "--phase",
+            "polish",
+            "--top-k",
+            "6",
+            "--format",
+            "json",
+        ]
+        completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+        packet = json.loads(completed.stdout)
+        self.assertFalse(packet["motion_strategy"]["enabled"])
+
 
 if __name__ == "__main__":
     unittest.main()

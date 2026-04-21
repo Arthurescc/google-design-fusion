@@ -78,8 +78,21 @@ def main() -> int:
     if records_text:
         records_text += "\n"
     (index_root / "records.jsonl").write_text(records_text, encoding="utf-8")
+    snapshot_manifest_path = input_root / ".snapshot-manifest.json"
+    snapshot_manifest = {}
+    if snapshot_manifest_path.exists():
+        snapshot_manifest = json.loads(snapshot_manifest_path.read_text(encoding="utf-8"))
     (manifest_root / "summary.json").write_text(
-        json.dumps({"record_count": len(records)}, indent=2, ensure_ascii=False),
+        json.dumps(
+            {
+                "record_count": len(records),
+                "snapshot_id": snapshot_manifest.get("snapshot_id", ""),
+                "source_kind": snapshot_manifest.get("source_kind", ""),
+                "source_url": snapshot_manifest.get("source_url", ""),
+            },
+            indent=2,
+            ensure_ascii=False,
+        ),
         encoding="utf-8",
     )
     return 0

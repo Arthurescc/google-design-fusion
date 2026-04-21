@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-14T11:29:50.340906Z",
-  "workspace_root": "E:\\AI??\\????\\goole design",
-  "output_root": "E:\\AI??\\????\\goole design\\google-design-vector-db",
+  "generated_at": "2026-04-21T20:37:36.826786Z",
+  "workspace_root": "E:\\AI素材\\前端设计\\goole design",
+  "output_root": "E:\\AI素材\\前端设计\\goole design\\google-design-vector-db",
   "design_google_sitemap_entry_count": 328,
   "design_google_record_count": 328,
   "design_google_indexable_record_count": 280,
@@ -22,5 +22,7 @@
   "chunk_count": 14066,
   "dimensions": 768,
   "top_dims": 64,
-  "galaxy_motion_record_count": 3802
+  "galaxy_motion_record_count": 3802,
+  "galaxy_motion_snapshot_id": "adbd2adde0a299a3956ea288fb444ec01891ca41",
+  "galaxy_motion_source_url": "https://codeload.github.com/uiverse-io/galaxy/zip/adbd2adde0a299a3956ea288fb444ec01891ca41"
 }

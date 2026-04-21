@@ -18,6 +18,8 @@ def main() -> int:
     manifest_path = workspace_root / "google-design-vector-db" / "manifest.json"
     summary_path = workspace_root / "google-design-vector-db" / "crawl-summary.json"
     report_path = workspace_root / "research" / "validation-report.md"
+    galaxy_summary_path = workspace_root / "skills" / "google-design-fusion" / "galaxy-motion" / "manifests" / "summary.json"
+    snapshot_manifest_path = workspace_root / "vendor" / "galaxy" / ".snapshot-manifest.json"
 
     if not manifest_path.exists():
         failures.append("Missing google-design-vector-db/manifest.json")
@@ -25,11 +27,17 @@ def main() -> int:
         failures.append("Missing google-design-vector-db/crawl-summary.json")
     if not report_path.exists():
         failures.append("Missing research/validation-report.md")
+    if not galaxy_summary_path.exists():
+        failures.append("Missing skills/google-design-fusion/galaxy-motion/manifests/summary.json")
+    if not snapshot_manifest_path.exists():
+        failures.append("Missing vendor/galaxy/.snapshot-manifest.json")
 
     if not failures:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         report = report_path.read_text(encoding="utf-8")
+        galaxy_summary = json.loads(galaxy_summary_path.read_text(encoding="utf-8"))
+        snapshot_manifest = json.loads(snapshot_manifest_path.read_text(encoding="utf-8"))
 
         expected_pairs = {
             "design_google_sitemap_entry_count": manifest.get("design_google_sitemap_entry_count"),
@@ -60,6 +68,12 @@ def main() -> int:
             failures.append(
                 "validation-report.md claims broad verification without mentioning workspace docs validation."
             )
+
+        snapshot_id = snapshot_manifest.get("snapshot_id", "")
+        if snapshot_id and galaxy_summary.get("snapshot_id", "") != snapshot_id:
+            failures.append("galaxy-motion summary snapshot_id does not match vendor snapshot manifest.")
+        if snapshot_id and manifest.get("galaxy_motion_snapshot_id", "") != snapshot_id:
+            failures.append("vector db manifest galaxy_motion_snapshot_id does not match vendor snapshot manifest.")
 
     if failures:
         print("Workspace docs validation failed:")
