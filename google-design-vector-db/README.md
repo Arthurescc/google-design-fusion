@@ -1,10 +1,10 @@
 # Google Design Fusion Vector Library
 
-- Generated: 2026-04-14T11:29:50.368958Z
-- Source records: 334
-- Retrieval chunks: 6457
+- Generated: 2026-04-21T18:20:59.948273Z
+- Source records: 4135
+- Retrieval chunks: 14039
 - design.google pages: 248
-- design.google external references: 32
+- design.google external references: 31
 - awesome-design-md references: 54
 
 ## design.google page kinds
@@ -12,7 +12,7 @@
 - `about`: 1
 - `category`: 7
 - `community`: 1
-- `external_reference`: 32
+- `external_reference`: 31
 - `home`: 1
 - `library`: 237
 - `m10`: 1
@@ -23,7 +23,7 @@
 - `Podcasts`: 52
 - `Perspectives`: 50
 - `Guides`: 38
-- `External reference`: 32
+- `External reference`: 31
 - `Conversations`: 19
 - `Video`: 12
 - `Gallery`: 2

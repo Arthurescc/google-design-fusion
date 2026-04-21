@@ -1,18 +1,37 @@
 {
-  "generated_at": "2026-04-14T11:29:48.943560Z",
+  "generated_at": "2026-04-21T18:20:57.194738Z",
   "sitemap_entry_count": 328,
   "record_count": 328,
-  "indexable_record_count": 280,
+  "indexable_record_count": 279,
   "outcomes": {
     "ok": 248,
     "external_redirect": 35,
-    "external_ingested": 32,
+    "external_ingested": 31,
     "fetch_error": 10,
-    "redirect_to_home": 3
+    "redirect_to_home": 3,
+    "external_ingest_failed": 1
   },
-  "unresolved_count": 48,
+  "unresolved_count": 49,
   "issue_count": 80,
   "unresolved": [
+    {
+      "requested_url": "https://design.google/library/You-will-never-read-the-same-way-font-lexend",
+      "final_url": "https://fonts.googleblog.com/2022/07/lexend.html",
+      "status": 200,
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/You-will-never-read-the-same-way-font-lexend",
+          "to": "https://fonts.googleblog.com/2022/07/lexend.html"
+        }
+      ],
+      "canonical_url": "",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_ingest_failed",
+      "note": "Failed to fetch https://r.jina.ai/http://fonts.googleblog.com/2022/07/lexend.html: HTTP Error 429: Too Many Requests",
+      "lastmod": "2025-06-16"
+    },
     {
       "requested_url": "https://design.google/library/accessibility-guidance-global-audience",
       "final_url": "https://www.youtube.com/watch?v=38fbB8wCPzg",
@@ -841,10 +860,10 @@
         }
       ],
       "canonical_url": "",
-      "record_kind": "external_reference",
-      "include_in_index": true,
-      "outcome": "external_ingested",
-      "note": "External reference ingested via jina_markdown.",
+      "record_kind": "none",
+      "include_in_index": false,
+      "outcome": "external_ingest_failed",
+      "note": "Failed to fetch https://r.jina.ai/http://fonts.googleblog.com/2022/07/lexend.html: HTTP Error 429: Too Many Requests",
       "lastmod": "2025-06-16"
     },
     {
@@ -1373,12 +1392,18 @@
       "requested_url": "https://design.google/library/you-can-say-again-role-repetition-conversation-design",
       "final_url": "https://medium.com/google-design/you-can-say-that-again-the-role-of-repetition-in-conversation-design-55937ef0f0ba",
       "status": 200,
-      "redirect_chain": [],
-      "canonical_url": "",
+      "redirect_chain": [
+        {
+          "code": 308,
+          "from": "https://design.google/library/you-can-say-again-role-repetition-conversation-design",
+          "to": "https://goo.gle/34FrZuo"
+        }
+      ],
+      "canonical_url": "https://medium.com/google-design/you-can-say-that-again-the-role-of-repetition-in-conversation-design-55937ef0f0ba",
       "record_kind": "external_reference",
       "include_in_index": true,
       "outcome": "external_ingested",
-      "note": "Used explicit override target: https://medium.com/google-design/you-can-say-that-again-the-role-of-repetition-in-conversation-design-55937ef0f0ba",
+      "note": "External reference ingested via jina_markdown.",
       "lastmod": "2025-06-19"
     },
     {
