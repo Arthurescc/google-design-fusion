@@ -1,4 +1,5 @@
 import json
+import importlib.util
 import subprocess
 import sys
 import tempfile
@@ -9,9 +10,19 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = REPO_ROOT / "skills" / "google-design-fusion" / "scripts" / "snapshot_galaxy_repo.py"
 FIXTURE = REPO_ROOT / "tests" / "google_design_fusion" / "fixtures" / "galaxy_sample"
+SCRIPT_SPEC = importlib.util.spec_from_file_location("snapshot_galaxy_repo", SCRIPT)
+assert SCRIPT_SPEC is not None and SCRIPT_SPEC.loader is not None
+SNAPSHOT_MODULE = importlib.util.module_from_spec(SCRIPT_SPEC)
+SCRIPT_SPEC.loader.exec_module(SNAPSHOT_MODULE)
 
 
 class SnapshotGalaxyRepoTests(unittest.TestCase):
+    def test_resolve_github_zip_uses_snapshot_id_path(self) -> None:
+        snapshot_id = "deadbeef1234"
+        url = SNAPSHOT_MODULE.resolve_github_zip(snapshot_id)
+        self.assertEqual(url, f"https://codeload.github.com/uiverse-io/galaxy/zip/{snapshot_id}")
+        self.assertNotIn("/refs/heads/", url)
+
     def test_offline_snapshot_writes_manifest_and_copies_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out_root = Path(tmp) / "vendor"

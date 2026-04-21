@@ -20,8 +20,8 @@ def copy_tree(source_dir: Path, output_root: Path) -> int:
     return sum(1 for path in target.rglob("*") if path.is_file())
 
 
-def resolve_github_zip(ref: str) -> str:
-    return f"https://codeload.github.com/uiverse-io/galaxy/zip/refs/heads/{ref}"
+def resolve_github_zip(snapshot_id: str) -> str:
+    return f"https://codeload.github.com/uiverse-io/galaxy/zip/{snapshot_id}"
 
 
 def resolve_github_commit_sha(ref: str) -> str:
@@ -88,11 +88,11 @@ def main() -> int:
         source_kind = "local-fixture"
         source_url = str(source_dir)
     else:
-        zip_url = resolve_github_zip(args.ref)
+        snapshot_id = args.snapshot_id or resolve_github_commit_sha(args.ref)
+        zip_url = resolve_github_zip(snapshot_id)
         with tempfile.TemporaryDirectory() as tmp_dir:
             extracted_root = fetch_and_extract(zip_url, Path(tmp_dir))
             copied_file_count = copy_tree(extracted_root, output_root)
-        snapshot_id = args.snapshot_id or resolve_github_commit_sha(args.ref)
         source_kind = "github-zip"
         source_url = zip_url
 
