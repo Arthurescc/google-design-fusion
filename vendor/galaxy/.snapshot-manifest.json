@@ -1,7 +1,7 @@
 {
-  "snapshot_id": "main",
+  "snapshot_id": "adbd2adde0a299a3956ea288fb444ec01891ca41",
   "source_kind": "github-zip",
   "source_url": "https://codeload.github.com/uiverse-io/galaxy/zip/refs/heads/main",
   "license": "MIT",
-  "file_count": 3804
+  "file_count": 3805
 }

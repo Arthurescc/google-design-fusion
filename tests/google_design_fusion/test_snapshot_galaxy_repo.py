@@ -1,5 +1,6 @@
 import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,7 +16,7 @@ class SnapshotGalaxyRepoTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             out_root = Path(tmp) / "vendor"
             command = [
-                "python",
+                sys.executable,
                 str(SCRIPT),
                 "--source-dir",
                 str(FIXTURE),
@@ -31,11 +32,16 @@ class SnapshotGalaxyRepoTests(unittest.TestCase):
             self.assertTrue(manifest_path.exists())
 
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            expected_file_count = sum(1 for path in FIXTURE.rglob("*") if path.is_file()) + 1
             self.assertEqual(manifest["snapshot_id"], "fixture-sha")
             self.assertEqual(manifest["source_kind"], "local-fixture")
             self.assertEqual(manifest["source_url"], str(FIXTURE.resolve()))
             self.assertEqual(manifest["license"], "MIT")
-            self.assertGreater(manifest["file_count"], 0)
+            self.assertEqual(manifest["file_count"], expected_file_count)
+            self.assertEqual(
+                set(manifest),
+                {"snapshot_id", "source_kind", "source_url", "license", "file_count"},
+            )
 
             copied_button = out_root / "galaxy" / "Buttons" / "sample-button.html"
             self.assertTrue(copied_button.exists())
