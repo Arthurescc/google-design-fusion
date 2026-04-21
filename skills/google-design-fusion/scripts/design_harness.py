@@ -177,8 +177,6 @@ def sparse_dot(query: Dict[int, float], vector: List[List[float]]) -> float:
 
 def query_needs_motion(query: str, phase: str) -> bool:
     lowered = query.lower()
-    if phase == "polish":
-        return True
     return any(term in lowered for term in MOTION_SIGNAL_TERMS)
 
 
@@ -489,7 +487,7 @@ def search(
 
 
 def build_prompt_packet(query: str, phase: str, hits: List[Dict]) -> Dict:
-    needs_motion = query_needs_motion(query, phase)
+    requested_motion = query_needs_motion(query, phase)
     motion_hits = [hit for hit in hits if (hit.get("source_family") or "") == "galaxy-motion"]
     motion_kinds = sorted(
         {
@@ -499,20 +497,22 @@ def build_prompt_packet(query: str, phase: str, hits: List[Dict]) -> Dict:
             if tag
         }
     )
+    motion_enabled = requested_motion and bool(motion_hits)
     return {
         "query": query,
         "phase": phase,
         "phase_goal": PHASE_GUIDANCE.get(phase, PHASE_GUIDANCE["ui"]),
         "guardrails": DEFAULT_GUARDRAILS,
         "motion_strategy": {
-            "enabled": needs_motion,
+            "enabled": motion_enabled,
             "role": (
                 "Use motion to support hierarchy, feedback, loading, and state change."
-                if needs_motion
+                if motion_enabled
                 else "Keep motion secondary and mostly static for this request."
             ),
             "motion_kinds": motion_kinds,
             "evidence_count": len(motion_hits),
+            "evidence_scope": "galaxy-motion hits",
         },
         "motion_guardrails": DEFAULT_MOTION_GUARDRAILS,
         "evidence": [
