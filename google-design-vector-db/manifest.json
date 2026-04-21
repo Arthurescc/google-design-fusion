@@ -1,7 +1,7 @@
-﻿{
+{
   "generated_at": "2026-04-14T11:29:50.340906Z",
-  "workspace_root": "E:\\AI素材\\前端设计\\goole design",
-  "output_root": "E:\\AI素材\\前端设计\\goole design\\google-design-vector-db",
+  "workspace_root": "E:\\AI??\\????\\goole design",
+  "output_root": "E:\\AI??\\????\\goole design\\google-design-vector-db",
   "design_google_sitemap_entry_count": 328,
   "design_google_record_count": 328,
   "design_google_indexable_record_count": 280,
@@ -19,7 +19,8 @@
   },
   "design_google_external_reference_count": 32,
   "awesome_design_record_count": 54,
-  "chunk_count": 6457,
+  "chunk_count": 14066,
   "dimensions": 768,
-  "top_dims": 64
+  "top_dims": 64,
+  "galaxy_motion_record_count": 3802
 }

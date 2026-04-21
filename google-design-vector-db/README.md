@@ -1,11 +1,12 @@
-﻿# Google Design Fusion Vector Library
+# Google Design Fusion Vector Library
 
-- Generated: 2026-04-14T11:29:50.368958Z
-- Source records: 334
-- Retrieval chunks: 6457
+- Generated: 2026-04-21T19:10:11.113828Z
+- Indexed source records: 4136
+- Retrieval chunks: 14066
 - design.google pages: 248
 - design.google external references: 32
 - awesome-design-md references: 54
+- galaxy-motion references: 3802
 
 ## design.google page kinds
 
