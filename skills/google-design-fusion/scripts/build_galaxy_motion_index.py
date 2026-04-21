@@ -31,11 +31,21 @@ def classify_motion_kinds(text: str) -> list[str]:
     return [label for label, pattern in MOTION_PATTERNS.items() if pattern.search(searchable_text)]
 
 
+def apply_family_priors(motion_kinds: list[str], family: str) -> list[str]:
+    normalized = set(motion_kinds)
+    family_key = family.strip().lower()
+    if family_key == "loaders":
+        normalized.add("loading")
+    if family_key == "notifications":
+        normalized.add("notification")
+    return sorted(normalized)
+
+
 def build_record(file_path: Path, root: Path) -> dict:
     text = file_path.read_text(encoding="utf-8")
     rel_path = file_path.relative_to(root).as_posix()
     family = rel_path.split("/", 1)[0]
-    motion_kinds = classify_motion_kinds(text)
+    motion_kinds = apply_family_priors(classify_motion_kinds(text), family)
     return {
         "id": rel_path.replace("/", "::"),
         "component_family": family,
@@ -64,10 +74,10 @@ def main() -> int:
 
     records = [build_record(path, input_root) for path in sorted(input_root.rglob("*.html"))]
 
-    (index_root / "records.jsonl").write_text(
-        "\n".join(json.dumps(record, ensure_ascii=False) for record in records) + "\n",
-        encoding="utf-8",
-    )
+    records_text = "\n".join(json.dumps(record, ensure_ascii=False) for record in records)
+    if records_text:
+        records_text += "\n"
+    (index_root / "records.jsonl").write_text(records_text, encoding="utf-8")
     (manifest_root / "summary.json").write_text(
         json.dumps({"record_count": len(records)}, indent=2, ensure_ascii=False),
         encoding="utf-8",

@@ -3,6 +3,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import shutil
 from pathlib import Path
 
 
@@ -39,9 +40,34 @@ class BuildGalaxyMotionIndexTests(unittest.TestCase):
             self.assertEqual(categories, ["Buttons", "Loaders", "Notifications"])
 
             by_category = {record["component_family"]: record for record in records}
-            self.assertIn("hover", by_category["Buttons"]["motion_kinds"])
-            self.assertIn("loading", by_category["Loaders"]["motion_kinds"])
-            self.assertIn("notification", by_category["Notifications"]["motion_kinds"])
+            self.assertEqual(by_category["Buttons"]["motion_kinds"], ["hover"])
+            self.assertEqual(by_category["Loaders"]["motion_kinds"], ["loading"])
+            self.assertEqual(by_category["Notifications"]["motion_kinds"], ["notification"])
+
+    def test_comments_do_not_create_semantic_labels_for_generic_buttons(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            input_root = Path(tmp) / "galaxy-input"
+            shutil.copytree(FIXTURE, input_root)
+            (input_root / "Buttons" / "comment-only.html").write_text(
+                "<!-- alert loading toast --><div class='plain-button'>Plain</div>",
+                encoding="utf-8",
+            )
+            out_root = Path(tmp) / "galaxy-motion"
+            command = [
+                sys.executable,
+                str(SCRIPT),
+                "--input-root",
+                str(input_root),
+                "--output-root",
+                str(out_root),
+            ]
+            completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+            self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+
+            records_path = out_root / "index" / "records.jsonl"
+            records = [json.loads(line) for line in records_path.read_text(encoding="utf-8").splitlines()]
+            comment_only = next(record for record in records if record["relative_path"] == "Buttons/comment-only.html")
+            self.assertEqual(comment_only["motion_kinds"], [])
 
     def test_missing_input_root_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
