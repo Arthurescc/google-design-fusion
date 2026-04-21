@@ -35,6 +35,7 @@ def main() -> int:
             "design_google_sitemap_entry_count": manifest.get("design_google_sitemap_entry_count"),
             "design_google_indexable_record_count": manifest.get("design_google_indexable_record_count"),
             "awesome_design_record_count": manifest.get("awesome_design_record_count"),
+            "galaxy_motion_record_count": manifest.get("galaxy_motion_record_count"),
             "chunk_count": manifest.get("chunk_count"),
         }
         for _, value in expected_pairs.items():

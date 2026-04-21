@@ -10,9 +10,11 @@ The final output should be concise, but it must be actionable.
    Which Google Design principles are steering the work.
 3. `Style seeds`
    Which `awesome-design-md` samples are being fused and why.
-4. `Style axes`
+4. `Motion references`
+   Which `galaxy-motion` references are shaping hover, loading, feedback, or transition behavior.
+5. `Style axes`
    Color, type, geometry, depth, rhythm, density, motion, and state treatment.
-5. `Guardrails`
+6. `Guardrails`
    What must not appear in the final UI.
 
 ## If the user wants implementation help
@@ -23,6 +25,7 @@ Add:
 - component priorities
 - content hierarchy
 - motion guidance
+- motion role and placement
 - accessibility cautions
 
 ## If the user wants a critique

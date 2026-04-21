@@ -15,6 +15,7 @@ It is a packaged skill system with:
 
 - a local design corpus built from `design.google`
 - a fused style layer built from `awesome-design-md`
+- a full local motion layer built from a vendored `uiverse-io/galaxy` snapshot
 - a retrieval harness that changes behavior by design phase
 - anti-AI-slop guardrails for common front-end generation mistakes
 - validation scripts that keep the skill, harness, and docs aligned
@@ -58,6 +59,20 @@ In short:
 
 `design.google` provides judgment. `awesome-design-md` provides style seeds. The skill fuses them into one retrieval-guided workflow.
 
+### 3. Motion Layer
+
+Source:
+
+- the vendored `uiverse-io/galaxy` snapshot under `vendor/galaxy/`
+- the derived `skills/google-design-fusion/galaxy-motion/` evidence layer
+
+What it contributes:
+
+- hover and transition references
+- CTA feedback patterns
+- loading and notification motion samples
+- microinteraction examples that can be pulled into `ui` and `polish` flows
+
 ## Why It Exists
 
 Most AI front-end output still falls into the same traps:
@@ -84,7 +99,8 @@ Current included corpus:
 - `248` indexed `design.google` source pages
 - `32` indexed high-value external references
 - `54` `awesome-design-md` samples
-- `6457` retrieval chunks in the local vector library
+- `3802` `galaxy-motion` records
+- `14066` retrieval chunks in the local vector library
 
 The generated corpus is checked into the repo because it is part of the skill's practical value, not just build output.
 
@@ -122,6 +138,7 @@ Responsibilities:
 - preserve canonical and redirect facts
 - selectively ingest stable external design references
 - ingest `awesome-design-md`
+- ingest the derived `galaxy-motion` layer
 - build chunked sparse retrieval indexes and manifest metadata
 
 ### Retrieval Harness
@@ -136,7 +153,7 @@ Responsibilities:
 - query the fused corpus
 - weight results with phase-aware profiles
 - inject anti-pattern guardrails
-- return a reusable design packet
+- return a reusable design packet, including `motion_strategy` when motion evidence is relevant
 
 ### Skill Surface
 
@@ -179,7 +196,7 @@ It works in four steps:
    Requests are mapped to `research`, `concept`, `wireframe`, `ui`, `polish`, or `audit`.
 
 3. **Retrieve with phase-specific rules**
-   The harness applies phase profiles, source weighting, and per-page caps so `audit` does not behave like `ui`, and `polish` does not behave like `research`.
+   The harness applies phase profiles, source weighting, and per-page caps so `audit` does not behave like `ui`, and `polish` does not behave like `research`. If the request benefits from motion, `galaxy-motion` is pulled in implicitly instead of requiring the user to ask for animation explicitly.
 
 4. **Return a design packet**
    The output includes the phase goal, ranked evidence, anti-pattern guardrails, and deduped page-level references.
@@ -196,6 +213,7 @@ The skill includes explicit warnings against common AI front-end mistakes, inclu
 - ornamental motion with no product role
 - style mixing without hierarchy discipline
 - polished-looking output with no source-backed rationale
+- motion added everywhere just because the request is in a polish phase
 
 Related research:
 
@@ -212,6 +230,7 @@ skills/google-design-fusion/
 google-design-vector-db/
 research/
 examples/
+  motion-fusion/
 assets/
 README.md
 README.zh-CN.md
@@ -224,6 +243,8 @@ Clone the repo, place the skill in your Codex skills workspace, and restart Code
 If you want to rebuild or inspect locally:
 
 ```bash
+python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main
+python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion
 python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py
 python skills/google-design-fusion/scripts/design_harness.py "premium glassmorphism landing page with calmer hierarchy" --phase ui --top-k 8
 python skills/google-design-fusion/scripts/run_full_validation.py

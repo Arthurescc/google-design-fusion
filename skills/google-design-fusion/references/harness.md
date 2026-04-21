@@ -23,6 +23,7 @@ Responsibilities:
 
 - crawl `design.google`
 - ingest `awesome-design-md`
+- ingest the derived `galaxy-motion` layer
 - chunk content
 - build sparse hashed vectors
 - write local manifests and indexes
@@ -37,7 +38,7 @@ Responsibilities:
 - score chunks from the local vector library
 - apply metadata boosts
 - inject guardrails
-- emit a retrieval packet
+- emit a retrieval packet with optional `motion_strategy` and `motion_guardrails`
 
 ### 3. Safety layer
 
@@ -71,6 +72,7 @@ So the harness is optimized for:
 
 - strong local retrieval
 - strong preflight guardrails
+- implicit motion fusion when the request benefits from motion
 - low-friction repeatability
 
 ## Next extensions
@@ -79,8 +81,10 @@ If the skill grows, add these in order:
 
 1. saved golden queries and regression tests
 2. explicit anti-pattern scoring
-3. prompt pack generation per phase
-4. persistent task state for long studies
-5. optional subagent verifier pass
+3. richer motion taxonomy and confidence scoring
+4. prompt pack generation per phase
+5. persistent task state for long studies
+6. optional subagent verifier pass
+
 
 Do not add multi-agent orchestration before the retrieval and verification loops stop changing.

@@ -21,7 +21,8 @@ python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py
 - `design.google` 外部高价值参考：`32`
 - `design.google` 总 indexable 语料：`280`
 - `awesome-design-md` 样本：`54`
-- 最终 chunk：`6457`
+- `galaxy-motion` 记录：`3802`
+- 最终 chunk：`14066`
 - 未入索引入口：`48`
 
 当前未入索引入口分类：
@@ -128,6 +129,7 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 3. 检索不会再只因为 `design.google` 的共享 tag 系统性刷分。
 4. `ui` 与 `audit` 的结果必须有基本区分度，否则校验失败。
 5. 校验不再只看“有没有某个 source family”，还会检查重复占位和 aggregate skew。
+6. `polish` 阶段只有在查询本身需要动效且检到 `galaxy-motion` 证据时，`motion_strategy.enabled` 才会打开。
 
 ## 7. 当前可放心使用的链路
 
