@@ -32,6 +32,22 @@ class BuildDesignFusionVectorDbTests(unittest.TestCase):
             self.assertIn("galaxy_motion_record_count", manifest)
             self.assertGreater(manifest["galaxy_motion_record_count"], 0)
 
+            records = [
+                json.loads(line)
+                for line in (out_root / "records.jsonl").read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            self.assertEqual(len(records), manifest["galaxy_motion_record_count"])
+            self.assertEqual({record["source_family"] for record in records}, {"galaxy-motion"})
+
+            chunks = [
+                json.loads(line)
+                for line in (out_root / "chunks.jsonl").read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            self.assertGreater(len(chunks), manifest["galaxy_motion_record_count"])
+            self.assertEqual({chunk["source_family"] for chunk in chunks}, {"galaxy-motion"})
+
 
 if __name__ == "__main__":
     unittest.main()
