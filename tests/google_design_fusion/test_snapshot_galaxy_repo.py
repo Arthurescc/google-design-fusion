@@ -33,6 +33,8 @@ class SnapshotGalaxyRepoTests(unittest.TestCase):
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             self.assertEqual(manifest["snapshot_id"], "fixture-sha")
             self.assertEqual(manifest["source_kind"], "local-fixture")
+            self.assertEqual(manifest["source_url"], str(FIXTURE.resolve()))
+            self.assertEqual(manifest["license"], "MIT")
             self.assertGreater(manifest["file_count"], 0)
 
             copied_button = out_root / "galaxy" / "Buttons" / "sample-button.html"

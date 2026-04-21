@@ -1,0 +1,843 @@
+# Google Design Fusion Galaxy Motion Integration Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> Apply `karpathy-guidelines` throughout implementation and review: state assumptions explicitly, choose the simplest solution that works, keep changes surgical, and verify before claiming success.
+
+**Goal:** Add a full local snapshot of `uiverse-io/galaxy`, derive a structured motion index from it, and upgrade `google-design-fusion` so motion is implicitly fused into `concept / ui / polish / audit` retrieval and final design output.
+
+**Architecture:** Keep `google-design-fusion` as a Tier 2 retrieval harness. Add Galaxy in two layers: a raw `vendor/galaxy/` snapshot plus a derived `skills/google-design-fusion/galaxy-motion/` evidence layer. Extend the existing corpus builder and harness so `design.google` remains the principle engine, `awesome-design-md` remains the style engine, and Galaxy becomes a motion engine that is queried implicitly only when the request benefits from motion.
+
+**Tech Stack:** Python 3.9 scripts, `unittest`, JSON/JSONL indexes, Markdown docs, local HTML/CSS demo pages, Git-managed vendor snapshot
+
+---
+
+## File Structure
+
+**New files and directories**
+
+- Create: `vendor/galaxy/`
+  Raw upstream Galaxy snapshot kept under version control.
+- Create: `skills/google-design-fusion/galaxy-motion/index/`
+  Derived motion records and retrieval-friendly JSON/JSONL files.
+- Create: `skills/google-design-fusion/galaxy-motion/manifests/`
+  Snapshot and index manifests.
+- Create: `skills/google-design-fusion/galaxy-motion/tests/`
+  Small generated sample pages or artifacts used by visual validation.
+- Create: `skills/google-design-fusion/scripts/snapshot_galaxy_repo.py`
+  Snapshot sync entry point for Galaxy.
+- Create: `skills/google-design-fusion/scripts/build_galaxy_motion_index.py`
+  Motion parser and index builder for the Galaxy snapshot.
+- Create: `skills/google-design-fusion/references/motion-fusion.md`
+  Rules for weaving motion into design outputs.
+- Create: `skills/google-design-fusion/references/motion-guardrails.md`
+  Motion-specific anti-patterns and safety limits.
+- Create: `skills/google-design-fusion/references/galaxy-source-policy.md`
+  Source weighting, license handling, and “do not let Galaxy dominate” rules.
+- Create: `tests/google_design_fusion/__init__.py`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Buttons/sample-button.html`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Loaders/sample-loader.html`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Notifications/sample-notification.html`
+- Create: `tests/google_design_fusion/test_snapshot_galaxy_repo.py`
+- Create: `tests/google_design_fusion/test_build_galaxy_motion_index.py`
+- Create: `tests/google_design_fusion/test_build_design_fusion_vector_db.py`
+- Create: `tests/google_design_fusion/test_motion_harness.py`
+- Create: `examples/motion-fusion/without-motion/index.html`
+- Create: `examples/motion-fusion/with-motion/index.html`
+
+**Existing files to modify**
+
+- Modify: `skills/google-design-fusion/scripts/build_design_fusion_vector_db.py`
+- Modify: `skills/google-design-fusion/scripts/design_harness.py`
+- Modify: `skills/google-design-fusion/scripts/validate_harness.py`
+- Modify: `skills/google-design-fusion/scripts/validate_workspace_docs.py`
+- Modify: `skills/google-design-fusion/scripts/run_full_validation.py`
+- Modify: `skills/google-design-fusion/SKILL.md`
+- Modify: `skills/google-design-fusion/references/workflow.md`
+- Modify: `skills/google-design-fusion/references/source-selection.md`
+- Modify: `skills/google-design-fusion/references/fusion-rules.md`
+- Modify: `skills/google-design-fusion/references/output-contract.md`
+- Modify: `skills/google-design-fusion/references/harness.md`
+- Modify: `README.md`
+- Modify: `README.zh-CN.md`
+- Modify: `research/google-design-awesome-fusion.md`
+- Modify: `research/validation-report.md`
+- Modify: `google-design-vector-db/manifest.json` (regenerated)
+- Modify: `google-design-vector-db/records.jsonl` (regenerated)
+- Modify: `google-design-vector-db/chunks.jsonl` (regenerated)
+- Modify: `google-design-vector-db/index.json` (regenerated)
+
+---
+
+### Task 1: Add Galaxy Snapshot Sync and Offline Test Fixtures
+
+**Files:**
+- Create: `skills/google-design-fusion/scripts/snapshot_galaxy_repo.py`
+- Create: `tests/google_design_fusion/__init__.py`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Buttons/sample-button.html`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Loaders/sample-loader.html`
+- Create: `tests/google_design_fusion/fixtures/galaxy_sample/Notifications/sample-notification.html`
+- Create: `tests/google_design_fusion/test_snapshot_galaxy_repo.py`
+- Create: `vendor/galaxy/` (generated by the script)
+
+- [ ] **Step 1: Write the failing snapshot test**
+
+```python
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPT = REPO_ROOT / "skills" / "google-design-fusion" / "scripts" / "snapshot_galaxy_repo.py"
+FIXTURE = REPO_ROOT / "tests" / "google_design_fusion" / "fixtures" / "galaxy_sample"
+
+
+class SnapshotGalaxyRepoTests(unittest.TestCase):
+    def test_offline_snapshot_writes_manifest_and_copies_files(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out_root = Path(tmp) / "vendor"
+            command = [
+                "python",
+                str(SCRIPT),
+                "--source-dir",
+                str(FIXTURE),
+                "--output-root",
+                str(out_root),
+                "--snapshot-id",
+                "fixture-sha",
+            ]
+            completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+            self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+
+            manifest_path = out_root / "galaxy" / ".snapshot-manifest.json"
+            self.assertTrue(manifest_path.exists())
+
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["snapshot_id"], "fixture-sha")
+            self.assertEqual(manifest["source_kind"], "local-fixture")
+            self.assertGreater(manifest["file_count"], 0)
+
+            copied_button = out_root / "galaxy" / "Buttons" / "sample-button.html"
+            self.assertTrue(copied_button.exists())
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `python -m unittest tests.google_design_fusion.test_snapshot_galaxy_repo -v`
+
+Expected: `FAIL` with `No module named` or `can't open file` for `snapshot_galaxy_repo.py`
+
+- [ ] **Step 3: Add the smallest snapshot script that supports offline fixtures first**
+
+```python
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+from pathlib import Path
+
+
+def copy_tree(source_dir: Path, output_root: Path) -> int:
+    target = output_root / "galaxy"
+    if target.exists():
+      shutil.rmtree(target)
+    shutil.copytree(source_dir, target)
+    return sum(1 for path in target.rglob("*") if path.is_file())
+
+
+def write_manifest(output_root: Path, *, snapshot_id: str, source_kind: str, file_count: int) -> None:
+    manifest = {
+        "snapshot_id": snapshot_id,
+        "source_kind": source_kind,
+        "file_count": file_count,
+    }
+    (output_root / "galaxy" / ".snapshot-manifest.json").write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--source-dir", required=True)
+    parser.add_argument("--output-root", required=True)
+    parser.add_argument("--snapshot-id", required=True)
+    args = parser.parse_args()
+
+    source_dir = Path(args.source_dir).resolve()
+    output_root = Path(args.output_root).resolve()
+    output_root.mkdir(parents=True, exist_ok=True)
+
+    file_count = copy_tree(source_dir, output_root)
+    write_manifest(
+        output_root,
+        snapshot_id=args.snapshot_id,
+        source_kind="local-fixture",
+        file_count=file_count,
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+- [ ] **Step 4: Replace the offline-only version with the production snapshot flow**
+
+```python
+def resolve_github_zip(ref: str) -> str:
+    return f"https://codeload.github.com/uiverse-io/galaxy/zip/refs/heads/{ref}"
+
+
+def fetch_and_extract(zip_url: str, temp_dir: Path) -> Path:
+    archive_path = temp_dir / "galaxy.zip"
+    with urllib.request.urlopen(zip_url) as response:
+        archive_path.write_bytes(response.read())
+    with zipfile.ZipFile(archive_path) as zf:
+        zf.extractall(temp_dir)
+    extracted_roots = [path for path in temp_dir.iterdir() if path.is_dir() and path.name.startswith("galaxy-")]
+    if len(extracted_roots) != 1:
+        raise RuntimeError(f"Expected one extracted Galaxy root, found {len(extracted_roots)}")
+    return extracted_roots[0]
+
+
+def write_manifest(output_root: Path, *, snapshot_id: str, source_kind: str, file_count: int, source_url: str) -> None:
+    manifest = {
+        "snapshot_id": snapshot_id,
+        "source_kind": source_kind,
+        "source_url": source_url,
+        "license": "MIT",
+        "file_count": file_count,
+    }
+    (output_root / "galaxy" / ".snapshot-manifest.json").write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+```
+
+Assumption to encode explicitly:
+- Tests use `--source-dir` and do not hit the network.
+- Real sync uses GitHub zip download only after the offline fixture path is green.
+
+- [ ] **Step 5: Run the test again to verify it passes**
+
+Run: `python -m unittest tests.google_design_fusion.test_snapshot_galaxy_repo -v`
+
+Expected: `OK`
+
+- [ ] **Step 6: Run a real snapshot sync into the repo**
+
+Run: `python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main`
+
+Expected:
+- `vendor/galaxy/` exists
+- `vendor/galaxy/.snapshot-manifest.json` exists
+- the manifest contains `license = MIT`
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add vendor/galaxy tests/google_design_fusion/__init__.py tests/google_design_fusion/fixtures/galaxy_sample tests/google_design_fusion/test_snapshot_galaxy_repo.py skills/google-design-fusion/scripts/snapshot_galaxy_repo.py
+git commit -m "feat: add Galaxy snapshot sync"
+```
+
+### Task 2: Build the Derived Galaxy Motion Index
+
+**Files:**
+- Create: `skills/google-design-fusion/scripts/build_galaxy_motion_index.py`
+- Create: `skills/google-design-fusion/galaxy-motion/index/`
+- Create: `skills/google-design-fusion/galaxy-motion/manifests/`
+- Create: `tests/google_design_fusion/test_build_galaxy_motion_index.py`
+
+- [ ] **Step 1: Write the failing motion index test**
+
+```python
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPT = REPO_ROOT / "skills" / "google-design-fusion" / "scripts" / "build_galaxy_motion_index.py"
+FIXTURE = REPO_ROOT / "tests" / "google_design_fusion" / "fixtures" / "galaxy_sample"
+
+
+class BuildGalaxyMotionIndexTests(unittest.TestCase):
+    def test_index_builds_records_and_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out_root = Path(tmp) / "galaxy-motion"
+            command = [
+                "python",
+                str(SCRIPT),
+                "--input-root",
+                str(FIXTURE),
+                "--output-root",
+                str(out_root),
+            ]
+            completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+            self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+
+            records_path = out_root / "index" / "records.jsonl"
+            summary_path = out_root / "manifests" / "summary.json"
+            self.assertTrue(records_path.exists())
+            self.assertTrue(summary_path.exists())
+
+            records = [json.loads(line) for line in records_path.read_text(encoding="utf-8").splitlines()]
+            categories = {record["component_family"] for record in records}
+            motion_kinds = {kind for record in records for kind in record["motion_kinds"]}
+            self.assertIn("Buttons", categories)
+            self.assertIn("hover", motion_kinds)
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `python -m unittest tests.google_design_fusion.test_build_galaxy_motion_index -v`
+
+Expected: `FAIL` because `build_galaxy_motion_index.py` does not exist
+
+- [ ] **Step 3: Implement the smallest parser that produces structured motion records**
+
+```python
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from pathlib import Path
+
+
+MOTION_PATTERNS = {
+    "hover": re.compile(r":hover|group-hover|hover:", re.IGNORECASE),
+    "transition": re.compile(r"transition|duration-|ease-|cubic-bezier", re.IGNORECASE),
+    "loading": re.compile(r"loader|loading|spinner|spin", re.IGNORECASE),
+    "notification": re.compile(r"toast|notification|alert|badge", re.IGNORECASE),
+    "loop": re.compile(r"animation:|@keyframes|animate-", re.IGNORECASE),
+}
+
+
+def classify_motion_kinds(text: str) -> list[str]:
+    return [label for label, pattern in MOTION_PATTERNS.items() if pattern.search(text)]
+
+
+def build_record(file_path: Path, root: Path) -> dict:
+    text = file_path.read_text(encoding="utf-8")
+    rel_path = file_path.relative_to(root).as_posix()
+    family = rel_path.split("/", 1)[0]
+    motion_kinds = classify_motion_kinds(text)
+    return {
+        "id": rel_path.replace("/", "::"),
+        "component_family": family,
+        "relative_path": rel_path,
+        "motion_kinds": motion_kinds,
+        "summary": f"{family} component with motion kinds: {', '.join(motion_kinds) or 'static'}",
+        "code_excerpt": text[:800],
+    }
+```
+
+- [ ] **Step 4: Finish the CLI so it writes the derived layer**
+
+```python
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input-root", required=True)
+    parser.add_argument("--output-root", required=True)
+    args = parser.parse_args()
+
+    input_root = Path(args.input_root).resolve()
+    output_root = Path(args.output_root).resolve()
+    index_root = output_root / "index"
+    manifest_root = output_root / "manifests"
+    index_root.mkdir(parents=True, exist_ok=True)
+    manifest_root.mkdir(parents=True, exist_ok=True)
+
+    records = [
+        build_record(path, input_root)
+        for path in sorted(input_root.rglob("*.html"))
+    ]
+
+    (index_root / "records.jsonl").write_text(
+        "\n".join(json.dumps(record, ensure_ascii=False) for record in records) + "\n",
+        encoding="utf-8",
+    )
+    (manifest_root / "summary.json").write_text(
+        json.dumps({"record_count": len(records)}, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    return 0
+```
+
+- [ ] **Step 5: Run the test to verify it passes**
+
+Run: `python -m unittest tests.google_design_fusion.test_build_galaxy_motion_index -v`
+
+Expected: `OK`
+
+- [ ] **Step 6: Build the real derived motion index**
+
+Run: `python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion`
+
+Expected:
+- `skills/google-design-fusion/galaxy-motion/index/records.jsonl` exists
+- `skills/google-design-fusion/galaxy-motion/manifests/summary.json` exists
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add tests/google_design_fusion/test_build_galaxy_motion_index.py skills/google-design-fusion/scripts/build_galaxy_motion_index.py skills/google-design-fusion/galaxy-motion
+git commit -m "feat: add Galaxy motion indexing"
+```
+
+### Task 3: Integrate Galaxy Motion into the Unified Corpus Builder
+
+**Files:**
+- Modify: `skills/google-design-fusion/scripts/build_design_fusion_vector_db.py`
+- Modify: `google-design-vector-db/README.md`
+- Test: `tests/google_design_fusion/test_build_design_fusion_vector_db.py`
+
+- [ ] **Step 1: Write the failing builder integration test**
+
+```python
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPT = REPO_ROOT / "skills" / "google-design-fusion" / "scripts" / "build_design_fusion_vector_db.py"
+MOTION_ROOT = REPO_ROOT / "skills" / "google-design-fusion" / "galaxy-motion"
+
+
+class BuildDesignFusionVectorDbTests(unittest.TestCase):
+    def test_manifest_mentions_galaxy_motion_records(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out_root = Path(tmp) / "db"
+            command = [
+                "python",
+                str(SCRIPT),
+                "--output-root",
+                str(out_root),
+                "--skip-design-google",
+                "--skip-awesome",
+                "--galaxy-motion-root",
+                str(MOTION_ROOT),
+            ]
+            completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+            self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+
+            manifest = json.loads((out_root / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("galaxy_motion_record_count", manifest)
+            self.assertGreater(manifest["galaxy_motion_record_count"], 0)
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `python -m unittest tests.google_design_fusion.test_build_design_fusion_vector_db -v`
+
+Expected: `FAIL` because the builder does not accept `--galaxy-motion-root` or emit `galaxy_motion_record_count`
+
+- [ ] **Step 3: Add the smallest builder extension that loads derived motion records**
+
+```python
+def load_galaxy_motion_records(galaxy_motion_root: Path) -> list[dict]:
+    records_path = galaxy_motion_root / "index" / "records.jsonl"
+    if not records_path.exists():
+        return []
+    records = []
+    for line in records_path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            record = json.loads(line)
+            records.append(
+                {
+                    "source_family": "galaxy-motion",
+                    "title": record["component_family"],
+                    "location": record["relative_path"],
+                    "summary": record["summary"],
+                    "body": record["code_excerpt"],
+                    "tags": record["motion_kinds"],
+                }
+            )
+    return records
+```
+
+- [ ] **Step 4: Extend the CLI so tests can isolate Galaxy**
+
+```python
+parser.add_argument("--output-root", default="google-design-vector-db")
+parser.add_argument("--skip-design-google", action="store_true")
+parser.add_argument("--skip-awesome", action="store_true")
+parser.add_argument("--galaxy-motion-root", default="skills/google-design-fusion/galaxy-motion")
+```
+
+Assumption to make explicit:
+- The main builder should still default to rebuilding all three sources in production.
+- The skip flags exist only to keep unit tests surgical.
+
+- [ ] **Step 5: Update manifest generation to expose Galaxy counts**
+
+```python
+manifest["galaxy_motion_record_count"] = len(galaxy_motion_records)
+manifest["source_families"] = {
+    "design.google": design_google_count,
+    "awesome-design-md": awesome_count,
+    "galaxy-motion": len(galaxy_motion_records),
+}
+```
+
+- [ ] **Step 6: Run the test to verify it passes**
+
+Run: `python -m unittest tests.google_design_fusion.test_build_design_fusion_vector_db -v`
+
+Expected: `OK`
+
+- [ ] **Step 7: Rebuild the real vector DB**
+
+Run: `python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py`
+
+Expected:
+- `google-design-vector-db/manifest.json` contains `galaxy_motion_record_count`
+- `galaxy-motion` entries appear in `records.jsonl` and `chunks.jsonl`
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add tests/google_design_fusion/test_build_design_fusion_vector_db.py skills/google-design-fusion/scripts/build_design_fusion_vector_db.py google-design-vector-db
+git commit -m "feat: fuse Galaxy motion into the vector db"
+```
+
+### Task 4: Make the Harness Motion-Aware by Default
+
+**Files:**
+- Modify: `skills/google-design-fusion/scripts/design_harness.py`
+- Modify: `skills/google-design-fusion/scripts/validate_harness.py`
+- Create: `tests/google_design_fusion/test_motion_harness.py`
+
+- [ ] **Step 1: Write the failing motion harness test**
+
+```python
+import json
+import subprocess
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPT = REPO_ROOT / "skills" / "google-design-fusion" / "scripts" / "design_harness.py"
+
+
+class MotionHarnessTests(unittest.TestCase):
+    def test_polish_query_emits_motion_strategy(self) -> None:
+        command = [
+            "python",
+            str(SCRIPT),
+            "premium landing page CTA hover loading states and microinteraction polish",
+            "--phase",
+            "polish",
+            "--top-k",
+            "6",
+            "--format",
+            "json",
+        ]
+        completed = subprocess.run(command, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, msg=completed.stderr)
+        packet = json.loads(completed.stdout)
+        self.assertIn("motion_strategy", packet)
+        self.assertIn("motion_guardrails", packet)
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `python -m unittest tests.google_design_fusion.test_motion_harness -v`
+
+Expected: `FAIL` because the packet does not contain `motion_strategy`
+
+- [ ] **Step 3: Add a narrow motion-detection layer**
+
+```python
+MOTION_SIGNAL_TERMS = {
+    "hover", "loading", "transition", "microinteraction", "motion", "animation",
+    "empty state", "notification", "feedback", "cta", "polish", "state change",
+}
+
+
+def query_needs_motion(query: str, phase: str) -> bool:
+    tokens = {token.lower() for token in tokenize(query)}
+    if phase == "polish":
+        return True
+    return any(term in query.lower() or term in tokens for term in MOTION_SIGNAL_TERMS)
+```
+
+- [ ] **Step 4: Add motion-aware weighting without letting Galaxy dominate**
+
+```python
+def apply_motion_prior(score: float, hit: dict, *, phase: str, needs_motion: bool) -> float:
+    family = hit.get("source_family") or ""
+    tags = {tag.lower() for tag in hit.get("tags", [])}
+    if not needs_motion:
+        if family == "galaxy-motion":
+            return score - 0.025
+        return score
+    if family == "galaxy-motion" and phase in {"ui", "polish"}:
+        return score + 0.03 + (0.01 if tags & {"hover", "transition", "loading", "notification"} else 0.0)
+    if family == "galaxy-motion" and phase == "audit":
+        return score + (0.01 if tags & {"loop", "loading", "hover"} else -0.01)
+    return score
+```
+
+- [ ] **Step 5: Extend the packet contract**
+
+```python
+packet = {
+    "query": query,
+    "phase": phase,
+    "phase_goal": PHASE_GUIDANCE.get(phase, PHASE_GUIDANCE["ui"]),
+    "guardrails": DEFAULT_GUARDRAILS,
+    "motion_strategy": {
+        "enabled": needs_motion,
+        "role": "Use motion to support hierarchy, feedback, loading, and state change." if needs_motion else "Keep motion secondary and mostly static for this request.",
+    },
+    "motion_guardrails": [
+        "Do not add looping motion that does not explain waiting, progress, or causality.",
+        "Do not animate every surface at once; give motion a single role per view.",
+        "Do not use motion that hurts readability, focus, or click precision.",
+    ],
+    "evidence": [
+        {
+            "rank": 1,
+            "source_family": "galaxy-motion",
+            "title": "Buttons",
+            "heading": "hover transition reference",
+            "excerpt": "Button component with hover and transition motion tags.",
+            "url": "",
+            "location": "Buttons/sample-button.html",
+        }
+    ],
+}
+```
+
+- [ ] **Step 6: Update harness validation to catch regressions**
+
+```python
+EXPECTATIONS.append(
+    {
+        "query": "premium landing page CTA hover loading states and microinteraction polish",
+        "phase": "polish",
+        "must_include_family": "galaxy-motion",
+    }
+)
+```
+
+- [ ] **Step 7: Run the targeted tests**
+
+Run:
+- `python -m unittest tests.google_design_fusion.test_motion_harness -v`
+- `python skills/google-design-fusion/scripts/validate_harness.py`
+
+Expected:
+- both commands exit `0`
+- `polish` queries surface Galaxy evidence more often than `research` queries
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add tests/google_design_fusion/test_motion_harness.py skills/google-design-fusion/scripts/design_harness.py skills/google-design-fusion/scripts/validate_harness.py
+git commit -m "feat: add motion-aware retrieval"
+```
+
+### Task 5: Update Skill References, Prompt Contract, and Motion Demo Flow
+
+**Files:**
+- Modify: `skills/google-design-fusion/SKILL.md`
+- Modify: `skills/google-design-fusion/references/workflow.md`
+- Modify: `skills/google-design-fusion/references/source-selection.md`
+- Modify: `skills/google-design-fusion/references/fusion-rules.md`
+- Modify: `skills/google-design-fusion/references/output-contract.md`
+- Modify: `skills/google-design-fusion/references/harness.md`
+- Create: `skills/google-design-fusion/references/motion-fusion.md`
+- Create: `skills/google-design-fusion/references/motion-guardrails.md`
+- Create: `skills/google-design-fusion/references/galaxy-source-policy.md`
+- Create: `examples/motion-fusion/without-motion/index.html`
+- Create: `examples/motion-fusion/with-motion/index.html`
+- Modify: `README.md`
+- Modify: `README.zh-CN.md`
+
+- [ ] **Step 1: Write the failing doc validation expectation**
+
+```python
+expected_doc_terms = [
+    "galaxy-motion",
+    "motion_strategy",
+    "motion_guardrails",
+]
+```
+
+Implementation note:
+- Add this as explicit checks inside `validate_workspace_docs.py`.
+
+- [ ] **Step 2: Update the skill contract so motion is first-class but not dominant**
+
+```md
+Use this skill to fuse three layers:
+1. `design.google` for principle judgment
+2. `awesome-design-md` for visual style
+3. `galaxy-motion` for motion references when the request benefits from motion
+
+Motion is implicit. The user does not need to ask for animation explicitly.
+```
+
+- [ ] **Step 3: Add motion-specific reference files**
+
+```md
+# Motion Fusion
+
+- Use motion to explain hierarchy, state change, loading, or causal feedback.
+- Keep motion secondary to task clarity.
+- In `polish`, prefer a single motion language across the page.
+```
+
+```md
+# Motion Guardrails
+
+- Reject decorative infinite loops.
+- Reject hover effects that reduce readability or click confidence.
+- Reject layered glow, shimmer, and bounce combinations in the same region.
+```
+
+- [ ] **Step 4: Add motion-fusion demos**
+
+```html
+<!-- examples/motion-fusion/without-motion/index.html -->
+<button class="cta">Start trial</button>
+```
+
+```html
+<!-- examples/motion-fusion/with-motion/index.html -->
+<button class="cta cta--lift">Start trial</button>
+```
+
+```css
+.cta--lift {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.cta--lift:hover,
+.cta--lift:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgba(81, 117, 255, 0.24);
+}
+```
+
+Assumption to keep explicit:
+- The demo proves the flow change only; it is not a generic component gallery.
+
+- [ ] **Step 5: Update README and Chinese README**
+
+Add sections for:
+- Galaxy full snapshot
+- motion-aware harness behavior
+- motion-fusion demo
+- validation flow
+
+- [ ] **Step 6: Run doc validation**
+
+Run: `python skills/google-design-fusion/scripts/validate_workspace_docs.py`
+
+Expected: `Workspace docs validation passed.`
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add skills/google-design-fusion/SKILL.md skills/google-design-fusion/references skills/google-design-fusion/scripts/validate_workspace_docs.py examples/motion-fusion README.md README.zh-CN.md
+git commit -m "docs: add motion fusion rules and demos"
+```
+
+### Task 6: Rebuild, Verify, and Publish the Integrated Skill
+
+**Files:**
+- Modify: `research/google-design-awesome-fusion.md`
+- Modify: `research/validation-report.md`
+- Regenerate: `google-design-vector-db/*`
+- Regenerate if needed: `assets/screenshots/*`
+
+- [ ] **Step 1: Rebuild the motion index and the main vector DB**
+
+Run:
+
+```bash
+python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main
+python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion
+python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py
+```
+
+Expected:
+- each command exits `0`
+- the main manifest now includes Galaxy counts
+
+- [ ] **Step 2: Run the test suite**
+
+Run:
+
+```bash
+python -m unittest tests.google_design_fusion.test_snapshot_galaxy_repo -v
+python -m unittest tests.google_design_fusion.test_build_galaxy_motion_index -v
+python -m unittest tests.google_design_fusion.test_build_design_fusion_vector_db -v
+python -m unittest tests.google_design_fusion.test_motion_harness -v
+```
+
+Expected: all four commands return `OK`
+
+- [ ] **Step 3: Run the full validation stack**
+
+Run:
+
+```bash
+python C:/Users/Administrator/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/google-design-fusion
+python skills/google-design-fusion/scripts/validate_skill_contract.py
+python skills/google-design-fusion/scripts/validate_harness.py
+python skills/google-design-fusion/scripts/validate_workspace_docs.py
+python skills/google-design-fusion/scripts/run_full_validation.py
+```
+
+Expected:
+- `Skill is valid!`
+- `Harness validation passed.`
+- `Workspace docs validation passed.`
+- `Full validation passed.`
+
+- [ ] **Step 4: Re-render the motion-fusion demo artifacts**
+
+Run:
+
+```bash
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless --disable-gpu --hide-scrollbars --window-size=1600,1200 --screenshot="assets/screenshots/motion-fusion.png" "file:///E:/AI素材/前端设计/goole%20design/examples/motion-fusion/with-motion/index.html"
+```
+
+Expected:
+- the screenshot exists
+- it shows motion-enhanced design direction assets for README/docs use
+
+- [ ] **Step 5: Update the research docs with fresh counts and motion integration narrative**
+
+```md
+- `galaxy_motion_record_count`
+- how Galaxy is weighted beneath `design.google`
+- how implicit motion fusion behaves in `ui / polish / audit`
+```
+
+- [ ] **Step 6: Final publish commit**
+
+```bash
+git add vendor/galaxy skills/google-design-fusion/galaxy-motion skills/google-design-fusion/scripts research README.md README.zh-CN.md examples/motion-fusion google-design-vector-db assets/screenshots/motion-fusion.png tests/google_design_fusion
+git commit -m "feat: integrate Galaxy motion into google-design-fusion"
+```
