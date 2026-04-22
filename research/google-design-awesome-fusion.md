@@ -11,7 +11,7 @@
 
 一句话说：
 
-`Google Design 管“为什么这样设计”，awesome-design-md 管“这样设计长什么样”。`
+`Google Design 管“为什么这样设计”，awesome-design-md 管“这样设计长什么样”，galaxy-motion 管“它在交互里怎么动”。`
 
 ## 2. 融合入口
 
@@ -139,7 +139,7 @@
 2. 再检索 2 到 3 个样式种子。
 3. 把样式样本翻译成风格轴。
 4. 用 anti-pattern 钩子先做一次负面筛查。
-5. 最后才输出设计方向、prompt 包或实现建议。
+5. 如果请求涉及反馈、CTA、loading、hover 或 polish，再引入 `galaxy-motion`。
+6. 最后才输出设计方向、prompt 包或实现建议。
 
 这样做的结果，不是把 Google Design “做成另一个模板库”，而是把它变成你整个设计生成流程里的判断引擎。
-

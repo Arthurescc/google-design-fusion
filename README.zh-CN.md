@@ -15,6 +15,7 @@
 
 - 基于 `design.google` 构建的本地设计语料库
 - 基于 `awesome-design-md` 融合出来的风格层
+- 基于 vendored `uiverse-io/galaxy` 快照整理出的本地动效层
 - 能按设计阶段切换行为的检索 harness
 - 针对常见 AI 前端错误的 anti-AI-slop guardrails
 - 用于保证 skill、harness 和文档一致性的校验脚本
@@ -58,6 +59,20 @@
 
 `design.google` 提供判断，`awesome-design-md` 提供风格种子，这个 skill 负责把两者融合成一个检索驱动的设计工作流。
 
+### 3. 动效层
+
+来源：
+
+- 仓库内 vendored 的 `uiverse-io/galaxy` 快照
+- 派生整理后的 `skills/google-design-fusion/galaxy-motion/`
+
+这一层提供：
+
+- hover 与 transition 参考
+- CTA 反馈模式
+- loading 与 notification 的动效样本
+- 能够在 `ui / polish` 阶段隐式参与的微交互参考
+
 ## 为什么要做这个
 
 大多数 AI 前端结果还在反复掉进同一批坑里：
@@ -84,7 +99,8 @@
 - `248` 个已索引的 `design.google` 页面
 - `32` 个已索引的高价值外部参考页面
 - `54` 个 `awesome-design-md` 样本
-- `6457` 个本地检索 chunk
+- `3802` 个 `galaxy-motion` 记录
+- `14066` 个本地检索 chunk
 
 生成后的本地向量库被直接纳入仓库，是因为它本身就是这个 skill 的实际价值组成部分，而不只是构建产物。
 
@@ -122,6 +138,7 @@
 - 保留 canonical 与 redirect 信息
 - 选择性纳入稳定的高价值外部设计参考
 - 纳入 `awesome-design-md`
+- 纳入派生后的 `galaxy-motion`
 - 构建 chunk 化的稀疏检索索引和 manifest 元数据
 
 ### Retrieval Harness
@@ -136,7 +153,7 @@
 - 查询融合后的本地语料
 - 结合阶段 profile 对结果加权
 - 注入 anti-pattern guardrails
-- 返回可复用的设计 packet
+- 返回可复用的设计 packet，并在需要时给出 `motion_strategy`
 
 ### Skill Surface
 
@@ -179,7 +196,7 @@ harness 是这个 skill 的运行核心。
    请求会被映射到 `research`、`concept`、`wireframe`、`ui`、`polish` 或 `audit`。
 
 3. **按阶段规则检索**
-   harness 会应用阶段 profile、来源权重和每页上限控制，因此 `audit` 不会像 `ui` 一样检索，`polish` 也不会像 `research` 一样工作。
+   harness 会应用阶段 profile、来源权重和每页上限控制，因此 `audit` 不会像 `ui` 一样检索，`polish` 也不会像 `research` 一样工作。如果请求本身需要动效，`galaxy-motion` 会被隐式拉进检索，而不是要求用户手动声明。
 
 4. **返回设计 packet**
    输出里会包含阶段目标、排序后的证据、anti-pattern guardrails，以及按页面去重后的参考来源。
@@ -196,6 +213,7 @@ harness 是这个 skill 的运行核心。
 - 没有产品角色的装饰性动效
 - 缺乏层级纪律的风格混搭
 - 看起来精致但没有来源依据的输出
+- 因为处于 `polish` 阶段就无差别加动效
 
 相关研究：
 
@@ -212,6 +230,7 @@ skills/google-design-fusion/
 google-design-vector-db/
 research/
 examples/
+  motion-fusion/
 assets/
 README.md
 README.zh-CN.md
@@ -224,6 +243,8 @@ README.zh-CN.md
 如果你想在本地重建或检查：
 
 ```bash
+python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main
+python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion
 python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py
 python skills/google-design-fusion/scripts/design_harness.py "premium glassmorphism landing page with calmer hierarchy" --phase ui --top-k 8
 python skills/google-design-fusion/scripts/run_full_validation.py

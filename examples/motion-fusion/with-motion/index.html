@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>With Motion Fusion</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1219;
+      --panel: #181d28;
+      --line: #2a3142;
+      --text: #f4f7fb;
+      --muted: #9aa7bf;
+      --accent: #6b7cff;
+      --accent-2: #78d4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "SF Pro Display", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(107,124,255,.18), transparent 30%),
+        radial-gradient(circle at 85% 12%, rgba(120,212,255,.16), transparent 26%),
+        var(--bg);
+      color: var(--text);
+    }
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 52px 28px 72px;
+    }
+    .frame {
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      display: grid;
+      gap: 24px;
+    }
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #b8c3da;
+    }
+    h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: .92;
+      letter-spacing: -.05em;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.6;
+      max-width: 46rem;
+    }
+    .cta-row {
+      display: flex;
+      gap: 16px;
+    }
+    .button {
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 0;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 12px 24px rgba(107,124,255,.22);
+    }
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(107,124,255,.32);
+    }
+    .button.secondary {
+      background: #222a38;
+      color: #d7dff0;
+      border: 1px solid #31405a;
+    }
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      transform: translateY(-1px);
+      border-color: #4c6188;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="frame">
+      <div class="eyebrow">With motion fusion</div>
+      <h1>Motion turns intent into a felt response.</h1>
+      <p>Subtle lift, faster feedback, and clearer button states make the primary action feel more confident without turning the page into a motion showcase.</p>
+      <div class="cta-row">
+        <button class="button primary">Start trial</button>
+        <button class="button secondary">See pricing</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,13 +1,13 @@
 ---
 name: google-design-fusion
-description: Fuse design.google research, a local Google Design vector library, and awesome-design-md style references into a full design workflow for landing pages, app shells, brand systems, UI audits, and frontend design prompts. Use when Codex needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) generate or refine a distinctive UI direction, or (5) reject common AI-generated design mistakes before implementation.
+description: Fuse design.google research, a local Google Design vector library, awesome-design-md style references, and a local galaxy-motion layer into a full design workflow for landing pages, app shells, brand systems, UI audits, motion-aware frontend design prompts, and polished interaction design. Use when Codex needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) implicitly pull `galaxy-motion` interaction references when the design benefits from motion, (5) generate or refine a distinctive UI direction, or (6) reject common AI-generated design mistakes before implementation.
 ---
 
 # Google Design Fusion
 
 ## Overview
 
-Use this skill to turn the local Google Design research corpus plus `awesome-design-md` into a structured design workflow. Treat `design.google` as the principle engine, `awesome-design-md` as the surface-style engine, and the local retrieval harness as the bridge between them.
+Use this skill to turn the local Google Design research corpus, `awesome-design-md`, and `galaxy-motion` into a structured design workflow. Treat `design.google` as the principle engine, `awesome-design-md` as the surface-style engine, `galaxy-motion` as the motion-reference engine, and the local retrieval harness as the bridge between them.
 
 ## Preflight
 
@@ -53,6 +53,7 @@ This builds a local corpus from:
 
 - `design.google` sitemap pages
 - the sibling `awesome-design-md` repository that the builder script targets by default
+- the local `galaxy-motion` derived layer built from the vendored `uiverse-io/galaxy` snapshot
 
 ### 3. Retrieve context
 
@@ -67,7 +68,8 @@ The harness gives you:
 
 - phase guidance
 - preflight guardrails
-- ranked evidence across Google Design and `awesome-design-md`
+- ranked evidence across Google Design, `awesome-design-md`, and `galaxy-motion`
+- `motion_strategy` and `motion_guardrails` when motion evidence is relevant
 
 Read [references/source-selection.md](references/source-selection.md) when deciding how much weight to give each source family.
 
@@ -77,8 +79,9 @@ Use this fusion order:
 
 1. Pick `1` principle cluster from Google Design.
 2. Pick `2-3` strong style seeds from `awesome-design-md`.
-3. Optionally add `1` stretch sample that changes the temperature, density, or geometry.
-4. Translate the mix into explicit style axes before writing UI.
+3. If the request benefits from motion, add `1-2` `galaxy-motion` references that fit the interaction role.
+4. Optionally add `1` stretch sample that changes the temperature, density, or geometry.
+5. Translate the mix into explicit style axes before writing UI.
 
 Never average many samples into one muddy result. Prefer a strong base plus one deliberate contrast.
 
@@ -101,12 +104,17 @@ Before finalizing, read [references/output-contract.md](references/output-contra
 
 - Use `design.google` for reasoning about attention, accessibility, motion, typography, color behavior, AI affordances, hardware constraints, and the evolution of Material.
 - Use `awesome-design-md` for brand tone, surface language, component signatures, density, geometry, and landing-page/app-shell references.
-- Use both when the user wants a polished, distinctive interface instead of a generic component-library layout.
+- Use `galaxy-motion` for hover, transition, loading, notification, and feedback references when motion improves hierarchy or system feedback.
+- Use all three when the user wants a polished, distinctive interface instead of a generic component-library layout.
 
 ## Scripts
 
 - `scripts/build_design_fusion_vector_db.py`
   Rebuild the local design corpus and sparse vectors.
+- `scripts/build_galaxy_motion_index.py`
+  Build the derived motion evidence layer from the vendored Galaxy snapshot.
+- `scripts/snapshot_galaxy_repo.py`
+  Sync the vendored Galaxy snapshot into `vendor/galaxy/`.
 - `scripts/design_harness.py`
   Retrieve ranked evidence and guardrails for a query and phase.
 - `scripts/validate_harness.py`
@@ -124,6 +132,12 @@ Before finalizing, read [references/output-contract.md](references/output-contra
   How to choose between Google Design, `awesome-design-md`, and anti-pattern guidance.
 - `references/fusion-rules.md`
   How to fuse principle clusters and style samples without collapsing into AI slop.
+- `references/motion-fusion.md`
+  How motion is woven into the design output without overpowering hierarchy.
+- `references/motion-guardrails.md`
+  Motion-specific failure modes to reject.
+- `references/galaxy-source-policy.md`
+  How to weight `galaxy-motion` against `design.google` and `awesome-design-md`.
 - `references/anti-patterns.md`
   Guardrails and source-backed pitfalls to reject before generating UI.
 - `references/output-contract.md`

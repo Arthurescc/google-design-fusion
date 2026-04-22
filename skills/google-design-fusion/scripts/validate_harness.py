@@ -34,6 +34,11 @@ EXPECTATIONS = [
         # Audit should still find meaningful design guidance, not only decorative media chunks.
         "must_not_be_empty": True,
     },
+    {
+        "query": "premium landing page CTA hover loading states and microinteraction polish",
+        "phase": "polish",
+        "must_include_family": "galaxy-motion",
+    },
 ]
 
 

@@ -1079,6 +1079,79 @@ def load_awesome_design_records(awesome_root: Path) -> List[Dict]:
     return records
 
 
+def load_galaxy_motion_records(galaxy_motion_root: Path) -> List[Dict]:
+    records_path = galaxy_motion_root / "index" / "records.jsonl"
+    if not records_path.exists():
+        print(f"[WARN] galaxy-motion index not found: {records_path}", file=sys.stderr)
+        return []
+
+    records: List[Dict] = []
+    for line in records_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        motion_record = json.loads(line)
+        motion_kinds = [str(item) for item in motion_record.get("motion_kinds", []) if item]
+        relative_path = str(motion_record.get("relative_path", "")).replace("\\", "/")
+        component_family = str(motion_record.get("component_family", "Galaxy Motion")).strip() or "Galaxy Motion"
+        summary = normalize_text(motion_record.get("summary", ""))
+        code_excerpt = normalize_text(motion_record.get("code_excerpt", ""))
+        segment_text = normalize_text(
+            "\n".join(
+                part
+                for part in (
+                    f"Component family: {component_family}",
+                    f"Relative path: {relative_path}",
+                    f"Motion kinds: {', '.join(motion_kinds)}" if motion_kinds else "Motion kinds: static",
+                    summary,
+                    code_excerpt,
+                )
+                if part
+            )
+        )
+        records.append(
+            {
+                "source_family": "galaxy-motion",
+                "url": "",
+                "location": relative_path,
+                "page_kind": "motion_reference",
+                "title": component_family,
+                "description": summary,
+                "publish_at": "",
+                "lastmod": "",
+                "category": "motion",
+                "tags": motion_kinds,
+                "contributors": [],
+                "summary": normalize_text(
+                    "\n".join(
+                        part
+                        for part in (
+                            component_family,
+                            summary,
+                            f"Motion kinds: {', '.join(motion_kinds)}" if motion_kinds else "",
+                        )
+                        if part
+                    )
+                ),
+                "segments": [
+                    {
+                        "kind": "motion_record",
+                        "heading": component_family,
+                        "block_type": "galaxy_motion",
+                        "text": segment_text,
+                    }
+                ],
+            }
+        )
+    return records
+
+
+def load_galaxy_motion_summary(galaxy_motion_root: Path) -> Dict[str, str]:
+    summary_path = galaxy_motion_root / "manifests" / "summary.json"
+    if not summary_path.exists():
+        return {}
+    return json.loads(summary_path.read_text(encoding="utf-8"))
+
+
 def build_chunks(records: Sequence[Dict]) -> List[Dict]:
     chunks: List[Dict] = []
     for record in records:
@@ -1198,11 +1271,12 @@ def build_catalog_markdown(records: Sequence[Dict], chunks: Sequence[Dict]) -> s
         "# Google Design Fusion Vector Library",
         "",
         f"- Generated: {dt.datetime.utcnow().isoformat()}Z",
-        f"- Source records: {len(records)}",
+        f"- Indexed source records: {len(records)}",
         f"- Retrieval chunks: {len(chunks)}",
         f"- design.google pages: {source_counts.get('design.google', 0)}",
         f"- design.google external references: {source_counts.get('design.google-external', 0)}",
         f"- awesome-design-md references: {source_counts.get('awesome-design-md', 0)}",
+        f"- galaxy-motion references: {source_counts.get('galaxy-motion', 0)}",
         "",
         "## design.google page kinds",
         "",
@@ -1246,6 +1320,13 @@ def main() -> int:
         default="",
         help="Path to the awesome-design-md repository. Defaults to the sibling workspace folder.",
     )
+    parser.add_argument(
+        "--galaxy-motion-root",
+        default="",
+        help="Path to the derived galaxy-motion layer. Defaults to skills/google-design-fusion/galaxy-motion.",
+    )
+    parser.add_argument("--skip-design-google", action="store_true", help="Skip crawling design.google.")
+    parser.add_argument("--skip-awesome", action="store_true", help="Skip loading awesome-design-md.")
     parser.add_argument("--workers", type=int, default=6, help="Concurrent fetch workers for design.google pages.")
     parser.add_argument(
         "--limit-pages",
@@ -1260,28 +1341,60 @@ def main() -> int:
     workspace_root = Path(__file__).resolve().parents[3]
     output_root = Path(args.output_root).resolve() if args.output_root else workspace_root / "google-design-vector-db"
     awesome_root = Path(args.awesome_root).resolve() if args.awesome_root else workspace_root.parent / "awesome-design-md"
+    galaxy_motion_root = (
+        Path(args.galaxy_motion_root).resolve()
+        if args.galaxy_motion_root
+        else workspace_root / "skills" / "google-design-fusion" / "galaxy-motion"
+    )
 
     output_root.mkdir(parents=True, exist_ok=True)
 
-    print("[1/5] Fetching design.google sitemap...")
-    sitemap_entries = parse_sitemap(fetch_text(SITE_MAP_URL))
-    if args.limit_pages and args.limit_pages > 0:
-        sitemap_entries = sitemap_entries[: args.limit_pages]
-    write_json(output_root / "site-map.json", {"entries": sitemap_entries})
+    if args.skip_design_google:
+        print("[1/5] Skipping design.google crawl...")
+        sitemap_entries = []
+        google_records = []
+        crawl_report = {
+            "rows": [],
+            "summary": {
+                "generated_at": dt.datetime.utcnow().isoformat() + "Z",
+                "sitemap_entry_count": 0,
+                "record_count": 0,
+                "indexable_record_count": 0,
+                "outcomes": {},
+                "unresolved_count": 0,
+                "issue_count": 0,
+                "unresolved": [],
+                "issues": [],
+            },
+        }
+    else:
+        print("[1/5] Fetching design.google sitemap...")
+        sitemap_entries = parse_sitemap(fetch_text(SITE_MAP_URL))
+        if args.limit_pages and args.limit_pages > 0:
+            sitemap_entries = sitemap_entries[: args.limit_pages]
+        print(f"[2/5] Crawling {len(sitemap_entries)} design.google pages...")
+        google_records, crawl_report = fetch_design_google_records(sitemap_entries, args.workers)
 
-    print(f"[2/5] Crawling {len(sitemap_entries)} design.google pages...")
-    google_records, crawl_report = fetch_design_google_records(sitemap_entries, args.workers)
+    write_json(output_root / "site-map.json", {"entries": sitemap_entries})
     write_jsonl(output_root / "crawl-report.jsonl", crawl_report["rows"])
     write_json(output_root / "crawl-summary.json", crawl_report["summary"])
 
-    print("[3/5] Loading awesome-design-md references...")
-    awesome_records = load_awesome_design_records(awesome_root)
+    if args.skip_awesome:
+        print("[3/5] Skipping awesome-design-md references...")
+        awesome_records = []
+    else:
+        print("[3/5] Loading awesome-design-md references...")
+        awesome_records = load_awesome_design_records(awesome_root)
+
+    print("[3/5] Loading galaxy-motion references...")
+    galaxy_motion_summary = load_galaxy_motion_summary(galaxy_motion_root)
+    galaxy_motion_records = load_galaxy_motion_records(galaxy_motion_root)
 
     # Keep all crawl outcomes in records.jsonl for coverage audits,
     # but only index the ones marked as indexable.
     indexable_google_records = [record for record in google_records if record.get("include_in_index", True)]
-    all_records = google_records + awesome_records
-    records_for_index = indexable_google_records + awesome_records
+    all_records = google_records + awesome_records + galaxy_motion_records
+    records_for_index = indexable_google_records + awesome_records + galaxy_motion_records
     write_jsonl(output_root / "records.jsonl", all_records)
 
     print("[4/5] Chunking and vectorizing corpus...")
@@ -1310,6 +1423,9 @@ def main() -> int:
             if record.get("source_family") == "design.google-external" and record.get("include_in_index")
         ),
         "awesome_design_record_count": len(awesome_records),
+        "galaxy_motion_record_count": len(galaxy_motion_records),
+        "galaxy_motion_snapshot_id": galaxy_motion_summary.get("snapshot_id", ""),
+        "galaxy_motion_source_url": galaxy_motion_summary.get("source_url", ""),
         "chunk_count": len(chunks),
         "dimensions": args.dimensions,
         "top_dims": args.top_dims,
@@ -1322,6 +1438,7 @@ def main() -> int:
     print(f"- design.google records (all outcomes): {len(google_records)}")
     print(f"- design.google indexable records: {len(indexable_google_records)}")
     print(f"- awesome-design-md records: {len(awesome_records)}")
+    print(f"- galaxy-motion records: {len(galaxy_motion_records)}")
     print(f"- chunks: {len(chunks)}")
     return 0
 

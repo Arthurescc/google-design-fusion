@@ -37,6 +37,23 @@ DEFAULT_GUARDRAILS = [
     "Do not bury the main action under secondary content or ornamental blocks.",
 ]
 
+MOTION_SIGNAL_TERMS = {
+    "hover",
+    "loading",
+    "transition",
+    "microinteraction",
+    "motion",
+    "animation",
+    "notification",
+    "toast",
+}
+
+DEFAULT_MOTION_GUARDRAILS = [
+    "Do not add looping motion unless it explains waiting, progress, or system state.",
+    "Do not animate every surface at once; choose a single motion role per screen.",
+    "Do not let motion reduce readability, click confidence, or task focus.",
+]
+
 
 @dataclasses.dataclass(frozen=True)
 class PhaseProfile:
@@ -152,6 +169,48 @@ def query_vector(tokens: Iterable[str], idf: Dict[str, float], dimensions: int) 
 
 def sparse_dot(query: Dict[int, float], vector: List[List[float]]) -> float:
     return sum(query.get(int(bucket), 0.0) * float(weight) for bucket, weight in vector)
+
+
+def query_needs_motion(query: str, phase: str) -> bool:
+    lowered = query.lower()
+    query_tokens = set(tokenize(query))
+    if query_tokens & MOTION_SIGNAL_TERMS:
+        return True
+    if phase == "audit":
+        return "state transition" in lowered or "interaction feedback" in lowered
+    return False
+
+
+def apply_motion_prior(score: float, chunk: Dict, *, phase: str, needs_motion: bool) -> float:
+    family = (chunk.get("source_family") or "").strip().lower()
+    tags = {str(tag).lower() for tag in chunk.get("tags", []) if tag}
+    if family != "galaxy-motion":
+        if needs_motion and phase == "polish":
+            if family == "awesome-design-md":
+                return score + 0.02
+            if family == "design.google":
+                return score + 0.012
+        if phase == "audit":
+            if family == "design.google":
+                return score + 0.03
+            if family == "awesome-design-md":
+                return score - 0.02
+        return score
+    if not needs_motion:
+        return score - 0.025
+    if phase == "polish":
+        score += 0.03
+    elif phase == "ui":
+        score += 0.035
+    elif phase == "audit":
+        score -= 0.01
+    elif phase == "concept":
+        score += 0.012
+    elif phase == "research":
+        score -= 0.005
+    if tags & {"hover", "transition", "loading", "notification"}:
+        score += 0.01
+    return score
 
 
 def _normalize_url_to_page_key(url: str) -> str:
@@ -393,6 +452,7 @@ def search(
     stats = build_corpus_stats(chunks)
     tokens = tokenize(query)
     profile = PHASE_PROFILES.get(phase, PHASE_PROFILES["ui"])
+    needs_motion = query_needs_motion(query, phase)
     qvec = query_vector(tokens, index.get("idf", {}), int(index.get("dimensions", 768)))
     lens_tokens = _phase_lens_tokens(profile, tokens)
     lens_vec = query_vector(lens_tokens, index.get("idf", {}), int(index.get("dimensions", 768))) if lens_tokens else {}
@@ -402,6 +462,7 @@ def search(
         if lens_vec:
             score += profile.lens_alpha * sparse_dot(lens_vec, chunk.get("vector", []))
         score += metadata_boost(chunk, tokens, phase, stats)
+        score = apply_motion_prior(score, chunk, phase=phase, needs_motion=needs_motion)
         if score <= 0:
             continue
         scored.append((score, chunk))
@@ -427,11 +488,38 @@ def search(
 
 
 def build_prompt_packet(query: str, phase: str, hits: List[Dict]) -> Dict:
+    requested_motion = query_needs_motion(query, phase)
+    motion_hits = [
+        hit
+        for hit in hits
+        if (hit.get("source_family") or "") == "galaxy-motion" and hit.get("tags")
+    ]
+    motion_kinds = sorted(
+        {
+            str(tag).lower()
+            for hit in motion_hits
+            for tag in hit.get("tags", [])
+            if tag
+        }
+    )
+    motion_enabled = requested_motion and bool(motion_hits)
     return {
         "query": query,
         "phase": phase,
         "phase_goal": PHASE_GUIDANCE.get(phase, PHASE_GUIDANCE["ui"]),
         "guardrails": DEFAULT_GUARDRAILS,
+        "motion_strategy": {
+            "enabled": motion_enabled,
+            "role": (
+                "Use motion to support hierarchy, feedback, loading, and state change."
+                if motion_enabled
+                else "Keep motion secondary and mostly static for this request."
+            ),
+            "motion_kinds": motion_kinds,
+            "evidence_count": len(motion_hits),
+            "evidence_scope": "galaxy-motion hits",
+        },
+        "motion_guardrails": DEFAULT_MOTION_GUARDRAILS,
         "evidence": [
             {
                 "rank": index + 1,
@@ -462,6 +550,15 @@ def format_markdown(packet: Dict) -> str:
         "",
     ]
     for rule in packet["guardrails"]:
+        lines.append(f"- {rule}")
+    lines.extend(["", "## Motion Strategy", ""])
+    lines.append(f"- enabled: {packet['motion_strategy']['enabled']}")
+    lines.append(f"- role: {packet['motion_strategy']['role']}")
+    lines.append(
+        f"- motion_kinds: {', '.join(packet['motion_strategy']['motion_kinds']) or 'none'}"
+    )
+    lines.extend(["", "## Motion Guardrails", ""])
+    for rule in packet["motion_guardrails"]:
         lines.append(f"- {rule}")
     lines.extend(["", "## Evidence", ""])
     for item in packet["evidence"]:
