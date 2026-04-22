@@ -6,9 +6,11 @@
 - Upstream repo: `https://github.com/alchaincyf/huashu-design`.
 - Local derived subset is recorded in `vendor/huashu-derived/manifest.json`.
 - Upstream license text is carried through verbatim at `vendor/huashu-derived/LICENSE.upstream.txt` (source: upstream `LICENSE`).
-- `manifest.json` `source_ref` should be an immutable upstream commit SHA.
+- `manifest.json` `source_ref` must be an immutable upstream commit SHA (`[0-9a-fA-F]{40}`); sync tooling now rejects non-SHA refs.
 - This repository intentionally vendors a constrained doctrine subset, not a full mirror of upstream.
 - Vendored doctrine docs can reference upstream-only files/tools that are not present in this repository snapshot.
+- `vendor/huashu-derived/package.json` is a repo-local reproducibility shim for vendored export scripts (`playwright@1.59.1`, `sharp@0.34.5`).
+- Output-root safety guard explicitly rejects symlink deletion targets; on Windows it also rejects reparse-point targets where detectable (junction/symlink class).
 
 ## License Boundary
 

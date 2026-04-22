@@ -116,7 +116,7 @@ python skills/google-design-fusion/scripts/design_harness.py "audit this enterpr
 
 如果你要运行 huashu-derived 导出脚本（尤其是 `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/` 下的脚本），请至少确认：
 
-- 已安装 Node.js，并为该 vendored 脚本工作区安装项目依赖。
+- 已安装 Node.js，并基于 `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` 安装 vendored 脚本依赖（`playwright@1.59.1`、`sharp@0.34.5`），例如：`cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`。
 - 若走视频/动效导出（`mp4`/`gif`），`PATH` 中可用 `ffmpeg`。
 - 若外部工具缺失，execution brief 仍可生成，但导出步骤可能失败或被跳过。
 

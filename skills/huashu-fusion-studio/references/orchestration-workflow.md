@@ -10,6 +10,6 @@ Scope note: `vendor/huashu-derived/` is a constrained upstream subset. Some refe
 
 Minimal export-tool prerequisites for huashu-derived scripts:
 
-- Node.js runtime with dependencies installed for the vendored script workspace.
+- Node.js runtime with vendored dependencies installed from `vendor/huashu-derived/package.json` (`playwright@1.59.1`, `sharp@0.34.5`), e.g. `cd vendor/huashu-derived && npm install`.
 - `ffmpeg` available on `PATH` when the routed export target includes motion/video formats (`mp4`/`gif`).
 - Missing external tools should fail fast (or explicitly skip export) while preserving execution-brief provenance output.

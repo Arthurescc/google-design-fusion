@@ -12,7 +12,8 @@
     "scripts/html2pptx.js",
     "assets/animations.jsx",
     "assets/deck_stage.js",
-    "LICENSE.upstream.txt"
+    "LICENSE.upstream.txt",
+    "package.json"
   ],
   "file_hashes": {
     "references/workflow.md": "d1b0e0b62069bff2159db771608006d38f1d0a02cce16eb51d16682a83eb3145",
@@ -21,6 +22,7 @@
     "scripts/html2pptx.js": "cfb023e8c17a74a35158126f2733d0a2aaa7b7f291e269b2f1828b449dd4f398",
     "assets/animations.jsx": "a67bc2305885d9568547dedb1409f272916b41602694987c687b59c6df45277f",
     "assets/deck_stage.js": "fc52ed7529e598b8cba1821418b848e5cbc17cf883bd0cc989a5186f58cd1e84",
-    "LICENSE.upstream.txt": "29e41e1a5a37eb8c1c00980fa0b37ae80ece1cc4fc5fabfe824cb5f0abac832a"
+    "LICENSE.upstream.txt": "29e41e1a5a37eb8c1c00980fa0b37ae80ece1cc4fc5fabfe824cb5f0abac832a",
+    "package.json": "77ac77988532e3945d72ed2c5066312e89ae9459c49777973c1801037bbd5dd0"
   }
 }

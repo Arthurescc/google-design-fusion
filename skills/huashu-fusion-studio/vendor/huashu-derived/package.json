@@ -1,0 +1,9 @@
+{
+  "name": "huashu-derived-export-tooling",
+  "private": true,
+  "description": "Minimal local dependencies for vendored huashu-derived export scripts.",
+  "dependencies": {
+    "playwright": "1.59.1",
+    "sharp": "0.34.5"
+  }
+}

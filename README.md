@@ -116,7 +116,7 @@ Use the phases like this:
 
 When running huashu-derived export scripts (especially under `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/`), keep prerequisites lightweight but explicit:
 
-- Node.js and project dependencies installed for the vendored script workspace.
+- Node.js plus vendored script dependencies from `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` (`playwright@1.59.1`, `sharp@0.34.5`), for example: `cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`.
 - `ffmpeg` available on `PATH` for motion/video exports (`mp4`/`gif` paths).
 - If external tooling is missing, execution-brief generation still works, but export steps can fail or be skipped.
 
