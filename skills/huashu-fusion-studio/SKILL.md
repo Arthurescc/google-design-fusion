@@ -18,6 +18,7 @@ Interpretation rules:
 - Retrieval evidence comes from `google-design-fusion` packets, not from ad-hoc stylistic guessing.
 - `huashu-fusion-studio` is responsible for deterministic routing from packet to execution brief.
 - The derived huashu subset contributes workflow/asset/export doctrine only; keep provenance and license boundaries explicit.
+- The vendored huashu-derived doctrine is a constrained upstream subset; some referenced upstream files may be intentionally absent in this repo snapshot.
 
 ## When to use
 
@@ -41,17 +42,33 @@ Minimal execution-brief output stub (top-level keys):
   "phase": "",
   "artifact_mode": "",
   "dominant_story": "",
-  "principle_cluster": [],
+  "principle_cluster": "",
   "style_seed_set": [],
-  "motion_role": "",
-  "brand_asset_requirements": [],
+  "motion_role": {
+    "enabled": false
+  },
+  "brand_asset_requirements": {
+    "require_logo": true,
+    "require_product_images": true,
+    "require_ui_screenshots": true
+  },
   "layout_rules": [],
-  "execution_rules": [],
-  "verification_rules": [],
+  "execution_rules": {
+    "mode": "",
+    "preserve_source_trail": true,
+    "deterministic_routing": true
+  },
+  "verification_rules": {
+    "require_source_evidence": true,
+    "require_export_targets": true,
+    "run_motion_checks": false
+  },
   "export_targets": [],
   "evidence": []
 }
 ```
+
+`motion_role` may also carry packet-provided fields like `role`, `motion_kinds`, `evidence_count`, and `evidence_scope` when present.
 
 ## Core references
 

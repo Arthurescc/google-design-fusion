@@ -56,6 +56,8 @@ License boundary note:
 
 - Repo code/docs are MIT unless noted.
 - `skills/huashu-fusion-studio/vendor/huashu-derived/` is derived from `alchaincyf/huashu-design` and remains under upstream `Personal Use License` terms (see `LICENSE.upstream.txt` in that folder), not relicensed to MIT.
+- The top-level third-party/exception ledger is [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).
+- The vendored huashu-derived doctrine docs are a constrained upstream subset and may reference upstream-only files that are not included in this repository snapshot.
 
 ### Compatibility
 
@@ -109,6 +111,14 @@ Use the phases like this:
 - `ui`: define typography, surfaces, and component language
 - `polish`: refine states, copy density, finish, and motion
 - `audit`: critique an existing design or prompt
+
+### Huashu Export Prerequisites (Minimal)
+
+When running huashu-derived export scripts (especially under `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/`), keep prerequisites lightweight but explicit:
+
+- Node.js and project dependencies installed for the vendored script workspace.
+- `ffmpeg` available on `PATH` for motion/video exports (`mp4`/`gif` paths).
+- If external tooling is missing, execution-brief generation still works, but export steps can fail or be skipped.
 
 ## What It Comes From
 
@@ -380,3 +390,5 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 Repository code and docs are MIT. See [LICENSE](./LICENSE).
 
 Exception: [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) is upstream-derived and follows its carried-through upstream license text at [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt).
+
+For a top-level exception list, see [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).

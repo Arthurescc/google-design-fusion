@@ -26,8 +26,56 @@ REQUIRED_KEYS = [
     "evidence",
 ]
 
+REQUIRED_TYPE_MAP = {
+    "query": str,
+    "phase": str,
+    "artifact_mode": str,
+    "dominant_story": str,
+    "principle_cluster": str,
+    "style_seed_set": list,
+    "motion_role": dict,
+    "brand_asset_requirements": dict,
+    "layout_rules": list,
+    "execution_rules": dict,
+    "verification_rules": dict,
+    "export_targets": list,
+    "evidence": list,
+}
+
 
 class BuildExecutionBriefTests(unittest.TestCase):
+    def assert_contract_types(self, brief: dict) -> None:
+        for key, expected_type in REQUIRED_TYPE_MAP.items():
+            self.assertIn(key, brief)
+            self.assertIsInstance(brief[key], expected_type, msg=f"{key} should be {expected_type.__name__}")
+
+        if "enabled" in brief["motion_role"]:
+            self.assertIsInstance(brief["motion_role"]["enabled"], bool)
+        if "role" in brief["motion_role"]:
+            self.assertIsInstance(brief["motion_role"]["role"], str)
+        if "motion_kinds" in brief["motion_role"]:
+            self.assertIsInstance(brief["motion_role"]["motion_kinds"], list)
+        if "evidence_count" in brief["motion_role"]:
+            self.assertIsInstance(brief["motion_role"]["evidence_count"], int)
+        if "evidence_scope" in brief["motion_role"]:
+            self.assertIsInstance(brief["motion_role"]["evidence_scope"], str)
+
+        self.assertIsInstance(brief["brand_asset_requirements"].get("require_logo"), bool)
+        self.assertIsInstance(brief["brand_asset_requirements"].get("require_product_images"), bool)
+        self.assertIsInstance(brief["brand_asset_requirements"].get("require_ui_screenshots"), bool)
+
+        self.assertIsInstance(brief["execution_rules"].get("mode"), str)
+        self.assertIsInstance(brief["execution_rules"].get("preserve_source_trail"), bool)
+        self.assertIsInstance(brief["execution_rules"].get("deterministic_routing"), bool)
+
+        self.assertIsInstance(brief["verification_rules"].get("require_source_evidence"), bool)
+        self.assertIsInstance(brief["verification_rules"].get("require_export_targets"), bool)
+        self.assertIsInstance(brief["verification_rules"].get("run_motion_checks"), bool)
+
+        self.assertTrue(all(isinstance(target, str) for target in brief["export_targets"]))
+        self.assertTrue(all(isinstance(item, str) for item in brief["style_seed_set"]))
+        self.assertTrue(all(isinstance(item, dict) for item in brief["evidence"]))
+
     def run_brief(self, fixture_name: str) -> dict:
         completed = subprocess.run(
             [
@@ -72,6 +120,7 @@ class BuildExecutionBriefTests(unittest.TestCase):
         self.assertGreaterEqual(len(brief["style_seed_set"]), 1)
         self.assertEqual(set(brief.keys()), set(REQUIRED_KEYS))
         self.assertEqual(len(brief.keys()), len(REQUIRED_KEYS))
+        self.assert_contract_types(brief)
         self.assertEqual(
             brief["brand_asset_requirements"],
             {
@@ -84,12 +133,14 @@ class BuildExecutionBriefTests(unittest.TestCase):
     def test_slides_packet_routes_to_slides_mode(self) -> None:
         brief = self.run_brief("retrieval_packet_slides.json")
         self.assertEqual(brief["artifact_mode"], "slides")
+        self.assert_contract_types(brief)
         self.assertIn("export_targets", brief)
         self.assertEqual(brief["export_targets"], ["html-deck", "pptx", "pdf"])
 
     def test_motion_packet_routes_to_motion_mode(self) -> None:
         brief = self.run_brief("retrieval_packet_motion.json")
         self.assertEqual(brief["artifact_mode"], "motion")
+        self.assert_contract_types(brief)
         self.assertEqual(brief["motion_role"]["enabled"], True)
         self.assertEqual(
             brief["brand_asset_requirements"],
@@ -114,6 +165,7 @@ class BuildExecutionBriefTests(unittest.TestCase):
         }
         brief = self.run_brief_from_packet(packet)
         self.assertEqual(brief["artifact_mode"], "critique")
+        self.assert_contract_types(brief)
         self.assertEqual(
             brief["brand_asset_requirements"],
             {
@@ -136,6 +188,7 @@ class BuildExecutionBriefTests(unittest.TestCase):
         }
         brief = self.run_brief_from_packet(packet)
         self.assertEqual(brief["artifact_mode"], "infographic")
+        self.assert_contract_types(brief)
         self.assertEqual(brief["export_targets"], ["html-poster", "pdf", "png", "svg"])
         self.assertEqual(
             brief["brand_asset_requirements"],
@@ -236,6 +289,7 @@ class BuildExecutionBriefTests(unittest.TestCase):
             self.assertEqual(brief["phase"], "ui")
             self.assertEqual(brief["artifact_mode"], "prototype")
             self.assertEqual(brief["principle_cluster"], "Harness principle")
+            self.assert_contract_types(brief)
 
 
 if __name__ == "__main__":

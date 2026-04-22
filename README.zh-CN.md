@@ -56,6 +56,8 @@
 
 - 仓库代码/文档默认遵循 MIT（除非另有说明）。
 - `skills/huashu-fusion-studio/vendor/huashu-derived/` 来自 `alchaincyf/huashu-design`，继续遵循上游 `Personal Use License`（见该目录下 `LICENSE.upstream.txt`），不被重新授权为 MIT。
+- 顶层第三方/例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。
+- vendored 的 huashu-derived doctrine 文档是上游的受限子集，可能会引用本仓库未包含的上游文件路径。
 
 ### 兼容性矩阵
 
@@ -109,6 +111,14 @@ python skills/google-design-fusion/scripts/design_harness.py "audit this enterpr
 - `ui`：定义字体、表面系统和组件语言
 - `polish`：打磨状态、文案密度、完成度和动效
 - `audit`：审查现有设计或提示词
+
+### Huashu 导出工具前置条件（最小集）
+
+如果你要运行 huashu-derived 导出脚本（尤其是 `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/` 下的脚本），请至少确认：
+
+- 已安装 Node.js，并为该 vendored 脚本工作区安装项目依赖。
+- 若走视频/动效导出（`mp4`/`gif`），`PATH` 中可用 `ffmpeg`。
+- 若外部工具缺失，execution brief 仍可生成，但导出步骤可能失败或被跳过。
 
 ## 它来自哪里
 
@@ -380,3 +390,5 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 仓库代码与文档遵循 MIT，详见 [LICENSE](./LICENSE)。
 
 例外： [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) 为上游派生内容，遵循随仓携带的上游授权文本 [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt)。
+
+顶层例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。
