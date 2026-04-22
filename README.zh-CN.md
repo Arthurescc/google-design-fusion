@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
-  <p><strong>一个开源 Codex Skill：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
+  <p><strong>一个面向多种 agent 客户端的开源可移植 skill / workflow 包：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -28,13 +28,25 @@
 
 你可以分三层来用：
 
-### 1. 先把 skill 装进 Codex
+### 1. 先接入你的 agent 客户端
 
 1. 克隆这个仓库。
-2. 把 [skills/google-design-fusion/](./skills/google-design-fusion/) 复制或软链接到你的 Codex skills 目录。
-3. 重启 Codex，让 skill 被加载。
+2. 让你的 agent runtime 指向 [skills/google-design-fusion/](./skills/google-design-fusion/)。
+3. 保持 [google-design-vector-db/](./google-design-vector-db/) 与 skill 在同一个工作区。
 
-Windows PowerShell 示例：
+核心可复用面是：
+
+- [skills/google-design-fusion/SKILL.md](./skills/google-design-fusion/SKILL.md)
+- [skills/google-design-fusion/references/](./skills/google-design-fusion/references/)
+- [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
+- [google-design-vector-db/](./google-design-vector-db/)
+
+客户端接入建议：
+
+- `Codex`：复制或软链接到 `~/.codex/skills/`。
+- `Claude Code`、`OpenClaw`、`OpenCode`：如果客户端支持本地 skill / prompt 包，就直接加载同一个 skill 文件夹；如果不支持，就把仓库保留在工作区里，直接调用 harness 脚本。
+
+Codex 的 PowerShell 示例：
 
 ```powershell
 New-Item -ItemType SymbolicLink `
@@ -44,7 +56,7 @@ New-Item -ItemType SymbolicLink `
 
 如果你只是想直接使用 skill，那么仓库里已经附带可用的 [google-design-vector-db/](./google-design-vector-db/)，不需要先重建。
 
-### 2. 在提示里明确要求使用它
+### 2. 在提示里明确要求 agent 使用它
 
 最稳妥的提示结构是：
 
@@ -294,9 +306,9 @@ README.zh-CN.md
 
 ## 快速开始
 
-克隆仓库，把 skill 放进你的 Codex skills 目录，然后重启 Codex。
+克隆仓库，然后让你的 agent runtime 指向 [skills/google-design-fusion/](./skills/google-design-fusion/)。
 
-如果你只是消费这个 skill，到这里就可以开始用了，直接按上面的提示方式向 Codex 发任务即可。
+如果你只是消费这个 skill，到这里就可以开始用了，直接按上面的提示方式向你的 agent 发任务即可。
 
 只有在你想刷新来源语料、检查检索流程、或者重建本地动效层时，才需要重建。
 

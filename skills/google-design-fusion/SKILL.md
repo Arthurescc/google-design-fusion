@@ -1,6 +1,6 @@
 ---
 name: google-design-fusion
-description: Fuse design.google research, a local Google Design vector library, awesome-design-md style references, and a local galaxy-motion layer into a full design workflow for landing pages, app shells, brand systems, UI audits, motion-aware frontend design prompts, and polished interaction design. Use when Codex needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) implicitly pull `galaxy-motion` interaction references when the design benefits from motion, (5) generate or refine a distinctive UI direction, or (6) reject common AI-generated design mistakes before implementation.
+description: Fuse design.google research, a local Google Design vector library, awesome-design-md style references, and a local galaxy-motion layer into a full design workflow for landing pages, app shells, brand systems, UI audits, motion-aware frontend design prompts, and polished interaction design. Use when an agent runtime needs to (1) research Google Design principles, Material history, accessibility, motion, typography, AI UI, or hardware/XR design, (2) blend those principles with `awesome-design-md` visual samples, (3) retrieve references from the local `google-design-vector-db`, (4) implicitly pull `galaxy-motion` interaction references when the design benefits from motion, (5) generate or refine a distinctive UI direction, or (6) reject common AI-generated design mistakes before implementation.
 ---
 
 # Google Design Fusion
@@ -8,6 +8,8 @@ description: Fuse design.google research, a local Google Design vector library, 
 ## Overview
 
 Use this skill to turn the local Google Design research corpus, `awesome-design-md`, and `galaxy-motion` into a structured design workflow. Treat `design.google` as the principle engine, `awesome-design-md` as the surface-style engine, `galaxy-motion` as the motion-reference engine, and the local retrieval harness as the bridge between them.
+
+This skill is portable. The core runtime is `SKILL.md + references/ + scripts/ + google-design-vector-db/`. `agents/openai.yaml` is only one adapter layer, not the whole product.
 
 ## Preflight
 
@@ -169,8 +171,13 @@ If the user only wants the skill outcome and the local corpus is already present
 Run this before claiming the skill is ready:
 
 ```bash
-python C:/Users/Administrator/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/google-design-fusion
 python skills/google-design-fusion/scripts/validate_skill_contract.py
 python skills/google-design-fusion/scripts/validate_harness.py
 python skills/google-design-fusion/scripts/run_full_validation.py
+```
+
+If you are validating Codex packaging specifically, also run:
+
+```bash
+python C:/Users/Administrator/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/google-design-fusion
 ```

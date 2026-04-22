@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
   <h1>Google Design Fusion</h1>
-  <p><strong>An open-source Codex skill that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
+  <p><strong>An open-source portable agent skill / workflow package that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -28,13 +28,25 @@ Most users only need the checked-in skill and the checked-in vector library. You
 
 Use it in three layers:
 
-### 1. Install the skill into Codex
+### 1. Load it into your agent client
 
 1. Clone this repository.
-2. Copy or symlink [skills/google-design-fusion/](./skills/google-design-fusion/) into your Codex skills directory.
-3. Restart Codex so the skill is loaded.
+2. Point your agent runtime at [skills/google-design-fusion/](./skills/google-design-fusion/).
+3. Keep the checked-in [google-design-vector-db/](./google-design-vector-db/) in the same workspace.
 
-Windows PowerShell example:
+The core reusable surface is:
+
+- [skills/google-design-fusion/SKILL.md](./skills/google-design-fusion/SKILL.md)
+- [skills/google-design-fusion/references/](./skills/google-design-fusion/references/)
+- [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
+- [google-design-vector-db/](./google-design-vector-db/)
+
+Client guidance:
+
+- `Codex`: copy or symlink the skill into `~/.codex/skills/`.
+- `Claude Code`, `OpenClaw`, `OpenCode`: load the same skill folder as a local skill/prompt package if your client supports one. If it does not, keep the repo in the workspace and call the harness scripts directly.
+
+Codex PowerShell example:
 
 ```powershell
 New-Item -ItemType SymbolicLink `
@@ -44,7 +56,7 @@ New-Item -ItemType SymbolicLink `
 
 If you only want to use the skill, the checked-in [google-design-vector-db/](./google-design-vector-db/) is already ready.
 
-### 2. Ask Codex to use it explicitly
+### 2. Ask your agent to use it explicitly
 
 The most reliable prompt shape is:
 
@@ -294,9 +306,9 @@ README.zh-CN.md
 
 ## Quick Start
 
-Clone the repo, place the skill in your Codex skills workspace, and restart Codex.
+Clone the repo and point your agent runtime at [skills/google-design-fusion/](./skills/google-design-fusion/).
 
-If you are only consuming the skill, stop there and start prompting Codex with the examples above.
+If you are only consuming the skill, stop there and start prompting your agent with the examples above.
 
 Rebuild only if you want to refresh the source corpus, inspect the retrieval pipeline, or regenerate the local motion layer.
 
