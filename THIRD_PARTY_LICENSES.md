@@ -1,6 +1,6 @@
 # Third-Party Licenses and Exceptions
 
-This repository is MIT-licensed by default (`LICENSE`) except where third-party material is explicitly listed below.
+Repository-authored code and documentation are licensed under MIT (`LICENSE`) unless noted otherwise. Third-party or derived material listed below is governed by its own terms and is not re-licensed by this repository.
 
 | Path | Origin | Governing terms | Notes |
 | --- | --- | --- | --- |

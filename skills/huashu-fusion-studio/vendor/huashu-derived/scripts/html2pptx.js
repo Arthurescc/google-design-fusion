@@ -27,6 +27,7 @@
 
 const { chromium } = require('playwright');
 const path = require('path');
+const { pathToFileURL } = require('url');
 const sharp = require('sharp');
 
 const PT_PER_PX = 0.75;
@@ -921,7 +922,7 @@ async function html2pptx(htmlFile, pres, options = {}) {
         console.log(`Browser console: ${msg.text()}`);
       });
 
-      await page.goto(`file://${filePath}`);
+      await page.goto(pathToFileURL(filePath).href);
 
       bodyDimensions = await getBodyDimensions(page);
 

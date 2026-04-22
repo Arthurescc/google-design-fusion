@@ -39,6 +39,7 @@
 
 const { chromium } = require('playwright');
 const path = require('path');
+const { pathToFileURL } = require('url');
 const fs = require('fs');
 const { spawnSync } = require('child_process');
 
@@ -95,7 +96,7 @@ console.log(`  output: ${MP4_OUT}`);
   fs.mkdirSync(TMP_DIR, { recursive: true });
 
   const browser = await chromium.launch();
-  const url = 'file://' + HTML_ABS;
+  const url = pathToFileURL(HTML_ABS).href;
 
   // ── Phase 1: WARMUP (no recording, caches fonts/assets) ─────────────
   console.log('▸ Warmup (caching fonts)…');
