@@ -41,10 +41,29 @@
 - [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
 - [google-design-vector-db/](./google-design-vector-db/)
 
-客户端接入建议：
+这个仓库现在内置两套协同 skill：
 
-- `Codex`：复制或软链接到 `~/.codex/skills/`。
-- `Claude Code`、`OpenClaw`、`OpenCode`：如果客户端支持本地 skill / prompt 包，就直接加载同一个 skill 文件夹；如果不支持，就把仓库保留在工作区里，直接调用 harness 脚本。
+- [skills/google-design-fusion/](./skills/google-design-fusion/) = 检索引擎（`design.google` + 精选风格/动效语料，输出 retrieval packet）。
+- [skills/huashu-fusion-studio/](./skills/huashu-fusion-studio/) = execution-first 编排器（packet -> 可执行 execution brief -> artifact 路由）。
+
+架构关系说明（详见 [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)）：
+
+- `google-design-fusion` = retrieval engine。
+- `huashu-fusion-studio` = orchestrator。
+- 来自 [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) 且存放在 [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) 的 huashu 派生子集 = execution doctrine。
+
+许可证边界说明：
+
+- 仓库代码/文档默认遵循 MIT（除非另有说明），但 huashu 派生子集仍保留其上游来源与 `Personal Use License` 约束。
+
+### 兼容性矩阵
+
+| 客户端 | 支持方式 | 推荐接入方式 | 说明 |
+| --- | --- | --- | --- |
+| `Codex` | 已验证适配 | 复制或软链接到 `~/.codex/skills/` | 这个仓库里的原生适配层已经在 Codex 上校验过。 |
+| `Claude Code` | 可移植工作流支持 | 如果客户端支持本地 skill / prompt 包，就加载 [skills/google-design-fusion/](./skills/google-design-fusion/)；否则把仓库保留在工作区里，直接调用 harness 脚本 | 复用同一套 `SKILL.md`、references、scripts 和已检入的向量库。 |
+| `OpenClaw` | 可移植工作流支持 | 把仓库保留在工作区里，并把同一个 skill 文件夹或 harness 脚本接进你的本地流程 | 核心运行面是仓库内本地资源，不依赖 Codex 专属提示层。 |
+| `OpenCode` | 可移植工作流支持 | 如果你的配置支持本地 prompt 包，就加载同一个 skill 文件夹；否则从工作区直接调用 harness 脚本 | 适合先拿 retrieval-backed design packet，再进入代码生成。 |
 
 Codex 的 PowerShell 示例：
 
@@ -295,6 +314,12 @@ skills/google-design-fusion/
   agents/openai.yaml
   references/
   scripts/
+skills/huashu-fusion-studio/
+  SKILL.md
+  agents/openai.yaml
+  references/
+  scripts/
+  vendor/huashu-derived/
 google-design-vector-db/
 research/
 examples/
@@ -332,6 +357,7 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 - [research/design-google-principles.md](./research/design-google-principles.md)
 - [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
 - [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
+- [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)
 - [research/validation-report.md](./research/validation-report.md)
 
 ## 发布说明

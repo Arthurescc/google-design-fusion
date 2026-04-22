@@ -41,10 +41,29 @@ The core reusable surface is:
 - [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
 - [google-design-vector-db/](./google-design-vector-db/)
 
-Client guidance:
+This repository ships two coordinated skills:
 
-- `Codex`: copy or symlink the skill into `~/.codex/skills/`.
-- `Claude Code`, `OpenClaw`, `OpenCode`: load the same skill folder as a local skill/prompt package if your client supports one. If it does not, keep the repo in the workspace and call the harness scripts directly.
+- [skills/google-design-fusion/](./skills/google-design-fusion/) = retrieval engine (`design.google` + curated style/motion corpus, retrieval packet output).
+- [skills/huashu-fusion-studio/](./skills/huashu-fusion-studio/) = execution-first orchestrator (packet -> deterministic execution brief -> artifact routing).
+
+Architecture relationship (details in [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)):
+
+- `google-design-fusion` = retrieval engine.
+- `huashu-fusion-studio` = orchestrator.
+- huashu-derived subset from [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design), stored under [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/), = execution doctrine.
+
+License boundary note:
+
+- Repo code/docs are MIT unless noted, but huashu-derived subset keeps upstream provenance and `Personal Use License` constraints.
+
+### Compatibility
+
+| Client | Support model | Recommended integration | Notes |
+| --- | --- | --- | --- |
+| `Codex` | Verified adapter | Copy or symlink the skill into `~/.codex/skills/` | Native packaging in this repo is verified on Codex. |
+| `Claude Code` | Portable workflow support | Load [skills/google-design-fusion/](./skills/google-design-fusion/) as a local skill/prompt package if supported, otherwise keep the repo in the workspace and call the harness scripts directly | Reuses the same `SKILL.md`, references, scripts, and checked-in vector DB. |
+| `OpenClaw` | Portable workflow support | Keep the repo in the workspace and wire the same skill folder or harness scripts into your local workflow | The core runtime is repo-local and not tied to a Codex-only prompt surface. |
+| `OpenCode` | Portable workflow support | Load the same skill folder if your setup supports local prompt packages, otherwise invoke the harness scripts from the workspace | Best fit when you want retrieval-backed design packets before code generation. |
 
 Codex PowerShell example:
 
@@ -295,6 +314,12 @@ skills/google-design-fusion/
   agents/openai.yaml
   references/
   scripts/
+skills/huashu-fusion-studio/
+  SKILL.md
+  agents/openai.yaml
+  references/
+  scripts/
+  vendor/huashu-derived/
 google-design-vector-db/
 research/
 examples/
@@ -332,6 +357,7 @@ Key supporting documents:
 - [research/design-google-principles.md](./research/design-google-principles.md)
 - [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
 - [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
+- [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)
 - [research/validation-report.md](./research/validation-report.md)
 
 ## Publishing Notes
