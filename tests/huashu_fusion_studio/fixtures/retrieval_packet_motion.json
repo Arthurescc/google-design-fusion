@@ -1,0 +1,63 @@
+{
+  "query": "Create a launch film motion concept with animation beats for product reveal.",
+  "phase": "polish",
+  "phase_goal": "Refine motion, copy density, contrast, and empty states until the design feels intentional.",
+  "guardrails": [
+    "Do not treat motion as decoration.",
+    "Do not animate every surface at once."
+  ],
+  "motion_strategy": {
+    "enabled": true,
+    "role": "Use motion to support hierarchy, feedback, loading, and state change.",
+    "motion_kinds": [
+      "transition",
+      "loading"
+    ],
+    "evidence_count": 2,
+    "evidence_scope": "galaxy-motion hits"
+  },
+  "motion_guardrails": [
+    "Do not add looping motion unless it explains state."
+  ],
+  "evidence": [
+    {
+      "rank": 1,
+      "score": 0.88,
+      "source_family": "design.google",
+      "title": "Motion hierarchy in product storytelling",
+      "heading": "Hierarchy",
+      "location": "design.google/motion-hierarchy",
+      "url": "https://design.google/motion-hierarchy",
+      "final_url": "https://design.google/motion-hierarchy",
+      "requested_url": "https://design.google/motion-hierarchy",
+      "page_key": "design.google/motion-hierarchy",
+      "excerpt": "Motion should reveal causality and direct focus."
+    },
+    {
+      "rank": 2,
+      "score": 0.84,
+      "source_family": "awesome-design-md",
+      "title": "Timing curves for reveal sequences",
+      "heading": "Motion pacing",
+      "location": "awesome-design-md/timing-curves",
+      "url": "https://example.com/timing-curves",
+      "final_url": "https://example.com/timing-curves",
+      "requested_url": "https://example.com/timing-curves",
+      "page_key": "example.com/timing-curves",
+      "excerpt": "Ease-based timing can preserve readability during scene transitions."
+    },
+    {
+      "rank": 3,
+      "score": 0.82,
+      "source_family": "galaxy-motion",
+      "title": "Loading-to-reveal transition",
+      "heading": "Transition",
+      "location": "galaxy-motion/loading-reveal",
+      "url": "https://example.com/loading-reveal",
+      "final_url": "https://example.com/loading-reveal",
+      "requested_url": "https://example.com/loading-reveal",
+      "page_key": "example.com/loading-reveal",
+      "excerpt": "Bridge loading and reveal with one dominant motion role."
+    }
+  ]
+}

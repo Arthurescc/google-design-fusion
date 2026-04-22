@@ -1,10 +1,9 @@
 # Artifact Routing
 
-Route by `artifact_mode`:
+Use deterministic keyword routing from `query` into `artifact_mode`:
 
-- `prototype`: interaction-first surface and component behavior output.
-- `slides`: narrative-first sequence with clear scene-level transitions.
-- `motion`: timing-first storyboard plus production notes.
-- `infographic`: data structure and visual hierarchy first.
-- `critique`: evidence-backed diagnosis with corrective directives.
-
+- `slides`: includes `ppt`, `slides`, `deck`, `keynote`, `presentation`
+- `motion`: includes `animation`, `motion`, `launch film`, `mp4`, `gif`
+- `infographic`: includes `infographic`, `data viz`, `dataviz`, `poster`
+- `critique`: includes `review`, `audit`, `critique`
+- `prototype`: default when no other mode token is present

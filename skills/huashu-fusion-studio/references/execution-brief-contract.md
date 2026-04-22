@@ -2,6 +2,8 @@
 
 Required keys in every execution brief:
 
+- `query`
+- `phase`
 - `artifact_mode`
 - `dominant_story`
 - `principle_cluster`
@@ -12,4 +14,4 @@ Required keys in every execution brief:
 - `execution_rules`
 - `verification_rules`
 - `export_targets`
-
+- `evidence`

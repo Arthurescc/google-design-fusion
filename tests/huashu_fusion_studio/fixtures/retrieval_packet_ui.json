@@ -1,0 +1,47 @@
+{
+  "query": "Design a fintech onboarding experience for a mobile app.",
+  "phase": "ui",
+  "phase_goal": "Turn hierarchy into a distinctive surface system with disciplined typography and spacing.",
+  "guardrails": [
+    "Do not use decorative microcopy.",
+    "Do not bury the main action under secondary content."
+  ],
+  "motion_strategy": {
+    "enabled": false,
+    "role": "Keep motion secondary and mostly static for this request.",
+    "motion_kinds": [],
+    "evidence_count": 0,
+    "evidence_scope": "galaxy-motion hits"
+  },
+  "motion_guardrails": [
+    "Do not animate every surface at once."
+  ],
+  "evidence": [
+    {
+      "rank": 1,
+      "score": 0.82,
+      "source_family": "design.google",
+      "title": "Material guidance for onboarding flows",
+      "heading": "Onboarding",
+      "location": "design.google/onboarding",
+      "url": "https://design.google/onboarding",
+      "final_url": "https://design.google/onboarding",
+      "requested_url": "https://design.google/onboarding",
+      "page_key": "design.google/onboarding",
+      "excerpt": "Use progressive disclosure and strong action hierarchy for first-run experiences."
+    },
+    {
+      "rank": 2,
+      "score": 0.78,
+      "source_family": "awesome-design-md",
+      "title": "Editorial UI rhythm examples",
+      "heading": "Typography and spacing",
+      "location": "awesome-design-md/editorial-ui-rhythm",
+      "url": "https://example.com/editorial-ui-rhythm",
+      "final_url": "https://example.com/editorial-ui-rhythm",
+      "requested_url": "https://example.com/editorial-ui-rhythm",
+      "page_key": "example.com/editorial-ui-rhythm",
+      "excerpt": "Contrast-based hierarchy and tight spacing systems keep onboarding concise."
+    }
+  ]
+}

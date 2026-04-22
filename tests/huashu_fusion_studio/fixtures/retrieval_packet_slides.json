@@ -1,0 +1,47 @@
+{
+  "query": "Build a product launch slides deck for enterprise analytics.",
+  "phase": "concept",
+  "phase_goal": "Prefer concept families with clear contrast, not minor variants of the same idea.",
+  "guardrails": [
+    "Do not layer multiple accent styles at once.",
+    "Do not use generic dashboard cards without narrative purpose."
+  ],
+  "motion_strategy": {
+    "enabled": false,
+    "role": "Keep motion secondary and mostly static for this request.",
+    "motion_kinds": [],
+    "evidence_count": 0,
+    "evidence_scope": "galaxy-motion hits"
+  },
+  "motion_guardrails": [
+    "Do not let motion reduce readability."
+  ],
+  "evidence": [
+    {
+      "rank": 1,
+      "score": 0.86,
+      "source_family": "design.google",
+      "title": "Narrative sequencing for presentations",
+      "heading": "Story beats",
+      "location": "design.google/presentation-story",
+      "url": "https://design.google/presentation-story",
+      "final_url": "https://design.google/presentation-story",
+      "requested_url": "https://design.google/presentation-story",
+      "page_key": "design.google/presentation-story",
+      "excerpt": "Each scene should have one primary claim and one visual proof."
+    },
+    {
+      "rank": 2,
+      "score": 0.8,
+      "source_family": "awesome-design-md",
+      "title": "Deck typography systems",
+      "heading": "Slide rhythm",
+      "location": "awesome-design-md/deck-typography",
+      "url": "https://example.com/deck-typography",
+      "final_url": "https://example.com/deck-typography",
+      "requested_url": "https://example.com/deck-typography",
+      "page_key": "example.com/deck-typography",
+      "excerpt": "Scene-level pacing depends on consistent typographic rhythm."
+    }
+  ]
+}
