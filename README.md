@@ -22,6 +22,62 @@ It is a packaged skill system with:
 
 The goal is simple: make AI-generated front-end work feel more intentional, more reviewable, and much less generic.
 
+## How To Use It
+
+Most users only need the checked-in skill and the checked-in vector library. You do not need to rebuild the corpus just to start using the project.
+
+Use it in three layers:
+
+### 1. Install the skill into Codex
+
+1. Clone this repository.
+2. Copy or symlink [skills/google-design-fusion/](./skills/google-design-fusion/) into your Codex skills directory.
+3. Restart Codex so the skill is loaded.
+
+Windows PowerShell example:
+
+```powershell
+New-Item -ItemType SymbolicLink `
+  -Path "$env:USERPROFILE\.codex\skills\google-design-fusion" `
+  -Target (Resolve-Path ".\skills\google-design-fusion")
+```
+
+If you only want to use the skill, the checked-in [google-design-vector-db/](./google-design-vector-db/) is already ready.
+
+### 2. Ask Codex to use it explicitly
+
+The most reliable prompt shape is:
+
+```text
+Use google-design-fusion for [task]. Phase: [research|concept|wireframe|ui|polish|audit]. Return a retrieval-backed design packet first, then the final direction.
+```
+
+Examples:
+
+- `Use google-design-fusion for an AI finance landing page. Phase: concept. Give me 3 distinct theses before any UI code.`
+- `Use google-design-fusion to redesign this dashboard. Phase: ui. Keep one dominant task, cut fake metrics, and define motion only where it improves feedback.`
+- `Use google-design-fusion to critique this existing mockup. Phase: audit. Flag hierarchy problems, tiny helper text, AI slop, and motion misuse.`
+- `Use google-design-fusion for a premium Apple-style glassmorphism hero. Phase: polish. Keep the typography restrained and the motion secondary.`
+
+### 3. Use the harness directly when you want traceable evidence
+
+Run the harness if you want to inspect the retrieved sources before turning them into a design output:
+
+```bash
+python skills/google-design-fusion/scripts/design_harness.py "premium glassmorphism landing page with calmer hierarchy" --phase ui --top-k 8
+python skills/google-design-fusion/scripts/design_harness.py "AI glasses notification motion" --phase research --top-k 8 --format json
+python skills/google-design-fusion/scripts/design_harness.py "audit this enterprise dashboard for fake KPI clutter" --phase audit --top-k 8
+```
+
+Use the phases like this:
+
+- `research`: collect principles, precedents, and constraints
+- `concept`: choose a thesis and contrast directions
+- `wireframe`: lock hierarchy, flow, and interaction rhythm
+- `ui`: define typography, surfaces, and component language
+- `polish`: refine states, copy density, finish, and motion
+- `audit`: critique an existing design or prompt
+
 ## What It Comes From
 
 This repository combines two source systems on purpose.
@@ -240,9 +296,15 @@ README.zh-CN.md
 
 Clone the repo, place the skill in your Codex skills workspace, and restart Codex.
 
+If you are only consuming the skill, stop there and start prompting Codex with the examples above.
+
+Rebuild only if you want to refresh the source corpus, inspect the retrieval pipeline, or regenerate the local motion layer.
+
 If you want to rebuild or inspect locally:
 
 ```bash
+git clone https://github.com/Arthurescc/google-design-fusion.git
+git clone https://github.com/Arthurescc/awesome-design-md.git ../awesome-design-md
 python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main
 python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion
 python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py

@@ -22,6 +22,62 @@
 
 目标很直接：让 AI 生成的前端结果更有设计判断力、更可复核，也更少“套壳感”。
 
+## 怎么使用
+
+大多数用户并不需要先重建语料库。这个仓库已经把 skill 和本地向量库一起准备好了，正常使用时直接安装并调用即可。
+
+你可以分三层来用：
+
+### 1. 先把 skill 装进 Codex
+
+1. 克隆这个仓库。
+2. 把 [skills/google-design-fusion/](./skills/google-design-fusion/) 复制或软链接到你的 Codex skills 目录。
+3. 重启 Codex，让 skill 被加载。
+
+Windows PowerShell 示例：
+
+```powershell
+New-Item -ItemType SymbolicLink `
+  -Path "$env:USERPROFILE\.codex\skills\google-design-fusion" `
+  -Target (Resolve-Path ".\skills\google-design-fusion")
+```
+
+如果你只是想直接使用 skill，那么仓库里已经附带可用的 [google-design-vector-db/](./google-design-vector-db/)，不需要先重建。
+
+### 2. 在提示里明确要求使用它
+
+最稳妥的提示结构是：
+
+```text
+Use google-design-fusion for [任务]. Phase: [research|concept|wireframe|ui|polish|audit]. Return a retrieval-backed design packet first, then the final direction.
+```
+
+你也可以直接这样说：
+
+- `Use google-design-fusion for an AI finance landing page. Phase: concept. Give me 3 distinct theses before any UI code.`
+- `Use google-design-fusion to redesign this dashboard. Phase: ui. Keep one dominant task, cut fake metrics, and define motion only where it improves feedback.`
+- `Use google-design-fusion to critique this existing mockup. Phase: audit. Flag hierarchy problems, tiny helper text, AI slop, and motion misuse.`
+- `Use google-design-fusion for a premium Apple-style glassmorphism hero. Phase: polish. Keep the typography restrained and the motion secondary.`
+
+### 3. 如果你想先看证据包，就直接跑 harness
+
+如果你希望先检查检索到的来源，再决定如何出图或写前端，可以直接运行 harness：
+
+```bash
+python skills/google-design-fusion/scripts/design_harness.py "premium glassmorphism landing page with calmer hierarchy" --phase ui --top-k 8
+python skills/google-design-fusion/scripts/design_harness.py "AI glasses notification motion" --phase research --top-k 8 --format json
+python skills/google-design-fusion/scripts/design_harness.py "audit this enterprise dashboard for fake KPI clutter" --phase audit --top-k 8
+```
+
+这些 phase 的含义分别是：
+
+- `research`：先收集原则、先例和约束
+- `concept`：先确定设计命题并做方向对比
+- `wireframe`：先锁定层级、流程和交互节奏
+- `ui`：定义字体、表面系统和组件语言
+- `polish`：打磨状态、文案密度、完成度和动效
+- `audit`：审查现有设计或提示词
+
 ## 它来自哪里
 
 这个仓库是有意识地把两套来源系统融合在一起。
@@ -240,9 +296,15 @@ README.zh-CN.md
 
 克隆仓库，把 skill 放进你的 Codex skills 目录，然后重启 Codex。
 
+如果你只是消费这个 skill，到这里就可以开始用了，直接按上面的提示方式向 Codex 发任务即可。
+
+只有在你想刷新来源语料、检查检索流程、或者重建本地动效层时，才需要重建。
+
 如果你想在本地重建或检查：
 
 ```bash
+git clone https://github.com/Arthurescc/google-design-fusion.git
+git clone https://github.com/Arthurescc/awesome-design-md.git ../awesome-design-md
 python skills/google-design-fusion/scripts/snapshot_galaxy_repo.py --output-root vendor --ref main
 python skills/google-design-fusion/scripts/build_galaxy_motion_index.py --input-root vendor/galaxy --output-root skills/google-design-fusion/galaxy-motion
 python skills/google-design-fusion/scripts/build_design_fusion_vector_db.py

@@ -100,6 +100,25 @@ Your output should be structured enough that another model or engineer can use i
 
 Before finalizing, read [references/output-contract.md](references/output-contract.md).
 
+## Invocation Recipes
+
+Use prompts in this shape when the user is not specific enough:
+
+```text
+Use google-design-fusion for [task].
+Phase: [research|concept|wireframe|ui|polish|audit].
+Return a retrieval-backed design packet first, then the final direction.
+```
+
+Examples:
+
+- `Use google-design-fusion for an AI-native dashboard refresh. Phase: concept. Return three clear theses and reject fake KPI noise.`
+- `Use google-design-fusion for a premium landing page. Phase: ui. Blend strong hierarchy with restrained glassmorphism and keep motion secondary.`
+- `Use google-design-fusion for this current mockup. Phase: audit. Call out tiny captions, weak CTA contrast, decorative cards, and motion misuse.`
+- `Use google-design-fusion for loading and notification behavior in an AI glasses flow. Phase: research. Pull motion evidence before making UI suggestions.`
+
+If the user only wants the skill outcome and the local corpus is already present, use the checked-in `google-design-vector-db/` directly. Rebuild only when the corpus is missing or stale.
+
 ## When to use which source
 
 - Use `design.google` for reasoning about attention, accessibility, motion, typography, color behavior, AI affordances, hardware constraints, and the evolution of Material.
