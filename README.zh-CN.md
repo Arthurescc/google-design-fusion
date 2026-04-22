@@ -54,7 +54,8 @@
 
 许可证边界说明：
 
-- 仓库代码/文档默认遵循 MIT（除非另有说明），但 huashu 派生子集仍保留其上游来源与 `Personal Use License` 约束。
+- 仓库代码/文档默认遵循 MIT（除非另有说明）。
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` 来自 `alchaincyf/huashu-design`，继续遵循上游 `Personal Use License`（见该目录下 `LICENSE.upstream.txt`），不被重新授权为 MIT。
 
 ### 兼容性矩阵
 
@@ -376,4 +377,6 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 
 ## 许可证
 
-MIT。详见 [LICENSE](./LICENSE)。
+仓库代码与文档遵循 MIT，详见 [LICENSE](./LICENSE)。
+
+例外： [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) 为上游派生内容，遵循随仓携带的上游授权文本 [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt)。

@@ -1,3 +1,4 @@
+import os
 import shutil
 import subprocess
 import sys
@@ -5,6 +6,7 @@ import tempfile
 import unittest
 from contextlib import contextmanager
 from pathlib import Path
+from typing import Optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -17,13 +19,21 @@ SUBPROCESS_TIMEOUT_SECONDS = 60
 
 class ValidateHuashuFusionSkillTests(unittest.TestCase):
     @staticmethod
-    def _run_validator(script_path: Path, cwd: Path) -> subprocess.CompletedProcess[str]:
+    def _run_validator(
+        script_path: Path,
+        cwd: Path,
+        env_overrides: Optional[dict[str, str]] = None,
+    ) -> subprocess.CompletedProcess[str]:
+        env = dict(os.environ)
+        if env_overrides:
+            env.update(env_overrides)
         try:
             return subprocess.run(
                 [sys.executable, str(script_path)],
                 cwd=str(cwd),
                 capture_output=True,
                 text=True,
+                env=env,
                 timeout=SUBPROCESS_TIMEOUT_SECONDS,
             )
         except subprocess.TimeoutExpired as exc:
@@ -55,8 +65,14 @@ class ValidateHuashuFusionSkillTests(unittest.TestCase):
         self.assertIn("Orchestration validation passed.", completed.stdout, msg=self._debug_output(completed))
 
     def test_run_full_validation_passes(self) -> None:
-        completed = self._run_validator(FULL_VALIDATION_SCRIPT, REPO_ROOT)
+        with tempfile.TemporaryDirectory() as codex_home:
+            completed = self._run_validator(
+                FULL_VALIDATION_SCRIPT,
+                REPO_ROOT,
+                env_overrides={"CODEX_HOME": codex_home},
+            )
         self.assertEqual(completed.returncode, 0, msg=self._debug_output(completed))
+        self.assertIn("Skipping quick_validate.py", completed.stdout, msg=self._debug_output(completed))
         self.assertIn("Skill contract validation passed.", completed.stdout, msg=self._debug_output(completed))
         self.assertIn("Orchestration validation passed.", completed.stdout, msg=self._debug_output(completed))
         self.assertIn("Full validation passed.", completed.stdout, msg=self._debug_output(completed))
@@ -117,6 +133,10 @@ class ValidateHuashuFusionSkillTests(unittest.TestCase):
                 completed.stdout,
                 msg=self._debug_output(completed),
             )
+
+    def test_validate_skill_contract_has_no_pyyaml_dependency(self) -> None:
+        script_text = SCRIPT.read_text(encoding="utf-8")
+        self.assertNotIn("import yaml", script_text)
 
 
 if __name__ == "__main__":

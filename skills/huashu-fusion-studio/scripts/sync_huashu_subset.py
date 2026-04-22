@@ -8,17 +8,20 @@ import shutil
 from pathlib import Path
 
 
-SYNC_PATHS = [
-    "references/workflow.md",
-    "references/verification.md",
-    "scripts/render-video.js",
-    "scripts/html2pptx.js",
-    "assets/animations.jsx",
-    "assets/deck_stage.js",
+SYNC_FILE_SPECS = [
+    ("references/workflow.md", "references/workflow.md"),
+    ("references/verification.md", "references/verification.md"),
+    ("scripts/render-video.js", "scripts/render-video.js"),
+    ("scripts/html2pptx.js", "scripts/html2pptx.js"),
+    ("assets/animations.jsx", "assets/animations.jsx"),
+    ("assets/deck_stage.js", "assets/deck_stage.js"),
+    ("LICENSE", "LICENSE.upstream.txt"),
 ]
 
 EXPECTED_DERIVED_FROM = "alchaincyf/huashu-design"
 EXPECTED_LICENSE_KIND = "personal-use-only"
+UPSTREAM_LICENSE_SOURCE = "LICENSE"
+UPSTREAM_LICENSE_DEST = "LICENSE.upstream.txt"
 
 
 def sha256_file(path: Path) -> str:
@@ -40,6 +43,9 @@ def validate_existing_manifest_sentinel(output_root: Path) -> tuple[bool, str]:
         return False, "manifest.json sentinel derived_from mismatch"
     if manifest.get("license_kind") != EXPECTED_LICENSE_KIND:
         return False, "manifest.json sentinel license_kind mismatch"
+    upstream_license_file = manifest.get("upstream_license_file")
+    if upstream_license_file not in (None, UPSTREAM_LICENSE_DEST):
+        return False, "manifest.json sentinel upstream_license_file mismatch"
     if "copied_files" not in manifest or "file_hashes" not in manifest:
         return False, "manifest.json sentinel missing required keys"
     return True, ""
@@ -92,15 +98,15 @@ def main() -> int:
 
     copied_files: list[str] = []
     file_hashes: dict[str, str] = {}
-    for relative in SYNC_PATHS:
-        src = source_root / relative
+    for source_relative, output_relative in SYNC_FILE_SPECS:
+        src = source_root / source_relative
         if not src.exists():
             raise SystemExit(f"Missing required source file: {src}")
-        dst = output_root / relative
+        dst = output_root / output_relative
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
 
-        normalized = relative.replace("\\", "/")
+        normalized = output_relative.replace("\\", "/")
         copied_files.append(normalized)
         file_hashes[normalized] = sha256_file(dst)
 
@@ -109,6 +115,8 @@ def main() -> int:
         "source_ref": args.source_ref,
         "license_kind": EXPECTED_LICENSE_KIND,
         "derived_from": EXPECTED_DERIVED_FROM,
+        "upstream_license_source": UPSTREAM_LICENSE_SOURCE,
+        "upstream_license_file": UPSTREAM_LICENSE_DEST,
         "copied_files": copied_files,
         "file_hashes": file_hashes,
     }

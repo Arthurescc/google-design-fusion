@@ -54,7 +54,8 @@ Architecture relationship (details in [research/huashu-fusion-architecture.md](.
 
 License boundary note:
 
-- Repo code/docs are MIT unless noted, but huashu-derived subset keeps upstream provenance and `Personal Use License` constraints.
+- Repo code/docs are MIT unless noted.
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` is derived from `alchaincyf/huashu-design` and remains under upstream `Personal Use License` terms (see `LICENSE.upstream.txt` in that folder), not relicensed to MIT.
 
 ### Compatibility
 
@@ -376,4 +377,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
-MIT. See [LICENSE](./LICENSE).
+Repository code and docs are MIT. See [LICENSE](./LICENSE).
+
+Exception: [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) is upstream-derived and follows its carried-through upstream license text at [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt).

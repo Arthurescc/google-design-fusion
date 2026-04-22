@@ -18,7 +18,9 @@ EXPECTED_PATHS = [
     "scripts/html2pptx.js",
     "assets/animations.jsx",
     "assets/deck_stage.js",
+    "LICENSE.upstream.txt",
 ]
+UPSTREAM_LICENSE_FIXTURE_TEXT = "Huashu upstream license fixture text.\n"
 
 
 class SyncHuashuSubsetTests(unittest.TestCase):
@@ -44,10 +46,19 @@ class SyncHuashuSubsetTests(unittest.TestCase):
             text=True,
         )
 
+    @staticmethod
+    def _prepare_fixture_source(temp_root: Path) -> Path:
+        source_root = temp_root / "source"
+        shutil.copytree(FIXTURE, source_root)
+        (source_root / "LICENSE").write_text(UPSTREAM_LICENSE_FIXTURE_TEXT, encoding="utf-8")
+        return source_root
+
     def test_sync_copies_curated_subset_and_writes_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            source_root = self._prepare_fixture_source(tmp_root)
             output_root = Path(tmp) / "vendor"
-            completed = self._run_sync(FIXTURE, output_root)
+            completed = self._run_sync(source_root, output_root)
             self.assertEqual(completed.returncode, 0, msg=completed.stderr)
 
             manifest = json.loads((output_root / "manifest.json").read_text(encoding="utf-8"))
@@ -55,22 +66,25 @@ class SyncHuashuSubsetTests(unittest.TestCase):
             self.assertEqual(manifest["source_ref"], "fixture-ref")
             self.assertEqual(manifest["license_kind"], "personal-use-only")
             self.assertEqual(manifest["derived_from"], "alchaincyf/huashu-design")
+            self.assertEqual(manifest["upstream_license_source"], "LICENSE")
+            self.assertEqual(manifest["upstream_license_file"], "LICENSE.upstream.txt")
             self.assertEqual(manifest["copied_files"], EXPECTED_PATHS)
             self.assertEqual(set(manifest["file_hashes"].keys()), set(EXPECTED_PATHS))
 
             for relative in EXPECTED_PATHS:
                 copied_file = output_root / Path(relative)
                 self.assertTrue(copied_file.exists(), msg=f"Missing copied file: {relative}")
-                expected_hash = self._sha256(FIXTURE / Path(relative))
+                fixture_source_relative = "LICENSE" if relative == "LICENSE.upstream.txt" else relative
+                expected_hash = self._sha256(source_root / Path(fixture_source_relative))
                 actual_hash = manifest["file_hashes"][relative]
                 self.assertEqual(actual_hash, expected_hash, msg=f"Hash mismatch for: {relative}")
                 self.assertEqual(len(actual_hash), 64, msg=f"Unexpected hash length for: {relative}")
 
     def test_sync_fails_when_required_source_file_is_missing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            source_root = Path(tmp) / "source"
+            tmp_root = Path(tmp)
+            source_root = self._prepare_fixture_source(tmp_root)
             output_root = Path(tmp) / "vendor"
-            shutil.copytree(FIXTURE, source_root)
             (source_root / "scripts" / "html2pptx.js").unlink()
 
             completed = self._run_sync(source_root, output_root)
@@ -80,25 +94,31 @@ class SyncHuashuSubsetTests(unittest.TestCase):
 
     def test_sync_fails_for_untrusted_existing_output_outside_workspace(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            source_root = self._prepare_fixture_source(tmp_root)
             output_root = Path(tmp) / "untrusted-output"
             output_root.mkdir(parents=True, exist_ok=True)
             (output_root / "keep.txt").write_text("do not delete blindly\n", encoding="utf-8")
 
-            completed = self._run_sync(FIXTURE, output_root)
+            completed = self._run_sync(source_root, output_root)
             self.assertNotEqual(completed.returncode, 0)
             self.assertIn("Unsafe existing output root:", completed.stderr)
 
     def test_sync_fails_for_existing_workspace_directory_without_sentinel(self) -> None:
         with tempfile.TemporaryDirectory(prefix="sync-guard-", dir=str(REPO_ROOT)) as tmp:
-            output_root = Path(tmp)
-            (output_root / "keep.txt").write_text("workspace directory without sentinel\n", encoding="utf-8")
+            with tempfile.TemporaryDirectory() as source_tmp:
+                source_root = self._prepare_fixture_source(Path(source_tmp))
+                output_root = Path(tmp)
+                (output_root / "keep.txt").write_text("workspace directory without sentinel\n", encoding="utf-8")
 
-            completed = self._run_sync(FIXTURE, output_root)
-            self.assertNotEqual(completed.returncode, 0)
-            self.assertIn("Unsafe existing output root:", completed.stderr)
+                completed = self._run_sync(source_root, output_root)
+                self.assertNotEqual(completed.returncode, 0)
+                self.assertIn("Unsafe existing output root:", completed.stderr)
 
     def test_sync_allows_existing_output_with_manifest_sentinel_outside_workspace(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            source_root = self._prepare_fixture_source(tmp_root)
             output_root = Path(tmp) / "trusted-output"
             output_root.mkdir(parents=True, exist_ok=True)
             (output_root / "manifest.json").write_text(
@@ -108,6 +128,7 @@ class SyncHuashuSubsetTests(unittest.TestCase):
                         "source_ref": "previous-ref",
                         "license_kind": "personal-use-only",
                         "derived_from": "alchaincyf/huashu-design",
+                        "upstream_license_file": "LICENSE.upstream.txt",
                         "copied_files": [],
                         "file_hashes": {},
                     }
@@ -115,13 +136,15 @@ class SyncHuashuSubsetTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            completed = self._run_sync(FIXTURE, output_root)
+            completed = self._run_sync(source_root, output_root)
             self.assertEqual(completed.returncode, 0, msg=completed.stderr)
             manifest = json.loads((output_root / "manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["source_ref"], "fixture-ref")
 
     def test_sync_fails_for_existing_output_with_unrelated_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            source_root = self._prepare_fixture_source(tmp_root)
             output_root = Path(tmp) / "unrelated-manifest-output"
             output_root.mkdir(parents=True, exist_ok=True)
             (output_root / "manifest.json").write_text(
@@ -136,14 +159,16 @@ class SyncHuashuSubsetTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            completed = self._run_sync(FIXTURE, output_root)
+            completed = self._run_sync(source_root, output_root)
             self.assertNotEqual(completed.returncode, 0)
             self.assertIn("Unsafe existing output root:", completed.stderr)
 
     def test_sync_fails_when_output_root_is_workspace_root(self) -> None:
-        completed = self._run_sync(FIXTURE, REPO_ROOT)
-        self.assertNotEqual(completed.returncode, 0)
-        self.assertIn("Unsafe output root: output_root must not equal workspace_root.", completed.stderr)
+        with tempfile.TemporaryDirectory() as tmp:
+            source_root = self._prepare_fixture_source(Path(tmp))
+            completed = self._run_sync(source_root, REPO_ROOT)
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("Unsafe output root: output_root must not equal workspace_root.", completed.stderr)
 
 
 if __name__ == "__main__":
