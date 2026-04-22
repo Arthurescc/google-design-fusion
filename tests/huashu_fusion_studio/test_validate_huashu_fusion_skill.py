@@ -9,18 +9,27 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = REPO_ROOT / "skills" / "huashu-fusion-studio" / "scripts" / "validate_skill_contract.py"
+ORCHESTRATION_SCRIPT = REPO_ROOT / "skills" / "huashu-fusion-studio" / "scripts" / "validate_orchestration.py"
+FULL_VALIDATION_SCRIPT = REPO_ROOT / "skills" / "huashu-fusion-studio" / "scripts" / "run_full_validation.py"
 SKILL_ROOT = REPO_ROOT / "skills" / "huashu-fusion-studio"
+SUBPROCESS_TIMEOUT_SECONDS = 60
 
 
 class ValidateHuashuFusionSkillTests(unittest.TestCase):
     @staticmethod
     def _run_validator(script_path: Path, cwd: Path) -> subprocess.CompletedProcess[str]:
-        return subprocess.run(
-            [sys.executable, str(script_path)],
-            cwd=str(cwd),
-            capture_output=True,
-            text=True,
-        )
+        try:
+            return subprocess.run(
+                [sys.executable, str(script_path)],
+                cwd=str(cwd),
+                capture_output=True,
+                text=True,
+                timeout=SUBPROCESS_TIMEOUT_SECONDS,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise AssertionError(
+                f"Validator timed out after {SUBPROCESS_TIMEOUT_SECONDS}s: {script_path}"
+            ) from exc
 
     @staticmethod
     def _debug_output(completed: subprocess.CompletedProcess[str]) -> str:
@@ -39,6 +48,18 @@ class ValidateHuashuFusionSkillTests(unittest.TestCase):
         completed = self._run_validator(SCRIPT, REPO_ROOT)
         self.assertEqual(completed.returncode, 0, msg=self._debug_output(completed))
         self.assertIn("Skill contract validation passed.", completed.stdout, msg=self._debug_output(completed))
+
+    def test_validate_orchestration_passes(self) -> None:
+        completed = self._run_validator(ORCHESTRATION_SCRIPT, REPO_ROOT)
+        self.assertEqual(completed.returncode, 0, msg=self._debug_output(completed))
+        self.assertIn("Orchestration validation passed.", completed.stdout, msg=self._debug_output(completed))
+
+    def test_run_full_validation_passes(self) -> None:
+        completed = self._run_validator(FULL_VALIDATION_SCRIPT, REPO_ROOT)
+        self.assertEqual(completed.returncode, 0, msg=self._debug_output(completed))
+        self.assertIn("Skill contract validation passed.", completed.stdout, msg=self._debug_output(completed))
+        self.assertIn("Orchestration validation passed.", completed.stdout, msg=self._debug_output(completed))
+        self.assertIn("Full validation passed.", completed.stdout, msg=self._debug_output(completed))
 
     def test_validate_skill_contract_fails_with_wrong_frontmatter_name(self) -> None:
         with self._temp_skill_workspace() as (tmp_root, copied_skill_root, copied_script):
