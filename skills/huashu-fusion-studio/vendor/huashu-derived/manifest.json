@@ -1,0 +1,22 @@
+{
+  "upstream_repo": "https://github.com/alchaincyf/huashu-design",
+  "source_ref": "a75835d3ef8ab44dab3691c7210f3251667d7120",
+  "license_kind": "personal-use-only",
+  "derived_from": "alchaincyf/huashu-design",
+  "copied_files": [
+    "references/workflow.md",
+    "references/verification.md",
+    "scripts/render-video.js",
+    "scripts/html2pptx.js",
+    "assets/animations.jsx",
+    "assets/deck_stage.js"
+  ],
+  "file_hashes": {
+    "references/workflow.md": "d1b0e0b62069bff2159db771608006d38f1d0a02cce16eb51d16682a83eb3145",
+    "references/verification.md": "d14da4f4265a4b3a81bd92c627cc698fdbb2a93f4c3c0e80ff98477f1d95c784",
+    "scripts/render-video.js": "1b7a2f88dcbffd54e76afe2135b7408c0c661d42d69def92cbc54c1bde6d63a9",
+    "scripts/html2pptx.js": "cfb023e8c17a74a35158126f2733d0a2aaa7b7f291e269b2f1828b449dd4f398",
+    "assets/animations.jsx": "a67bc2305885d9568547dedb1409f272916b41602694987c687b59c6df45277f",
+    "assets/deck_stage.js": "fc52ed7529e598b8cba1821418b848e5cbc17cf883bd0cc989a5186f58cd1e84"
+  }
+}

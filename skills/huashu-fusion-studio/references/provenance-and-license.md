@@ -1,7 +1,14 @@
 # Provenance and License
 
-- Keep source attribution from retrieval evidence in the execution brief.
-- Preserve citation links or identifiers for every major design directive.
-- Do not claim relicensing of third-party material.
-- Mark generated artifacts as derivative execution outputs with source-backed rationale.
+## Provenance
 
+- Derived from `alchaincyf/huashu-design`.
+- Upstream repo: `https://github.com/alchaincyf/huashu-design`.
+- Local derived subset is recorded in `vendor/huashu-derived/manifest.json`.
+- `manifest.json` `source_ref` should be an immutable upstream commit SHA.
+
+## License Boundary
+
+- Upstream license kind: `Personal Use License`.
+- This derived skill must keep upstream attribution visible.
+- This repository must not present the derived subset as commercially relicensed.
