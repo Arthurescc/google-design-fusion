@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
-  <h1>Google Design Fusion</h1>
-  <p><strong>An open-source portable agent skill / workflow package that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
+  <img src="./assets/logo.svg" width="124" alt="Design fusion .skill logo" />
+  <h1>Design fusion .skill</h1>
+  <p><strong>An open-source portable agent skill repository that packages retrieval-backed design intelligence and execution-first design workflows into one multi-client design system.</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 

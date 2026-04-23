@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
-  <h1>Google Design Fusion</h1>
-  <p><strong>一个面向多种 agent 客户端的开源可移植 skill / workflow 包：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
+  <img src="./assets/logo.svg" width="124" alt="Design fusion .skill logo" />
+  <h1>Design fusion .skill</h1>
+  <p><strong>一个面向多种 agent 客户端的开源设计 skill 仓库，把检索增强的设计判断层和执行优先的设计工作流整合成一个多客户端可用的 design system。</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
