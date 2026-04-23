@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
-  <h1>Google Design Fusion</h1>
-  <p><strong>An open-source portable agent skill / workflow package that fuses the full <code>design.google</code> idea system with curated <code>awesome-design-md</code> / <code>DESIGN.md</code> style references, then turns that fusion into a retrieval-backed front-end design workflow.</strong></p>
+  <img src="./assets/logo.svg" width="124" alt="Design fusion .skill logo" />
+  <h1>Design fusion .skill</h1>
+  <p><strong>An open-source portable agent skill repository that packages retrieval-backed design intelligence and execution-first design workflows into one multi-client design system.</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -41,10 +41,32 @@ The core reusable surface is:
 - [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
 - [google-design-vector-db/](./google-design-vector-db/)
 
-Client guidance:
+This repository ships two coordinated skills:
 
-- `Codex`: copy or symlink the skill into `~/.codex/skills/`.
-- `Claude Code`, `OpenClaw`, `OpenCode`: load the same skill folder as a local skill/prompt package if your client supports one. If it does not, keep the repo in the workspace and call the harness scripts directly.
+- [skills/google-design-fusion/](./skills/google-design-fusion/) = retrieval engine (`design.google` + curated style/motion corpus, retrieval packet output).
+- [skills/huashu-fusion-studio/](./skills/huashu-fusion-studio/) = execution-first orchestrator (packet -> deterministic execution brief -> artifact routing).
+
+Architecture relationship (details in [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)):
+
+- `google-design-fusion` = retrieval engine.
+- `huashu-fusion-studio` = orchestrator.
+- huashu-derived subset from [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design), synced locally into `skills/huashu-fusion-studio/vendor/huashu-derived/` when needed, = execution doctrine.
+
+License boundary note:
+
+- Repo code/docs are MIT unless noted.
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` is an optional local sync output derived from `alchaincyf/huashu-design`; when generated locally, it remains under upstream `Personal Use License` terms and is not relicensed to MIT.
+- The top-level third-party/exception ledger is [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).
+- The locally synced huashu-derived doctrine docs are a constrained upstream subset and may reference upstream-only files that are not included in this repository snapshot.
+
+### Compatibility
+
+| Client | Support model | Recommended integration | Notes |
+| --- | --- | --- | --- |
+| `Codex` | Verified adapter | Copy or symlink the skill into `~/.codex/skills/` | Native packaging in this repo is verified on Codex. |
+| `Claude Code` | Portable workflow support | Load [skills/google-design-fusion/](./skills/google-design-fusion/) as a local skill/prompt package if supported, otherwise keep the repo in the workspace and call the harness scripts directly | Reuses the same `SKILL.md`, references, scripts, and checked-in vector DB. |
+| `OpenClaw` | Portable workflow support | Keep the repo in the workspace and wire the same skill folder or harness scripts into your local workflow | The core runtime is repo-local and not tied to a Codex-only prompt surface. |
+| `OpenCode` | Portable workflow support | Load the same skill folder if your setup supports local prompt packages, otherwise invoke the harness scripts from the workspace | Best fit when you want retrieval-backed design packets before code generation. |
 
 Codex PowerShell example:
 
@@ -89,6 +111,21 @@ Use the phases like this:
 - `ui`: define typography, surfaces, and component language
 - `polish`: refine states, copy density, finish, and motion
 - `audit`: critique an existing design or prompt
+
+### Huashu Export Prerequisites (Minimal)
+
+When running huashu-derived export scripts, first sync the optional local subset into `skills/huashu-fusion-studio/vendor/huashu-derived/`, then keep prerequisites lightweight but explicit:
+
+- Sync command:
+
+```bash
+git clone https://github.com/alchaincyf/huashu-design.git ../huashu-design-upstream
+python skills/huashu-fusion-studio/scripts/sync_huashu_subset.py --source-root ../huashu-design-upstream --output-root skills/huashu-fusion-studio/vendor/huashu-derived --source-ref <40-char-upstream-sha>
+```
+
+- Node.js plus local generated script dependencies from `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` (`playwright@1.59.1`, `sharp@0.34.5`), for example: `cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`.
+- `ffmpeg` available on `PATH` for motion/video exports (`mp4`/`gif` paths).
+- If external tooling is missing, execution-brief generation still works, but export steps can fail or be skipped.
 
 ## What It Comes From
 
@@ -295,6 +332,13 @@ skills/google-design-fusion/
   agents/openai.yaml
   references/
   scripts/
+skills/huashu-fusion-studio/
+  SKILL.md
+  agents/openai.yaml
+  references/
+  scripts/
+  vendor/
+    README.md
 google-design-vector-db/
 research/
 examples/
@@ -332,6 +376,7 @@ Key supporting documents:
 - [research/design-google-principles.md](./research/design-google-principles.md)
 - [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
 - [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
+- [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)
 - [research/validation-report.md](./research/validation-report.md)
 
 ## Publishing Notes
@@ -350,4 +395,8 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
-MIT. See [LICENSE](./LICENSE).
+Repository code and docs are MIT. See [LICENSE](./LICENSE).
+
+Exception: if you generate a local `skills/huashu-fusion-studio/vendor/huashu-derived/` subset with the sync script, that local output follows upstream terms from `alchaincyf/huashu-design` and is not relicensed to MIT.
+
+For a top-level exception list, see [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).

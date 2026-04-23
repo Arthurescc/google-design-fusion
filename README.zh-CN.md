@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./assets/logo.svg" width="124" alt="Google Design Fusion logo" />
-  <h1>Google Design Fusion</h1>
-  <p><strong>一个面向多种 agent 客户端的开源可移植 skill / workflow 包：把 <code>design.google</code> 的完整设计思想体系，与精选的 <code>awesome-design-md</code> / <code>DESIGN.md</code> 风格参考库融合起来，再通过检索驱动的方式打通前端设计工作流。</strong></p>
+  <img src="./assets/logo.svg" width="124" alt="Design fusion .skill logo" />
+  <h1>Design fusion .skill</h1>
+  <p><strong>一个面向多种 agent 客户端的开源设计 skill 仓库，把检索增强的设计判断层和执行优先的设计工作流整合成一个多客户端可用的 design system。</strong></p>
   <p><a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a></p>
 </div>
 
@@ -41,10 +41,32 @@
 - [skills/google-design-fusion/scripts/](./skills/google-design-fusion/scripts/)
 - [google-design-vector-db/](./google-design-vector-db/)
 
-客户端接入建议：
+这个仓库现在内置两套协同 skill：
 
-- `Codex`：复制或软链接到 `~/.codex/skills/`。
-- `Claude Code`、`OpenClaw`、`OpenCode`：如果客户端支持本地 skill / prompt 包，就直接加载同一个 skill 文件夹；如果不支持，就把仓库保留在工作区里，直接调用 harness 脚本。
+- [skills/google-design-fusion/](./skills/google-design-fusion/) = 检索引擎（`design.google` + 精选风格/动效语料，输出 retrieval packet）。
+- [skills/huashu-fusion-studio/](./skills/huashu-fusion-studio/) = execution-first 编排器（packet -> 可执行 execution brief -> artifact 路由）。
+
+架构关系说明（详见 [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)）：
+
+- `google-design-fusion` = retrieval engine。
+- `huashu-fusion-studio` = orchestrator。
+- 来自 [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) 且在需要时本地同步到 `skills/huashu-fusion-studio/vendor/huashu-derived/` 的 huashu 派生子集 = execution doctrine。
+
+许可证边界说明：
+
+- 仓库代码/文档默认遵循 MIT（除非另有说明）。
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` 是一个可选的本地同步输出，来源于 `alchaincyf/huashu-design`；一旦你在本地生成它，就继续遵循上游 `Personal Use License`，不被重新授权为 MIT。
+- 顶层第三方/例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。
+- 本地同步得到的 huashu-derived doctrine 文档是上游的受限子集，可能会引用本仓库未包含的上游文件路径。
+
+### 兼容性矩阵
+
+| 客户端 | 支持方式 | 推荐接入方式 | 说明 |
+| --- | --- | --- | --- |
+| `Codex` | 已验证适配 | 复制或软链接到 `~/.codex/skills/` | 这个仓库里的原生适配层已经在 Codex 上校验过。 |
+| `Claude Code` | 可移植工作流支持 | 如果客户端支持本地 skill / prompt 包，就加载 [skills/google-design-fusion/](./skills/google-design-fusion/)；否则把仓库保留在工作区里，直接调用 harness 脚本 | 复用同一套 `SKILL.md`、references、scripts 和已检入的向量库。 |
+| `OpenClaw` | 可移植工作流支持 | 把仓库保留在工作区里，并把同一个 skill 文件夹或 harness 脚本接进你的本地流程 | 核心运行面是仓库内本地资源，不依赖 Codex 专属提示层。 |
+| `OpenCode` | 可移植工作流支持 | 如果你的配置支持本地 prompt 包，就加载同一个 skill 文件夹；否则从工作区直接调用 harness 脚本 | 适合先拿 retrieval-backed design packet，再进入代码生成。 |
 
 Codex 的 PowerShell 示例：
 
@@ -89,6 +111,21 @@ python skills/google-design-fusion/scripts/design_harness.py "audit this enterpr
 - `ui`：定义字体、表面系统和组件语言
 - `polish`：打磨状态、文案密度、完成度和动效
 - `audit`：审查现有设计或提示词
+
+### Huashu 导出工具前置条件（最小集）
+
+如果你要运行 huashu-derived 导出脚本，先把可选本地子集同步到 `skills/huashu-fusion-studio/vendor/huashu-derived/`，再确认：
+
+- 同步命令：
+
+```bash
+git clone https://github.com/alchaincyf/huashu-design.git ../huashu-design-upstream
+python skills/huashu-fusion-studio/scripts/sync_huashu_subset.py --source-root ../huashu-design-upstream --output-root skills/huashu-fusion-studio/vendor/huashu-derived --source-ref <40位上游SHA>
+```
+
+- 已安装 Node.js，并基于 `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` 安装本地生成脚本依赖（`playwright@1.59.1`、`sharp@0.34.5`），例如：`cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`。
+- 若走视频/动效导出（`mp4`/`gif`），`PATH` 中可用 `ffmpeg`。
+- 若外部工具缺失，execution brief 仍可生成，但导出步骤可能失败或被跳过。
 
 ## 它来自哪里
 
@@ -295,6 +332,13 @@ skills/google-design-fusion/
   agents/openai.yaml
   references/
   scripts/
+skills/huashu-fusion-studio/
+  SKILL.md
+  agents/openai.yaml
+  references/
+  scripts/
+  vendor/
+    README.md
 google-design-vector-db/
 research/
 examples/
@@ -332,6 +376,7 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 - [research/design-google-principles.md](./research/design-google-principles.md)
 - [research/google-design-awesome-fusion.md](./research/google-design-awesome-fusion.md)
 - [research/ai-design-antipatterns.md](./research/ai-design-antipatterns.md)
+- [research/huashu-fusion-architecture.md](./research/huashu-fusion-architecture.md)
 - [research/validation-report.md](./research/validation-report.md)
 
 ## 发布说明
@@ -350,4 +395,8 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 
 ## 许可证
 
-MIT。详见 [LICENSE](./LICENSE)。
+仓库代码与文档遵循 MIT，详见 [LICENSE](./LICENSE)。
+
+例外：如果你本地用同步脚本生成 `skills/huashu-fusion-studio/vendor/huashu-derived/`，那部分本地输出遵循 `alchaincyf/huashu-design` 的上游条款，不会被重新授权为 MIT。
+
+顶层例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。

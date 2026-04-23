@@ -1,0 +1,7 @@
+interface:
+  display_name: "Huashu Fusion Studio"
+  short_description: "Execution-brief orchestration for retrieval-backed design delivery."
+  default_prompt: |
+    Use $huashu-fusion-studio for this task.
+    Start from retrieval evidence and produce an execution brief before artifact output.
+
