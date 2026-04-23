@@ -11,14 +11,14 @@ Use this skill when design reasoning must stay traceable while execution output 
 
 - `google-design-fusion` = retrieval engine.
 - `huashu-fusion-studio` = execution-first orchestrator.
-- `alchaincyf/huashu-design` derived subset (`vendor/huashu-derived/`) = execution doctrine.
+- `alchaincyf/huashu-design` derived subset (synced locally into `vendor/huashu-derived/` when needed) = execution doctrine.
 
 Interpretation rules:
 
 - Retrieval evidence comes from `google-design-fusion` packets, not from ad-hoc stylistic guessing.
 - `huashu-fusion-studio` is responsible for deterministic routing from packet to execution brief.
 - The derived huashu subset contributes workflow/asset/export doctrine only; keep provenance and license boundaries explicit.
-- The vendored huashu-derived doctrine is a constrained upstream subset; some referenced upstream files may be intentionally absent in this repo snapshot.
+- The locally synced huashu-derived doctrine is a constrained upstream subset; some referenced upstream files may be intentionally absent in this repo snapshot.
 
 ## When to use
 

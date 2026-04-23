@@ -50,14 +50,14 @@
 
 - `google-design-fusion` = retrieval engine。
 - `huashu-fusion-studio` = orchestrator。
-- 来自 [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) 且存放在 [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) 的 huashu 派生子集 = execution doctrine。
+- 来自 [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) 且在需要时本地同步到 `skills/huashu-fusion-studio/vendor/huashu-derived/` 的 huashu 派生子集 = execution doctrine。
 
 许可证边界说明：
 
 - 仓库代码/文档默认遵循 MIT（除非另有说明）。
-- `skills/huashu-fusion-studio/vendor/huashu-derived/` 来自 `alchaincyf/huashu-design`，继续遵循上游 `Personal Use License`（见该目录下 `LICENSE.upstream.txt`），不被重新授权为 MIT。
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` 是一个可选的本地同步输出，来源于 `alchaincyf/huashu-design`；一旦你在本地生成它，就继续遵循上游 `Personal Use License`，不被重新授权为 MIT。
 - 顶层第三方/例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。
-- vendored 的 huashu-derived doctrine 文档是上游的受限子集，可能会引用本仓库未包含的上游文件路径。
+- 本地同步得到的 huashu-derived doctrine 文档是上游的受限子集，可能会引用本仓库未包含的上游文件路径。
 
 ### 兼容性矩阵
 
@@ -114,9 +114,16 @@ python skills/google-design-fusion/scripts/design_harness.py "audit this enterpr
 
 ### Huashu 导出工具前置条件（最小集）
 
-如果你要运行 huashu-derived 导出脚本（尤其是 `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/` 下的脚本），请至少确认：
+如果你要运行 huashu-derived 导出脚本，先把可选本地子集同步到 `skills/huashu-fusion-studio/vendor/huashu-derived/`，再确认：
 
-- 已安装 Node.js，并基于 `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` 安装 vendored 脚本依赖（`playwright@1.59.1`、`sharp@0.34.5`），例如：`cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`。
+- 同步命令：
+
+```bash
+git clone https://github.com/alchaincyf/huashu-design.git ../huashu-design-upstream
+python skills/huashu-fusion-studio/scripts/sync_huashu_subset.py --source-root ../huashu-design-upstream --output-root skills/huashu-fusion-studio/vendor/huashu-derived --source-ref <40位上游SHA>
+```
+
+- 已安装 Node.js，并基于 `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` 安装本地生成脚本依赖（`playwright@1.59.1`、`sharp@0.34.5`），例如：`cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`。
 - 若走视频/动效导出（`mp4`/`gif`），`PATH` 中可用 `ffmpeg`。
 - 若外部工具缺失，execution brief 仍可生成，但导出步骤可能失败或被跳过。
 
@@ -330,7 +337,8 @@ skills/huashu-fusion-studio/
   agents/openai.yaml
   references/
   scripts/
-  vendor/huashu-derived/
+  vendor/
+    README.md
 google-design-vector-db/
 research/
 examples/
@@ -389,6 +397,6 @@ python skills/google-design-fusion/scripts/run_full_validation.py
 
 仓库代码与文档遵循 MIT，详见 [LICENSE](./LICENSE)。
 
-例外： [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) 为上游派生内容，遵循随仓携带的上游授权文本 [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt)。
+例外：如果你本地用同步脚本生成 `skills/huashu-fusion-studio/vendor/huashu-derived/`，那部分本地输出遵循 `alchaincyf/huashu-design` 的上游条款，不会被重新授权为 MIT。
 
 顶层例外清单见 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)。

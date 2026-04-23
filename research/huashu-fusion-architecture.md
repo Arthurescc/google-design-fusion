@@ -50,7 +50,7 @@ Primary responsibility:
 Source and location:
 
 - Derived from `alchaincyf/huashu-design` ([upstream repository](https://github.com/alchaincyf/huashu-design)).
-- Stored as a constrained local subset in `skills/huashu-fusion-studio/vendor/huashu-derived/`.
+- Can be synced locally into `skills/huashu-fusion-studio/vendor/huashu-derived/` when execution doctrine is needed.
 
 Boundary:
 
@@ -67,6 +67,6 @@ Boundary:
 ## Provenance and License Boundary
 
 - Repository-wide MIT licensing in this repo does not relicense upstream huashu-derived materials.
-- Huashu-derived subset from `alchaincyf/huashu-design` remains governed by upstream `Personal Use License` constraints.
+- Huashu-derived subset from `alchaincyf/huashu-design` remains governed by upstream `Personal Use License` constraints whenever it is generated locally.
 - Attribution and source linkage must remain visible in docs and manifests.
 - Exact local constraints are documented in `skills/huashu-fusion-studio/references/provenance-and-license.md`.

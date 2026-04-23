@@ -50,14 +50,14 @@ Architecture relationship (details in [research/huashu-fusion-architecture.md](.
 
 - `google-design-fusion` = retrieval engine.
 - `huashu-fusion-studio` = orchestrator.
-- huashu-derived subset from [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design), stored under [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/), = execution doctrine.
+- huashu-derived subset from [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design), synced locally into `skills/huashu-fusion-studio/vendor/huashu-derived/` when needed, = execution doctrine.
 
 License boundary note:
 
 - Repo code/docs are MIT unless noted.
-- `skills/huashu-fusion-studio/vendor/huashu-derived/` is derived from `alchaincyf/huashu-design` and remains under upstream `Personal Use License` terms (see `LICENSE.upstream.txt` in that folder), not relicensed to MIT.
+- `skills/huashu-fusion-studio/vendor/huashu-derived/` is an optional local sync output derived from `alchaincyf/huashu-design`; when generated locally, it remains under upstream `Personal Use License` terms and is not relicensed to MIT.
 - The top-level third-party/exception ledger is [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).
-- The vendored huashu-derived doctrine docs are a constrained upstream subset and may reference upstream-only files that are not included in this repository snapshot.
+- The locally synced huashu-derived doctrine docs are a constrained upstream subset and may reference upstream-only files that are not included in this repository snapshot.
 
 ### Compatibility
 
@@ -114,9 +114,16 @@ Use the phases like this:
 
 ### Huashu Export Prerequisites (Minimal)
 
-When running huashu-derived export scripts (especially under `skills/huashu-fusion-studio/vendor/huashu-derived/scripts/`), keep prerequisites lightweight but explicit:
+When running huashu-derived export scripts, first sync the optional local subset into `skills/huashu-fusion-studio/vendor/huashu-derived/`, then keep prerequisites lightweight but explicit:
 
-- Node.js plus vendored script dependencies from `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` (`playwright@1.59.1`, `sharp@0.34.5`), for example: `cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`.
+- Sync command:
+
+```bash
+git clone https://github.com/alchaincyf/huashu-design.git ../huashu-design-upstream
+python skills/huashu-fusion-studio/scripts/sync_huashu_subset.py --source-root ../huashu-design-upstream --output-root skills/huashu-fusion-studio/vendor/huashu-derived --source-ref <40-char-upstream-sha>
+```
+
+- Node.js plus local generated script dependencies from `skills/huashu-fusion-studio/vendor/huashu-derived/package.json` (`playwright@1.59.1`, `sharp@0.34.5`), for example: `cd skills/huashu-fusion-studio/vendor/huashu-derived && npm install`.
 - `ffmpeg` available on `PATH` for motion/video exports (`mp4`/`gif` paths).
 - If external tooling is missing, execution-brief generation still works, but export steps can fail or be skipped.
 
@@ -330,7 +337,8 @@ skills/huashu-fusion-studio/
   agents/openai.yaml
   references/
   scripts/
-  vendor/huashu-derived/
+  vendor/
+    README.md
 google-design-vector-db/
 research/
 examples/
@@ -389,6 +397,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 Repository code and docs are MIT. See [LICENSE](./LICENSE).
 
-Exception: [skills/huashu-fusion-studio/vendor/huashu-derived/](./skills/huashu-fusion-studio/vendor/huashu-derived/) is upstream-derived and follows its carried-through upstream license text at [skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt](./skills/huashu-fusion-studio/vendor/huashu-derived/LICENSE.upstream.txt).
+Exception: if you generate a local `skills/huashu-fusion-studio/vendor/huashu-derived/` subset with the sync script, that local output follows upstream terms from `alchaincyf/huashu-design` and is not relicensed to MIT.
 
 For a top-level exception list, see [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).
